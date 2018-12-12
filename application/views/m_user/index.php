@@ -12,7 +12,7 @@
                     </div>
                     
                     <div class="col">
-                      <div class="td-actions text-right">
+                      <div class="text-right">
                         <button type="button" rel="tooltip" class="btn btn-success" data-original-title="" title="<?php echo $resource['res_add']?>">
                           <i class="material-icons">add</i>
                         </button>
