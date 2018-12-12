@@ -11,7 +11,7 @@
         <div class="container-fluid">
           <!-- Page Header-->
           <header class="header-custom"> 
-            <h1 class="h3 display"><i class="fa fa-fire"></i> <?php echo $resource['res_master_groupuser']?></h1>
+            <h1 class="h3 display"><i class="fa fa-fire"></i><?php echo $resource['res_master_user']?></h1>
           </header>
           <div class="row">
             <div class="col-lg-12">
@@ -21,31 +21,28 @@
                     <div class = "col-lg-10">
                       <h4><?php echo $resource['res_add_data']?></h4> 
                     </div>
-                    <div class = "col-lg-2 icon-custom-table-header"><a href="<?php echo base_url('mgroupuser');?>"><i class="fa fa-table"></i> Index</a></div>
+                    <div class = "col-lg-2 icon-custom-table-header"><a href="<?php echo base_url('muser');?>"><i class="fa fa-table"></i> Index</a></div>
                   </div>
                 </div>
-                <div class="card-body">
-                  <?php if($this->session->flashdata('warning_msg'))
-                    {
-                        $msg = $this->session->flashdata('warning_msg');
-                        for($i=0 ; $i<count($msg); $i++)
-                        {
-                  ?>
-                          <p class="text-danger"><?php echo $msg[$i]; ?></p>
-                  <?php 
-                        }
-                    }
-                  ?>
-                    <!-- <p class="text-danger"><?php echo $this->session->flashdata('warning_msg_name_exist'); ?></p> -->
-                 
-                  <form method = "post" action = "<?php echo base_url('mgroupuser/addsave');?>">
+                <div class="card-body">                 
+                  <form method = "post" action = "<?php echo base_url('muser/addsave');?>">
                     <div class="form-group">
                       <label><?php echo $resource['res_name']?></label>
-                      <input id="named" type="text" placeholder="<?php echo $resource['res_name']?>" class="form-control" name = "named" value="<?php echo $model['groupname']?>" required> 
+                      <input id="named" type="text" placeholder="<?php echo $resource['res_name']?>" class="form-control" name = "named" value="<?php echo $model['username']?>" required>
+                    </div>
+                    <div class="form-group">
+                      <label><?php echo $resource['res_group_user']?></label>
+                      <div class="input-group">
+                        <input hidden="true" id = "groupid" type="text" class="form-control" name = "groupid" value="<?php echo $model['groupid']?>">
+                        <input readonly id = "groupname" placeholder="<?php echo $resource['res_group_user']?>" type="text" class="form-control"  value="<?php echo $model['groupname']?>">
+                        <div class="input-group-append">
+                          <button id="btnGroupModal" data-toggle="modal" type="button" class="btn btn-primary" onclick="getModalGroup(1);" data-target="#modalGroupUser"><i class="fa fa-search"></i></button>
+                        </div>
+                      </div>
                     </div>
                     <div class="form-group">       
-                      <label><?php echo $resource['res_description']?></label>
-                      <textarea id="description" type="text" placeholder="<?php echo $resource['res_description']?>" class="form-control" name = "description" ><?php echo $model['description']?></textarea>
+                      <label><?php echo $resource['res_password']?></label>
+                      <input id="password" type="password" placeholder="<?php echo $resource['res_password']?>" class="form-control" name = "password" value="<?php echo $model['password']?>">
                     </div>
                     <div class="form-group">       
                       <input type="submit" value="<?php echo $resource['res_save']?>" class="btn btn-primary">
@@ -58,23 +55,24 @@
         </div>
       </section>
 
-      <script type = "text/javascript">
-        $(document).ready(function() {    
-         init();
-        });
+<script type = "text/javascript">
+  $(document).ready(function() {    
+    init();
+  });
 
-        function init(){
-          <?php 
-          if($this->session->flashdata('add_warning_msg'))
-          {
-            $msg = $this->session->flashdata('add_warning_msg');
-            for($i=0 ; $i<count($msg); $i++)
-            {
-          ?>
-              setNotification("<?php echo $msg[$i]; ?>", 3, "bottom", "right");
-          <?php 
-            }
-          }
-          ?>
-        }
-      </script>
+  function init(){
+    <?php 
+    if($this->session->flashdata('add_warning_msg'))
+    {
+      $msg = $this->session->flashdata('add_warning_msg');
+      for($i=0 ; $i<count($msg); $i++)
+      {
+    ?>
+        setNotification("<?php echo $msg[$i]; ?>", 3, "bottom", "right");
+    <?php 
+      }
+    }
+    ?>
+  }
+
+</script>

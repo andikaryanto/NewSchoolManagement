@@ -1,50 +1,32 @@
-    <div class="content-inner">
-      <div class="breadcrumb-holder">
+<div class="content">
         <div class="container-fluid">
-          <ul class="breadcrumb">
-            <li class="breadcrumb-item"><a href="<?php echo base_url();?>">Home</a></li>
-            <li class="breadcrumb-item active">User</li>
-          </ul>
-        </div>
-      </div>
-      <section>
-        <div class="container-fluid">
-          <!-- Page Header-->
-          <header class="header-custom"> 
-            <h1 class="h3 display"><i class="fa fa-user"></i> <?php echo $resource['res_master_groupuser']?></h1>
-          </header>
           <div class="row">
-            <div class="col-lg-12">
-              <div id = "cardtabel" class="card">
-                <div class="card-header">
-									<div class="row">
-										<div class = "col-lg-10">
-											<h4><?php echo  $resource['res_data']?></h4>
-										</div>
-										<div class = "col-lg-2 icon-custom-table-header"><a href="<?php echo base_url('mgroupuser/add');?>"><i class="fa fa-plus"></i> <?php echo $resource['res_add']?></a></div>
-									</div>
-								</div>
-                <div class="card-body">
-                  <div class="form-group row">
-                    <div class="col-sm-12">
-                      <div class="form-group">
-                        <div class="input-group">
-                          <input id = "search" type="text" class="form-control" value = "<?php echo $search?>">
-                          <div class="input-group-append">
-                            <button id = "searchbutton" type="button" class="btn btn-primary"><?php echo $resource['res_search']?></button>
-                          </div>
-                        </div>
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header card-header-success">
+                  
+                  <div class="row">
+                    <div class="col">
+                      <h4 class="card-title "><?php echo $resource['res_data']?></h4>
+                      <p class="card-category"> <?php echo $resource['res_master_groupuser']?></p>
+                    </div>
+                    
+                    <div class="col">
+                      <div class="text-right">
+                        <button type="button" rel="tooltip" class="btn btn-success"  click  = "<?php echo base_url('mgroupuser/add');?>">
+                          <i class="material-icons">add</i>
+                        </button>
                       </div>
                     </div>
                   </div>
+                </div>
+                <div class="card-body">
                   <div class="table-responsive">
-                    <table class="table table-striped table-hover">
-                      <thead>
-                        <tr>
+                    <table class="table">
+                      <thead class=" text-success">
                           <th><?php echo  $resource['res_name']?></th>
                           <th><?php echo  $resource['res_description']?></th>
                           <th></th>
-                        </tr>
                       </thead>
                       <tbody>
 											<?php
@@ -67,7 +49,7 @@
                     </table>
                   </div>
 									<div class="row">
-                    <div class = "col-lg-6 ">
+                    <div class = "col ">
                       <nav aria-label="Page navigation example ">
                         <ul class="pagination">
                           
@@ -118,7 +100,7 @@
                         </ul>
                       </nav>
                     </div>
-                    <div class = "col-lg-6 icon-custom-table-header">
+                    <div class = "col text-right">
                       Total Data : <?php echo $totalrow?>
                     </div>
                   </div>
@@ -127,6 +109,7 @@
             </div>
           </div>
         </div>
+      </div>
       </section>
 
 <script type = "text/javascript">
