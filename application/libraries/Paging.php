@@ -5,7 +5,7 @@ class Paging {
 
     public function get_config()
     {
-        $data["perpage"] = 10;
+        $data["perpage"] = 5;
         $data["perpagemodal"] = 5;
         $data["pagelen"] = 5;
         return $data;
@@ -49,8 +49,10 @@ class Paging {
 
     public function load_footer()
     {
+        $resource = $this->set_resources_header_page();
+        $data['resource'] = $resource;
         $CI =& get_instance();
-        $CI->load->view('template/footer');
+        $CI->load->view('template/footer', $data);
     }
 
     public function set_resources_forbidden_page()
@@ -238,11 +240,17 @@ class Paging {
             $lastpage = 0;
         }
 
+        $startNumber = 1;
+        if($currentpage > 1){
+            $startNumber = (($currentpage - 1)*$pagesz) + 1;
+        }
+
         $data['modelheader'] = $modelheader;
         $data['modeldetail'] = $modeldetail;
         $data['totalrow'] = $totalrow;
         $data['totalpage'] = $totalpage;
         $data['currentpage'] = (int)$currentpage;
+        $data['startnumber'] = $startNumber;
         $data['firstpage'] = $firstpage;
         $data['lastpage'] = $lastpage;
         $data['search'] = $search;

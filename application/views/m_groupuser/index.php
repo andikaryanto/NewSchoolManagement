@@ -3,17 +3,17 @@
           <div class="row">
             <div class="col-md-12">
               <div class="card">
-                <div class="card-header card-header-success">
+                <div class="card-header card-header-primary">
                   
                   <div class="row">
                     <div class="col">
-                      <h4 class="card-title "><?php echo $resource['res_data']?></h4>
-                      <p class="card-category"> <?php echo $resource['res_master_groupuser']?></p>
+                      <h4 class="card-title "><?php echo getLang('ui_data')?></h4>
+                      <p class="card-category"> <?php echo getLang('ui_master_groupuser')?></p>
                     </div>
                     
                     <div class="col">
                       <div class="text-right">
-                        <button type="button" rel="tooltip" class="btn btn-success"  click  = "<?php echo base_url('mgroupuser/add');?>">
+                        <button type="button" rel="tooltip" class="btn btn-primary btn-round btn-fab" title="<?php echo getLang('ui_add')?>" onclick="window.location.href='<?php echo base_url('mgroupuser/add');?>'">
                           <i class="material-icons">add</i>
                         </button>
                       </div>
@@ -23,9 +23,10 @@
                 <div class="card-body">
                   <div class="table-responsive">
                     <table class="table">
-                      <thead class=" text-success">
-                          <th><?php echo  $resource['res_name']?></th>
-                          <th><?php echo  $resource['res_description']?></th>
+                      <thead class=" text-primary">
+                          <th># </th>
+                          <th><?php echo  getLang('ui_name')?></th>
+                          <th><?php echo  getLang('ui_description')?></th>
                           <th></th>
                       </thead>
                       <tbody>
@@ -34,15 +35,23 @@
 												{
 											?>
 													<tr>
+														<td><?php echo $startnumber?></td>
 														<td><?php echo $value->GroupName?></td>
 														<td><?php echo $value->Description?></td>
-														<td class = "icon-custom-table-header">
-															<a class = "icon-custom-table-detail" href="<?php echo base_url('mgroupuser/edit/').$value->Id;?>"><i class="fa fa-edit"></i><?php echo  $resource['res_edit']?></a>
-															<a class = "icon-custom-table-detail" href="javascript:void(0);" onclick="delete_disaster('<?php echo $value->Id?>','<?php echo $value->GroupName?>')"><i class="fa fa-trash"></i><?php echo  $resource['res_delete']?></a>
-															<a class = "icon-custom-table-detail" href="<?php echo base_url('mgroupuser/editrole/').$value->Id;?>"><i class="fa fa-user"></i><?php echo  $resource['res_role']?></a>
-														</td>
+														<td class = "td-actions text-right">
+                              <button type="button" rel="tooltip" class="btn btn-primary btn-round" data-original-title="" title="<?php echo  getLang('ui_edit')?>" onclick="window.location.href='<?php echo base_url('mgroupuser/edit/').$value->Id;?>'">
+                                <i class="material-icons">edit</i>
+                              </button>
+                              <button type="button" rel="tooltip" class="btn btn-primary btn-round" data-original-title="" title="<?php echo  getLang('ui_role')?>" onclick="window.location.href='<?php echo base_url('mgroupuser/editrole/').$value->Id;?>'">
+                                <i class="material-icons">face</i>
+                              </button>
+                              <button type="button" rel="tooltip" class="btn btn-danger btn-round" data-original-title="" title="<?php echo  getLang('ui_delete')?>" onclick="delete_disaster('<?php echo $value->Id?>','<?php echo $value->GroupName?>')">
+                                <i class="material-icons">close</i>
+                              </button>
+                            </td>
 													</tr>
-											<?php
+                      <?php
+                          $startnumber++;
 												}
 											?>
                       </tbody>
@@ -50,8 +59,8 @@
                   </div>
 									<div class="row">
                     <div class = "col ">
-                      <nav aria-label="Page navigation example ">
-                        <ul class="pagination">
+                      <nav aria-label="Page navigation example">
+                        <ul class="pagination pagination-primary">
                           
                           <?php if($currentpage > 3)
                           {
@@ -70,8 +79,8 @@
                           ?>
                             <?php if ($currentpage == $i){
                             ?>
-                              <li class="page-item active">
-                                <div class="page-link" ><?php echo $i?></div>
+                              <li class="page-item">
+                                <div class="page-link paging-active" ><?php echo $i?></div>
                               </li>
                             <?php
                             } else {
@@ -112,9 +121,9 @@
       </div>
       </section>
 
-<script type = "text/javascript">
+<script>
 
-$(document).ready(function() {    
+  $(document).ready(function() {    
     init();
   });
 

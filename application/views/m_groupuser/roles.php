@@ -1,36 +1,28 @@
-<div class="content-inner">
-   <div class="breadcrumb-holder">
+<div class="content">
         <div class="container-fluid">
-          <ul class="breadcrumb">
-            <li class="breadcrumb-item"><a href="<?php echo base_url();?>">Home</a></li>
-            <li class="breadcrumb-item active">User</li>
-          </ul>
-        </div>
-      </div>
-      <section>
-        <div class="container-fluid">
-          <!-- Page Header-->
-          <header class="header-custom"> 
-            <h1 class="h3 display"><i class="fa fa-user"></i> <?php echo $resource['res_master_groupuser']?></h1>
-          </header>
           <div class="row">
-            <div class="col-lg-12">
-              <div id = "cardtabel" class="card">
-                <div class="card-header ">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header card-header-primary">
+                  
                   <div class="row">
-                    <div class = "col-lg-4">
-                        <h4>Group : <?php echo  $modelheader->GroupName?></h4>
+                    <div class="col">
+                      <h4 class="card-title "><?php echo  $modelheader->GroupName?></h4>
+                      <p class="card-category"> <?php echo $resource['res_master_groupuser']?></p>
                     </div>
-                    <div class = "col-lg-8 icon-custom-table-header">
-                        <!-- <a id = "btnSave" class = "icon-custom-table-detail" href="#"><i class="fa fa-save"></i> <?php echo $resource['res_save']?></a> -->
-                        <a class = "icon-custom-table-detail" href="<?php echo base_url('mgroupuser');?>"><i class="fa fa-table"></i> Index</a>
+                    <div class="col">
+                      <div class="text-right">
+                        <button type="button" rel="tooltip" class="btn btn-primary btn-round btn-fab" title="index" onclick="window.location.href='<?php echo base_url('mgroupuser');?>'">
+                          <i class="material-icons">list</i>
+                        </button>
+                      </div>
                     </div>
                   </div>
-								</div>
+                </div>
                 <div class="card-body">
                   <div class="table-responsive">
                       <table id = "tblRole" class="table table-striped table-hover">
-                          <thead>
+                          <thead class ="text-primary">
                               <tr>
                               <th><?php echo  $resource['res_module']?></th>
                               <th>Alias</th>
@@ -55,48 +47,77 @@
                                   <?php }?>
                                   <td id = "td<?php echo $i ?>localname"><?php echo $value->LocalName?></td>
                                   <td id = "td<?php echo $i ?>tdread">
-                                    <?php if($value->Header ==0) { ?>
-                                        <input id = "td<?php echo $i ?>read" type="checkbox" value = "td~<?php echo $i ?>~read" <?php if($value->Readd == 1)
-                                                                {
-                                                            ?>
-                                                                checked=""
-                                                            <?php
-                                                                }
-                                                            ?>>
-                                    <?php } ?>
+                                    <div class = "form-check">
+                                        <label class="form-check-label">
+                                            <?php if($value->Header ==0) { ?>
+                                                <input class = "form-check-input" id = "td<?php echo $i ?>read" type="checkbox" value = "td~<?php echo $i ?>~read" <?php if($value->Readd == 1)
+                                                                        {
+                                                                    ?>
+                                                                        checked=""
+                                                                    <?php
+                                                                        }
+                                                                    ?>>
+                                                <span class="form-check-sign">
+                                                    <span class="check"></span>
+                                                </span>
+                                            <?php } ?>
+                                        </label>
+                                    </div>
                                   </td>
                                   <td id = "td<?php echo $i ?>tdwrite">
-                                    <?php if($value->Header ==0) { ?>
-                                        <input id = "td<?php echo $i ?>write" type="checkbox" value = "td~<?php echo $i ?>~write"<?php if($value->Writee == 1)
-                                                                {
-                                                            ?>
-                                                                checked=""
-                                                            <?php
-                                                                }
-                                                            ?>>
-                                    <?php } ?>
+                                    <div class = "form-check">
+                                        <label class="form-check-label">
+                                            <?php if($value->Header ==0) { ?>
+                                                <input class = "form-check-input" id = "td<?php echo $i ?>write" type="checkbox" value = "td~<?php echo $i ?>~write"<?php if($value->Writee == 1)
+                                                                        {
+                                                                    ?>
+                                                                        checked=""
+                                                                    <?php
+                                                                        }
+                                                                    ?>>
+                                                <span class="form-check-sign">
+                                                    <span class="check"></span>
+                                                </span>
+                                            <?php } ?>
+                                        </label>
+                                    </div>
                                   </td>
-                                  <td id = "td<?php echo $i ?>tddelete">
-                                    <?php if($value->Header ==0) { ?>
-                                        <input id = "td<?php echo $i ?>delete" type="checkbox" value = "td~<?php echo $i ?>~delete" <?php if($value->Deletee == 1)
-                                                                {
-                                                            ?>
-                                                                checked=""
-                                                            <?php
-                                                                }
-                                                            ?>>
-                                    <?php } ?>
+                                  <td id = "td<?php echo $i ?>tddelete">                                  
+                                    <div class = "form-check">
+                                        <label class="form-check-label">
+                                            <?php if($value->Header ==0) { ?>
+                                                <input class = "form-check-input" id = "td<?php echo $i ?>delete" type="checkbox" value = "td~<?php echo $i ?>~delete" <?php if($value->Deletee == 1)
+                                                                        {
+                                                                    ?>
+                                                                        checked=""
+                                                                    <?php
+                                                                        }
+                                                                    ?>>
+                                                
+                                                <span class="form-check-sign">
+                                                    <span class="check"></span>
+                                                </span>
+                                            <?php } ?>
+                                        </label>
+                                    </div>
                                   </td>
-                                  <td id = "td<?php echo $i ?>tdprint">
-                                    <?php if($value->Header ==0) { ?>
-                                        <input id ="td<?php echo $i ?>print" type="checkbox" value = "td~<?php echo $i ?>~print"<?php if($value->Printt == 1)
-                                                                {
-                                                            ?>
-                                                                checked=""
-                                                            <?php
-                                                                }
-                                                            ?>>
-                                    <?php } ?>
+                                  <td id = "td<?php echo $i ?>tdprint">                                 
+                                    <div class = "form-check">
+                                        <label class="form-check-label">
+                                            <?php if($value->Header ==0) { ?>
+                                                <input class = "form-check-input" id ="td<?php echo $i ?>print" type="checkbox" value = "td~<?php echo $i ?>~print"<?php if($value->Printt == 1)
+                                                                        {
+                                                                    ?>
+                                                                        checked=""
+                                                                    <?php
+                                                                        }
+                                                                    ?>>
+                                                <span class="form-check-sign">
+                                                    <span class="check"></span>
+                                                </span>
+                                            <?php } ?>
+                                        </label>
+                                    </div>
                                   </td>
                               </tr>
                               <?php
@@ -114,10 +135,10 @@
         </div>
       </section>
 
-<script type = "text/javascript">
+<script>
     $("#searchbutton").on("click",function() {
         var search = $("#search").val();
-        alert(search);
+        console.log('<?php echo json_encode($modeldetail);?>');
         //window.location =" <?php echo base_url('m_groupuser');?>?search="+search;
     });
 
