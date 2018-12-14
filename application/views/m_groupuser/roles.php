@@ -8,7 +8,7 @@
                   <div class="row">
                     <div class="col">
                       <h4 class="card-title "><?php echo  $modelheader->GroupName?></h4>
-                      <p class="card-category"> <?php echo $resource['res_master_groupuser']?></p>
+                      <p class="card-category"> <?php echolang('_master_groupuser')?></p>
                     </div>
                     <div class="col">
                       <div class="text-right">
@@ -24,12 +24,12 @@
                       <table id = "tblRole" class="table table-striped table-hover">
                           <thead class ="text-primary">
                               <tr>
-                              <th><?php echo  $resource['res_module']?></th>
+                              <th><?php echo lang('_module')?></th>
                               <th>Alias</th>
-                              <th><?php echo  $resource['res_read']?></th>
-                              <th><?php echo  $resource['res_write']?></th>
-                              <th><?php echo  $resource['res_delete']?></th>
-                              <th><?php echo  $resource['res_print']?></th>
+                              <th><?php echo lang('_read')?></th>
+                              <th><?php echo lang('_write')?></th>
+                              <th><?php echo lang('_delete')?></th>
+                              <th><?php echo lang('_print')?></th>
                               </tr>
                           </thead>
                           <tbody>

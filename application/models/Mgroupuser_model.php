@@ -15,8 +15,8 @@ class Mgroupuser_model extends CI_Model {
         $this->load->model(array("Mform_model"));
         $this->load->library('session');
         $this->load->library('paging');
-        $this->lang->load('form_ui', !empty($_SESSION['language']['language']) ? $_SESSION['language']['language'] : $this->config->item('language'));
-        $this->lang->load('err_msg', !empty($_SESSION['language']['language']) ? $_SESSION['language']['language'] : $this->config->item('language'));
+        // $this->lang->load('form_ui', !empty($_SESSION['language']['language']) ? $_SESSION['language']['language'] : $this->config->item('language'));
+        // $this->lang->load('err_msg', !empty($_SESSION['language']['language']) ? $_SESSION['language']['language'] : $this->config->item('language'));
     }
     
     public function get_alldata()
@@ -173,7 +173,7 @@ class Mgroupuser_model extends CI_Model {
     {
         $nameexist = false;
         $warning = array();
-        $resource = $this->set_resources();
+        
         if(!empty($oldmodel))
         {
             if($model['groupname'] != $oldmodel['groupname'])
@@ -187,12 +187,12 @@ class Mgroupuser_model extends CI_Model {
                 $nameexist = $this->is_data_exist($model['groupname']);
             }
             else{
-                $warning = array_merge($warning, array(0=>$resource['res_msg_group_name_can_not_null']));
+                $warning = array_merge($warning, array(0=>lang('ui_msg_group_name_can_not_null')));
             }
         }
         if($nameexist)
         {
-            $warning = array_merge($warning, array(0=>$resource['res_err_name_exist']));
+            $warning = array_merge($warning, array(0=>lang('err_msg_name_exist')));
         }
         
         return $warning;

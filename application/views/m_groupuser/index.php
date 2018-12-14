@@ -7,13 +7,13 @@
                   
                   <div class="row">
                     <div class="col">
-                      <h4 class="card-title "><?php echo getLang('ui_data')?></h4>
-                      <p class="card-category"> <?php echo getLang('ui_master_groupuser')?></p>
+                      <h4 class="card-title "><?php echo lang('ui_data')?></h4>
+                      <p class="card-category"> <?php echo lang('ui_master_groupuser')?></p>
                     </div>
                     
                     <div class="col">
                       <div class="text-right">
-                        <button type="button" rel="tooltip" class="btn btn-primary btn-round btn-fab" title="<?php echo getLang('ui_add')?>" onclick="window.location.href='<?php echo base_url('mgroupuser/add');?>'">
+                        <button type="button" rel="tooltip" class="btn btn-primary btn-round btn-fab" title="<?php echo lang('ui_add')?>" onclick="window.location.href='<?php echo base_url('mgroupuser/add');?>'">
                           <i class="material-icons">add</i>
                         </button>
                       </div>
@@ -25,8 +25,8 @@
                     <table class="table">
                       <thead class=" text-primary">
                           <th># </th>
-                          <th><?php echo  getLang('ui_name')?></th>
-                          <th><?php echo  getLang('ui_description')?></th>
+                          <th><?php echo  lang('ui_name')?></th>
+                          <th><?php echo  lang('ui_description')?></th>
                           <th></th>
                       </thead>
                       <tbody>
@@ -39,13 +39,13 @@
 														<td><?php echo $value->GroupName?></td>
 														<td><?php echo $value->Description?></td>
 														<td class = "td-actions text-right">
-                              <button type="button" rel="tooltip" class="btn btn-primary btn-round" data-original-title="" title="<?php echo  getLang('ui_edit')?>" onclick="window.location.href='<?php echo base_url('mgroupuser/edit/').$value->Id;?>'">
+                              <button type="button" rel="tooltip" class="btn btn-primary btn-round" data-original-title="" title="<?php echo  lang('ui_edit')?>" onclick="window.location.href='<?php echo base_url('mgroupuser/edit/').$value->Id;?>'">
                                 <i class="material-icons">edit</i>
                               </button>
-                              <button type="button" rel="tooltip" class="btn btn-primary btn-round" data-original-title="" title="<?php echo  getLang('ui_role')?>" onclick="window.location.href='<?php echo base_url('mgroupuser/editrole/').$value->Id;?>'">
+                              <button type="button" rel="tooltip" class="btn btn-primary btn-round" data-original-title="" title="<?php echo  lang('ui_role')?>" onclick="window.location.href='<?php echo base_url('mgroupuser/editrole/').$value->Id;?>'">
                                 <i class="material-icons">face</i>
                               </button>
-                              <button type="button" rel="tooltip" class="btn btn-danger btn-round" data-original-title="" title="<?php echo  getLang('ui_delete')?>" onclick="delete_disaster('<?php echo $value->Id?>','<?php echo $value->GroupName?>')">
+                              <button type="button" rel="tooltip" class="btn btn-danger btn-round" data-original-title="" title="<?php echo  lang('ui_delete')?>" onclick="delete_disaster('<?php echo $value->Id?>','<?php echo $value->GroupName?>')">
                                 <i class="material-icons">close</i>
                               </button>
                             </td>

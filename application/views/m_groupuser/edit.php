@@ -7,8 +7,8 @@
                   
                   <div class="row">
                     <div class="col">
-                      <h4 class="card-title "><?php echo $resource['res_edit_data']?></h4>
-                      <p class="card-category"> <?php echo $resource['res_master_groupuser']?></p>
+                      <h4 class="card-title "><?php echo lang('ui_edit_data')?></h4>
+                      <p class="card-category"> <?php echo lang('ui_master_groupuser')?></p>
                     </div>
                     <div class="col">
                       <div class="text-right">
@@ -23,15 +23,15 @@
                   <form method = "post" action = "<?php echo base_url('mgroupuser/editsave');?>">
                     <input hidden name ="idgroupuser" id="idgroupuser" value="<?php echo $model['id']?>">
                     <div class="form-group">
-                      <label><?php echo $resource['res_name']?></label>
+                      <label><?php echo lang('ui_name')?></label>
                       <input id="named" type="text"  class="form-control" name = "named" value="<?php echo $model['groupname']?>" required>
                     </div>
                     <div class="form-group">       
-                      <label><?php echo $resource['res_description']?></label>
+                      <label><?php echo lang('ui_description')?></label>
                       <textarea id="description" type="text" class="form-control" name = "description" ><?php echo $model['description']?></textarea>
                     </div>
                     <div class="form-group">       
-                      <input type="submit" value="<?php echo $resource['res_save']?>" class="btn btn-primary">
+                      <input type="submit" value="<?php echo lang('ui_save')?>" class="btn btn-primary">
                     </div>
                   </form>
                 </div>
