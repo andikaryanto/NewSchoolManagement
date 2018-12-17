@@ -150,5 +150,12 @@ $lang['ui_placeofborth'] = "Place of Birth";
 $lang['ui_mothername'] = "Mother's Name";
 $lang['ui_fathername'] = "Father's Name";
 $lang['ui_yearofstudy'] = "Year of Study";
+$lang['ui_showing'] = "Showing";
+$lang['ui_of'] = "of";
+$lang['ui_to'] = "to";
+$lang['ui_setting'] = "Setting";
+$lang['ui_language'] = "Language";
+$lang['ui_color'] = "Color";
+$lang['ui_usersetting'] = "User Setting";
 
 

@@ -16,8 +16,6 @@ class Muser_model extends CI_Model {
         $this->load->helper('helpers');
         $this->load->library('session');
         $this->load->model('Mgroupuser_model');
-        $this->lang->load('form_ui', !empty($_SESSION['language']['language']) ? $_SESSION['language']['language'] : $this->config->item('language'));
-        $this->lang->load('err_msg', !empty($_SESSION['language']['language']) ? $_SESSION['language']['language'] : $this->config->item('language'));
     }
     
     public function get_alldata()
@@ -34,6 +32,14 @@ class Muser_model extends CI_Model {
         $this->db->where('a.Id', $id);
         $query = $this->db->get();
         return $query->row(); // a single row use row() instead of result()
+    }
+
+    public function get_usersetting_by_userid($id){
+        $this->db->select('a.*');
+        $this->db->from('m_usersetting as a');
+        $this->db->where('a.UserId', $id);
+        $query = $this->db->get();
+        return $query->row();
     }
     
     public function get_sigle_data_user($username, $password)
@@ -71,6 +77,15 @@ class Muser_model extends CI_Model {
 
     }
 
+    public function get_data_by_name($name){
+        $this->db->select('a.*, b.GroupName');
+        $this->db->from('m_user as a');
+        $this->db->join('m_groupuser as b', 'a.GroupId = b.Id', 'left');
+        $this->db->where('a.Username', $name);
+        $query = $this->db->get();
+        return $query->row();
+    }
+
     public function set_loggedin($username){
         $this->db->set('IsLoggedIn', 1);
         $this->db->where('Username', $username);
@@ -85,7 +100,11 @@ class Muser_model extends CI_Model {
 
     public function save_data($data)
     {
-        $this->db->insert('m_user', $data);
+        if($this->db->insert('m_user', $data)){
+            $user = $this->get_data_by_name($data['username']);
+            $usersetting = $this->create_usersetting_object(null, $user->Id);
+            $this->db->insert('m_usersetting', $usersetting);
+        }
     }
 
     public function edit_data($data)
@@ -116,6 +135,28 @@ class Muser_model extends CI_Model {
         $this->db->set('Password', $newmd5pass);
         $this->db->where('Password', $md5pass);
         $this->db->update('m_user');
+    }
+
+    public function create_usersetting_object($id = null, $userid = null,
+        $language = 'indonesia', 
+        $color = 'assets/material-dashboard/assets/css/material-dashboard.min.css', 
+        $colorvalue = '#9c27b0',
+        $background = 'assets/material-dashboard//assets/img/sidebar-1.jpg',
+        $customcolor = 'assets/material-dashboard/assets/css/Custom.css',
+        $customcolorvalue = '#9c27b0'){
+            
+        $data = array(
+            'id' => $id,
+            'userid' => $userid,
+            'language' => $language,
+            'color' => $color,
+            'colorvalue' => $colorvalue,
+            'background' => $background,
+            'customcolor' => $customcolor,
+            'customcolorvalue' => $customcolorvalue
+        );
+        return  $data;
+
     }
 
     public function changeLanguage($username,$language){
@@ -184,7 +225,6 @@ class Muser_model extends CI_Model {
     {
         $nameexist  = false;
         $warning    = array();
-        $resource   = $this->set_resources();
 
         if(!empty($oldmodel))
         {
@@ -199,18 +239,18 @@ class Muser_model extends CI_Model {
                 $nameexist = $this->is_data_exist($model['username']);
             }
             else{
-                $warning = array_merge($warning, array(0=>$resource['res_msg_name_can_not_null']));
+                $warning = array_merge($warning, array(0=>'err_msg_name_can_not_null'));
             }
         }
 
         if($nameexist)
-            $warning = array_merge($warning, array(0=>$resource['res_err_name_exist']));
+            $warning = array_merge($warning, array(0=>'err_msg_name_exist'));
 
         if(empty($model['groupid']))
-            $warning = array_merge($warning, array(0=>$resource['res_groupuser_can_not_null']));
+            $warning = array_merge($warning, array(0=>'err_msg_groupuser_can_not_null'));
 
         if(empty($model['password']))
-            $warning = array_merge($warning, array(0=>$resource['res_password_can_not_null']));
+            $warning = array_merge($warning, array(0=>'err_msg_password_can_not_null'));
 
         
         return $warning;
@@ -218,51 +258,18 @@ class Muser_model extends CI_Model {
 
     public function validate_changepassword($username, $oldpassword, $newpassword, $confirmpassword){
         $warning = array();
-        $resource = $this->set_resources();
         $datauser = $this->get_sigle_data_user($username, $oldpassword);
         if($datauser){
             if($newpassword != $confirmpassword){
-                $warning = array_merge($warning, array(0=>$resource['res_wrong_confirmed_password']));
+                $warning = array_merge($warning, array(0=>'err_wrong_confirmed_password'));
             }
         } else {
-            $warning = array_merge($warning, array(0=>$resource['res_wrong_password']));
+            $warning = array_merge($warning, array(0=>'err_wrong_password'));
         }
         return $warning;
 
     }
 
-    public function set_resources()
-    {
-        $resource['res_master_user'] = $this->lang->line('ui_master_user');
-        $resource['res_user'] = $this->lang->line('ui_user');
-        $resource['res_group_user'] = $this->lang->line('ui_group_user');
-        $resource['res_data'] =  $this->lang->line('ui_data');
-        $resource['res_add'] =  $this->lang->line('ui_add');
-        $resource['res_name'] =$this->lang->line('ui_name');
-        $resource['res_description'] = $this->lang->line('ui_description');
-        $resource['res_edit'] = $this->lang->line('ui_edit');
-        $resource['res_delete'] =$this->lang->line('ui_delete');
-        $resource['res_search'] = $this->lang->line('ui_search');
-        $resource['res_save'] = $this->lang->line('ui_save');
-        $resource['res_add_data'] = $this->lang->line('ui_add_data');
-        $resource['res_edit_data'] = $this->lang->line('ui_edit_data');
-        $resource['res_changepassword'] = $this->lang->line('ui_changepassword');
-        $resource['res_password'] = $this->lang->line('ui_password');
-        $resource['res_oldpassword'] = $this->lang->line('ui_oldpassword');
-        $resource['res_newpassword'] = $this->lang->line('ui_newpassword');
-        $resource['res_confirmpassword'] = $this->lang->line('ui_confirmpassword');
-        $resource['res_isactive'] = $this->lang->line('ui_isactive');
-        $resource['res_deactivate'] = $this->lang->line('ui_deactivate');
-        $resource['res_activate'] = $this->lang->line('ui_activate');   
-
-        $resource['res_err_name_exist'] = $this->lang->line('err_msg_name_exist');
-        $resource['res_msg_name_can_not_null'] = $this->lang->line('err_msg_name_can_not_null');
-        $resource['res_wrong_password'] = $this->lang->line('err_wrong_password');
-        $resource['res_wrong_confirmed_password'] = $this->lang->line('err_wrong_confirmed_password');
-        $resource['res_groupuser_can_not_null'] = $this->lang->line('err_msg_groupuser_can_not_null');
-        $resource['res_password_can_not_null'] = $this->lang->line('err_msg_password_can_not_null');
-
-        return $resource;
-    }
+    
     
 }

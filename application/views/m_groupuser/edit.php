@@ -53,7 +53,7 @@
             for($i=0 ; $i<count($msg); $i++)
             {
           ?>
-              setNotification("<?php echo $msg[$i]; ?>", 3, "bottom", "right");
+              setNotification("<?php echo lang($msg[$i]); ?>", 3, "bottom", "right");
           <?php 
             }
           }

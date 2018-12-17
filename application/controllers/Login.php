@@ -31,11 +31,14 @@ class Login extends CI_Controller
             if($query->IsLoggedIn == 0){
                 $userdata = $this->Muser_model->create_object($query->Id, $query->GroupId, $query->GroupName, $query->Username, null, null, null, null, null);
                 $this->session->set_userdata('userdata',$userdata);
+
+                $usersetting = $this->Muser_model->get_usersetting_by_userid($query->Id);
+                $this->session->set_userdata('usersetting',$usersetting);
     
-                $language = array(
-                    'language' => $query->Language
-                );
-                $this->session->set_userdata('language',$language);
+                // $language = array(
+                //     'language' => $usersetting->Language
+                // );
+                // $this->session->set_userdata('language',$language);
                 //$this->Muser_model->set_loggedin($username);
                 redirect('home');
             } else {

@@ -76,6 +76,7 @@ $route['muser/editsave'] = 'm_user/editsave';
 $route['muser/delete/(:num)'] = 'm_user/delete/$1';
 $route['muser/activate/(:num)'] = 'm_user/activate/$1';
 $route['changePassword'] = 'm_user/changePassword';
+$route['settings'] = 'm_user/setting';
 $route['saveChangePassword'] = 'm_user/saveNewPassword';
 
 

@@ -1,51 +1,49 @@
-<div class="content-inner">
-    <div class="breadcrumb-holder">
+      <div class="content">
         <div class="container-fluid">
-          <ul class="breadcrumb">
-            <li class="breadcrumb-item"><a href="<?php echo base_url();?>">Home</a></li>
-            <li class="breadcrumb-item active">Master       </li>
-          </ul>
-        </div>
-    </div>
-      <section class="forms">
-        <div class="container-fluid">
-          <!-- Page Header-->
-          <header class="header-custom"> 
-            <h1 class="h3 display"><i class="fa fa-fire"></i><?php echo $resource['res_master_user']?></h1>
-          </header>
           <div class="row">
-            <div class="col-lg-12">
+            <div class="col-md-12">
               <div class="card">
-                <div class="card-header">
-									<div class="row">
-                    <div class = "col-lg-10">
-                      <h4><?php echo $resource['res_add_data']?></h4> 
+                <div class="card-header card-header-primary">
+                  
+                  <div class="row">
+                    <div class="col">
+                      <h4 class="card-title "><?php echo lang('ui_add_data')?></h4>
+                      <p class="card-category"> <?php echo lang('ui_master_user')?></p>
                     </div>
-                    <div class = "col-lg-2 icon-custom-table-header"><a href="<?php echo base_url('muser');?>"><i class="fa fa-table"></i> Index</a></div>
+                    <div class="col">
+                      <div class="text-right">
+                        <button type="button" rel="tooltip" class="btn btn-primary btn-round btn-fab" title="index" onclick="window.location.href='<?php echo base_url('muser');?>'">
+                          <i class="material-icons">list</i>
+                        </button>
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <div class="card-body">                 
                   <form method = "post" action = "<?php echo base_url('muser/addsave');?>">
-                    <div class="form-group">
-                      <label><?php echo $resource['res_name']?></label>
-                      <input id="named" type="text" placeholder="<?php echo $resource['res_name']?>" class="form-control" name = "named" value="<?php echo $model['username']?>" required>
+                    <div class="form-group bmd-form-group">
+                      <label class = ""><?php echo lang('ui_name')?></label>
+                      <input id="named" type="text"  class="form-control " name = "named" value="<?php echo $model['username']?>" required>
                     </div>
                     <div class="form-group">
-                      <label><?php echo $resource['res_group_user']?></label>
-                      <div class="input-group">
+                      <label><?php echo lang('ui_group_user')?></label>
+                      <div class="input-group has-success">
                         <input hidden="true" id = "groupid" type="text" class="form-control" name = "groupid" value="<?php echo $model['groupid']?>">
-                        <input readonly id = "groupname" placeholder="<?php echo $resource['res_group_user']?>" type="text" class="form-control"  value="<?php echo $model['groupname']?>">
+                        <input id = "groupname" type="text" class="form-control custom-readonly"  value="<?php echo $model['groupname']?>" readonly>
+                        <!-- <span class="form-control-feedback text-primary">
+                            <i class="material-icons">search</i>
+                        </span> -->
                         <div class="input-group-append">
                           <button id="btnGroupModal" data-toggle="modal" type="button" class="btn btn-primary" onclick="getModalGroup(1);" data-target="#modalGroupUser"><i class="fa fa-search"></i></button>
                         </div>
                       </div>
                     </div>
                     <div class="form-group">       
-                      <label><?php echo $resource['res_password']?></label>
-                      <input id="password" type="password" placeholder="<?php echo $resource['res_password']?>" class="form-control" name = "password" value="<?php echo $model['password']?>">
+                      <label><?php echo lang('ui_password')?></label>
+                      <input id="password" type="password" class="form-control" name = "password" value="<?php echo $model['password']?>">
                     </div>
                     <div class="form-group">       
-                      <input type="submit" value="<?php echo $resource['res_save']?>" class="btn btn-primary">
+                      <input type="submit" value="<?php echo lang('ui_save')?>" class="btn btn-primary">
                     </div>
                   </form>
                 </div>
@@ -78,8 +76,9 @@
         </div>
         <div class="table-responsive">
           <table id = "tblGroupUserLookUp" class="table table-striped table-hover">
-            <thead>
+            <thead class = "text-primary">
               <tr>
+                <th># </th>
                 <th>Group </th>
               </tr>
             </thead>
@@ -109,7 +108,7 @@
       for($i=0 ; $i<count($msg); $i++)
       {
     ?>
-        setNotification("<?php echo $msg[$i]; ?>", 3, "bottom", "right");
+        setNotification("<?php echo lang($msg[$i]); ?>", 3, "bottom", "right");
     <?php 
       }
     }
@@ -130,12 +129,14 @@
       success:function(data){
         var groupuser = $.parseJSON(data);
         console.log(groupuser);
-        setResourceModalGroupUser(groupuser['m_groupuser']['resourcemodal']);
+        setResourceModalGroupUser();
 
         var detail = groupuser['m_groupuser']['modeldetailmodal'];
+        var firstrow = groupuser['m_groupuser']['firstrowmodal']
         for(var i = 0; i < detail.length; i++)
         {
-          $("#tblGroupUserLookUp").append("<tr onclick='chooseGroupName("+detail[i].Id+","+'"'+detail[i].GroupName+'"'+");'><td>" + detail[i].GroupName + "</td></tr>");
+          $("#tblGroupUserLookUp").append("<tr onclick='chooseGroupName("+detail[i].Id+","+'"'+detail[i].GroupName+'"'+");'><td>" + firstrow + "</td><td>" + detail[i].GroupName + "</td></tr>");
+          firstrow++;
         }
 
         var previous = "";
@@ -153,9 +154,15 @@
         }
 
         for (var i = groupuser['m_groupuser']['firstpagemodal'] ; i <= groupuser['m_groupuser']['lastpagemodal']; i++){
-          pages += " <li class='page-item' >";
-          pages += "<a class='page-link' href='#' onclick = 'getModalGroup("+i+")'>"+i+"</a>";
-          pages += "</li>";
+          if(groupuser['m_groupuser']['currentpagemodal'] == i){
+            pages += " <li class='page-item ' >";
+            pages += "<a class='page-link paging-active' href='#' onclick = 'getModalGroup("+i+")'>"+i+"</a>";
+            pages += "</li>";
+          } else {
+            pages += " <li class='page-item ' >";
+            pages += "<a class='page-link' href='#' onclick = 'getModalGroup("+i+")'>"+i+"</a>";
+            pages += "</li>";
+          }
         }
 
         if(groupuser['m_groupuser']['currentpagemodal'] < groupuser['m_groupuser']['totalpagemodal'] - 2)
@@ -179,7 +186,8 @@
         append += "</nav>";
         append += "</div>";
         append += "<div class = 'col-lg-6 icon-custom-table-header'>";
-        append +="Total Data : "+groupuser['m_groupuser']['totalrowmodal'];
+        append += "<?php echo lang('ui_showing')?>"+" "+groupuser['m_groupuser']['firstrowmodal']+" "+"<?php echo lang('ui_to')?>"+" "+groupuser['m_groupuser']['lastrowmodal']+" "+"<?php echo lang('ui_of')?>"+" "+groupuser['m_groupuser']['totalrowmodal']+" "+"<?php echo lang('ui_data')?>";
+        //append +="Total Data : "+groupuser['m_groupuser']['firstrow'];
         append += "</div>";
         append += "</div>";
         
@@ -205,9 +213,9 @@
     $("#modalGroupUserPaging").remove();
   }
 
-  function setResourceModalGroupUser(resource)
+  function setResourceModalGroupUser()
   {
-    $("#searchbutton").innerHtml = resource['res_search'];
-    $("#groupUserModalLabel").text = resource['res_groupuser'];
+    $("#searchbutton").innerHtml = "<?php echo lang('ui_search')?>";
+    $("#groupUserModalLabel").text = "<?php echo lang('ui_groupuser')?>";
   }
 </script>

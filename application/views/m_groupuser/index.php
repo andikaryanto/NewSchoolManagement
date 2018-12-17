@@ -21,6 +21,27 @@
                   </div>
                 </div>
                 <div class="card-body">
+                  <div class="row">
+                    <!-- <div class="col-sm-12 col-md-6">
+                      <div class="dataTables_length" id="datatables_length">
+                        <label>Show 
+                          <select name="datatables_length" aria-controls="datatables" class="custom-select custom-select-sm form-control form-control-sm">
+                            <option value="10">10</option>
+                            <option value="25">25</option>
+                            <option value="50">50</option>
+                            <option value="-1">All</option>
+                          </select> entries
+                        </label>
+                      </div>
+                    </div> -->
+                    <div class="col text-right">
+                      <label>
+                        <span class="bmd-form-group bmd-form-group-sm">
+                          <input id="search" type="search" class="form-control form-control-sm" placeholder="Search records" aria-controls="datatables" value = "<?php echo $search?>">
+                        </span>
+                      </label>
+                    </div>
+                  </div>
                   <div class="table-responsive">
                     <table class="table">
                       <thead class=" text-primary">
@@ -76,8 +97,7 @@
                           ?>
                           <?php for ($i = $firstpage ; $i <= $lastpage; $i++)
                           {
-                          ?>
-                            <?php if ($currentpage == $i){
+                            if ($currentpage == $i){
                             ?>
                               <li class="page-item">
                                 <div class="page-link paging-active" ><?php echo $i?></div>
@@ -110,7 +130,7 @@
                       </nav>
                     </div>
                     <div class = "col text-right">
-                      Total Data : <?php echo $totalrow?>
+                      <?php echo lang('ui_showing')." ".$firstrow." ".lang('ui_to')." ".$lastrow." ".lang('ui_of')." ".$totalrow." ".lang('ui_data')?>
                     </div>
                   </div>
                 </div>
@@ -135,7 +155,7 @@
         for($i=0 ; $i<count($msg); $i++)
         {
       ?>
-          setNotification("<?php echo $msg[$i]; ?>", 2, "bottom", "right");
+          setNotification("<?php echo lang($msg[$i]); ?>", 2, "bottom", "right");
       <?php 
         }
       }
@@ -146,7 +166,7 @@
         for($i=0 ; $i<count($msg); $i++)
         {
       ?>
-          setNotification("<?php echo $msg[$i]; ?>", 2, "bottom", "right");
+          setNotification("<?php echo lang($msg[$i]); ?>", 2, "bottom", "right");
       <?php 
         }
       }
@@ -157,17 +177,19 @@
         for($i=0 ; $i<count($msg); $i++)
         {
       ?>
-          setNotification("<?php echo $msg[$i]; ?>", 3, "bottom", "right");
+          setNotification("<?php echo lang($msg[$i]); ?>", 3, "bottom", "right");
       <?php 
         }
       }
     ?>
   }
   
-  $("#searchbutton").on("click",function() {
-    var search = $("#search").val();
-    //alert(search);
-    window.location =" <?php echo base_url('m_groupuser');?>?search="+search;
+  $("#search").on("keyup",function(e) {
+    if (e.keyCode == 13) {
+      var search = $("#search").val();
+      //alert(search);
+      window.location =" <?php echo base_url('m_groupuser');?>?search="+search;
+    }
   })   
 
   function delete_disaster(id, name){

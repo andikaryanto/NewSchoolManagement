@@ -7,7 +7,7 @@ class M_user extends CI_Controller
     {
         parent::__construct();
         //$this->load->database('natureuser', TRUE);
-        $this->load->model(array('Muser_model','Mgroupuser_model'));
+        $this->load->model(array('Muser_model','Mgroupuser_model', 'Gsetting_model'));
         $this->load->library(array('paging', 'session','helpers'));
         $this->load->helper('form');
         $this->paging->is_session_set();
@@ -36,16 +36,14 @@ class M_user extends CI_Controller
             
             $rows = !empty($search) ? count($datapages) : count($resultdata);
 
-            $resource = $this->Muser_model->set_resources();
-
-            $data =  $this->paging->set_data_page_index($resource, $datapages, $rows, $page, $search);
+            $data =  $this->paging->set_data_page_index($datapages, $rows, $page, $search);
             
             $this->loadview('m_user/index', $data);
         }
        else
         {   
-            $data['resource'] = $this->paging->set_resources_forbidden_page();
-            $this->load->view('forbidden/forbidden', $data);
+            
+            $this->load->view('forbidden/forbidden');
         }
     }
 
@@ -54,15 +52,15 @@ class M_user extends CI_Controller
         $form = $this->paging->get_form_name_id();
         if($this->Mgroupuser_model->is_permitted($_SESSION['userdata']['groupid'],$form['m_user'],'Write'))
         {
-            $resource = $this->Muser_model->set_resources();
+            
             $model = $this->Muser_model->create_object(null, null,null, null, null, null, null, null, null);
-            $data =  $this->paging->set_data_page_add($resource, $model);
+            $data =  $this->paging->set_data_page_add($model);
             $this->loadview('m_user/add', $data);   
         }
         else
         {
-            $data['resource'] = $this->paging->set_resources_forbidden_page();
-            $this->load->view('forbidden/forbidden', $data);
+            
+            $this->load->view('forbidden/forbidden');
         }
     }
 
@@ -71,7 +69,7 @@ class M_user extends CI_Controller
         //$date = new DateTime();
         $warning    = array();
         $err_exist  = false;
-        $resource   = $this->Muser_model->set_resources();
+       
         $groupid    = $this->input->post('groupid');
         $groupname  = $this->input->post('groupname');
         $username   = $this->input->post('named');
@@ -85,7 +83,7 @@ class M_user extends CI_Controller
         if($validate)
         {
             $this->session->set_flashdata('add_warning_msg',$validate);
-            $data =  $this->paging->set_data_page_add($resource, $model);
+            $data =  $this->paging->set_data_page_add($model);
             $this->loadview('m_user/add', $data);   
         }
         else{
@@ -105,22 +103,22 @@ class M_user extends CI_Controller
         $form = $this->paging->get_form_name_id();
         if($this->Mgroupuser_model->is_permitted($_SESSION['userdata']['groupid'],$form['m_user'],'Write'))
         {
-            $resource = $this->Muser_model->set_resources();
+            
             $edit = $this->Muser_model->get_data_by_id($id);
             $model = $this->Muser_model->create_object($edit->Id, $edit->GroupId, $edit->GroupName, $edit->Username, $edit->Password, null, null, null, null);
-            $data =  $this->paging->set_data_page_edit($resource, $model);
+            $data =  $this->paging->set_data_page_edit($model);
             //echo json_encode($edit);
             $this->loadview('m_user/edit', $data);   
         }
         else{
-            $data['resource'] = $this->paging->set_resources_forbidden_page();
-            $this->load->view('forbidden/forbidden', $data);
+            
+            $this->load->view('forbidden/forbidden');
         }
     }
 
     public function editsave()
     {
-        $resource   = $this->Muser_model->set_resources();
+       
 
         $userid     = $this->input->post('userid');
         $groupid    = $this->input->post('groupid');
@@ -138,7 +136,7 @@ class M_user extends CI_Controller
         if($validate)
         {
             $this->session->set_flashdata('edit_warning_msg',$validate);
-            $data =  $this->paging->set_data_page_edit($resource, $model);
+            $data =  $this->paging->set_data_page_edit($model);
             $this->loadview('m_user/edit', $data);   
         }
         else
@@ -171,9 +169,16 @@ class M_user extends CI_Controller
         }
         else
         {   
-            $data['resource'] = $this->paging->set_resources_forbidden_page();
-            $this->load->view('forbidden/forbidden', $data);
+            $this->load->view('forbidden/forbidden');
         }   
+    }
+
+    public function setting(){
+        $enums['languageenums'] =  $this->Gsetting_model->get_language();
+        $enums['colorenums'] =  $this->Gsetting_model->get_color();
+        //$model = $this->Muser_model->get_data_by_id($_SESSION['userdata']['id']);
+        $data = $this->paging->set_data_page_add(null, $enums);
+        $this->loadview('m_user/settings',$data);
     }
 
     public function activate($id)
@@ -186,8 +191,7 @@ class M_user extends CI_Controller
         }
         else
         {   
-            $data['resource'] = $this->paging->set_resources_forbidden_page();
-            $this->load->view('forbidden/forbidden', $data);
+            $this->load->view('forbidden/forbidden');
         }   
     }
 
@@ -198,8 +202,6 @@ class M_user extends CI_Controller
             'confirmpassword' => ""
         );
 
-        $resource = $this->Muser_model->set_resources();
-        $data =  $this->paging->set_data_page_add($resource);
         $this->loadview('m_user/changePassword', $data);    
     }
 
@@ -214,11 +216,11 @@ class M_user extends CI_Controller
             'confirmpassword' =>  $confirmpassword
         );
         
-        $resource = $this->Muser_model->set_resources();
+        
         $validate = $this->Muser_model->validate_changepassword($_SESSION['userdata']['username'], $oldpassword, $newpassword, $confirmpassword);
         if($validate){
             $this->session->set_flashdata('warning_msg',$validate);
-            $data =  $this->paging->set_data_page_add($resource, $model);
+            $data =  $this->paging->set_data_page_add($model);
             $this->loadview('m_user/changePassword', $data);    
         }
         else{

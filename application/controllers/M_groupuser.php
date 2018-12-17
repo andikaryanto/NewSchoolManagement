@@ -33,16 +33,13 @@ class M_groupuser extends CI_Controller
             $resultdata = $this->Mgroupuser_model->get_alldata();
             $datapages = $this->Mgroupuser_model->get_datapages($page,  $pagesize['perpage'], $search);
             $rows = !empty($search) ? count($datapages) : count($resultdata);
-
-            $resource = $this->Mgroupuser_model->set_resources();
-
-            $data =  $this->paging->set_data_page_index($resource, $datapages, $rows, $page, $search);
+            $data =  $this->paging->set_data_page_index($datapages, $rows, $page, $search);
             
             $this->loadview('m_groupuser/index', $data);
         }
         else
-        {   $data['resource'] = $this->paging->set_resources_forbidden_page();
-            $this->load->view('forbidden/forbidden', $data);
+        {   
+            $this->load->view('forbidden/forbidden');
         }
     }
 
@@ -56,9 +53,7 @@ class M_groupuser extends CI_Controller
         $datapages = $this->Mgroupuser_model->get_datapages($page,  $pagesize['perpagemodal'], $search);
         $rows = !empty($search) ? count($datapages) : count($resultdata);
 
-        $resource = $this->Mgroupuser_model->set_resources();
-
-        $data =  $this->paging->set_data_page_modal($resource, $datapages, $rows, $page, $search, null, 'm_groupuser');      
+        $data =  $this->paging->set_data_page_modal($datapages, $rows, $page, $search, null, 'm_groupuser');      
         
         echo json_encode($data);
     }
@@ -68,15 +63,13 @@ class M_groupuser extends CI_Controller
         $form = $this->paging->get_form_name_id();
         if($this->Mgroupuser_model->is_permitted($_SESSION['userdata']['groupid'],$form['m_groupuser'],'Write'))
         {
-            $resource = $this->Mgroupuser_model->set_resources();
             $model = $this->Mgroupuser_model->create_object(null, null, null, null, null, null, null);
-            $data =  $this->paging->set_data_page_add($resource, $model);
+            $data =  $this->paging->set_data_page_add($model);
             $this->loadview('m_groupuser/add', $data);  
         }
         else
         {
-            $data['resource'] = $this->paging->set_resources_forbidden_page();
-            $this->load->view('forbidden/forbidden', $data);
+            $this->load->view('forbidden/forbidden');
         }
     }
 
@@ -85,7 +78,6 @@ class M_groupuser extends CI_Controller
         //$date = new DateTime();
         $warning = array();
         $err_exist = false;
-        $resource = $this->Mgroupuser_model->set_resources();
         $name = $this->input->post('named');
         $description = $this->input->post('description');
         
@@ -96,7 +88,7 @@ class M_groupuser extends CI_Controller
         if($validate)
         {
             $this->session->set_flashdata('add_warning_msg',$validate);
-            $data =  $this->paging->set_data_page_add($resource, $model);
+            $data =  $this->paging->set_data_page_add($model);
             $this->loadview('m_groupuser/add', $data);   
         }
         else{
@@ -116,23 +108,19 @@ class M_groupuser extends CI_Controller
         $form = $this->paging->get_form_name_id();
         if($this->Mgroupuser_model->is_permitted($_SESSION['userdata']['groupid'],$form['m_groupuser'],'Write'))
         {
-            $resource = $this->Mgroupuser_model->set_resources();
             $edit = $this->Mgroupuser_model->get_data_by_id($id);
             $model = $this->Mgroupuser_model->create_object($edit->Id, $edit->GroupName, $edit->Description, null, null, null, null);
-            $data =  $this->paging->set_data_page_edit($resource, $model);
+            $data =  $this->paging->set_data_page_edit($model);
             $this->loadview('m_groupuser/edit', $data);  
         }
         else
         {
-            $data['resource'] = $this->paging->set_resources_forbidden_page();
-            $this->load->view('forbidden/forbidden', $data);
+            $this->load->view('forbidden/forbidden');
         } 
     }
 
     public function editsave()
     {
-        $resource = $this->Mgroupuser_model->set_resources();
-
         $name = $this->input->post('named');
         $description = $this->input->post('description');
 
@@ -144,7 +132,7 @@ class M_groupuser extends CI_Controller
         if($validate)
         {
             $this->session->set_flashdata('edit_warning_msg',$validate);
-            $data =  $this->paging->set_data_page_edit($resource, $model);
+            $data =  $this->paging->set_data_page_edit($model);
             $this->loadview('m_groupuser/edit', $data);   
         }
         else
@@ -167,16 +155,14 @@ class M_groupuser extends CI_Controller
         {
             $modelheader = $this->Mgroupuser_model->get_data_by_id($groupid);
             $modeldetail = $this->Mgroupuser_model->get_role($groupid);
-            $resource = $this->Mgroupuser_model->set_resources();
 
-            $data =  $this->paging->set_data_page_index($resource, $modeldetail, null, null, null, $modelheader);
+            $data =  $this->paging->set_data_page_index($modeldetail, null, null, null, $modelheader);
             
             $this->loadview('m_groupuser/roles', $data); 
         }
         else
         {
-            $data['resource'] = $this->paging->set_resources_forbidden_page();
-            $this->load->view('forbidden/forbidden', $data);
+            $this->load->view('forbidden/forbidden');
         } 
     }
 
@@ -211,8 +197,7 @@ class M_groupuser extends CI_Controller
         }
         else
         {   
-            $data['resource'] = $this->paging->set_resources_forbidden_page();
-            $this->load->view('forbidden/forbidden', $data);
+            $this->load->view('forbidden/forbidden');
         }   
     }
 

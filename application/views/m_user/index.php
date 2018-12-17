@@ -3,17 +3,17 @@
           <div class="row">
             <div class="col-md-12">
               <div class="card">
-                <div class="card-header card-header-success">
+                <div class="card-header card-header-primary">
                   
                   <div class="row">
                     <div class="col">
-                      <h4 class="card-title "><?php echo $resource['res_data']?></h4>
-                      <p class="card-category"> <?php echo $resource['res_master_user']?></p>
+                      <h4 class="card-title "><?php echo lang('ui_data')?></h4>
+                      <p class="card-category"> <?php echo lang('ui_master_user')?></p>
                     </div>
                     
                     <div class="col">
                       <div class="text-right">
-                        <button type="button" rel="tooltip" class="btn btn-success" data-original-title="" title="<?php echo $resource['res_add']?>">
+                        <button type="button" rel="tooltip" class="btn btn-primary btn-round btn-fab" title="<?php echo lang('ui_add')?>" onclick="window.location.href='<?php echo base_url('muser/add');?>'">
                           <i class="material-icons">add</i>
                         </button>
                       </div>
@@ -21,12 +21,33 @@
                   </div>
                 </div>
                 <div class="card-body">
+                  <div class="row">
+                    <!-- <div class="col-sm-12 col-md-6">
+                      <div class="dataTables_length" id="datatables_length">
+                        <label>Show 
+                          <select name="datatables_length" aria-controls="datatables" class="custom-select custom-select-sm form-control form-control-sm">
+                            <option value="10">10</option>
+                            <option value="25">25</option>
+                            <option value="50">50</option>
+                            <option value="-1">All</option>
+                          </select> entries
+                        </label>
+                      </div>
+                    </div> -->
+                    <div class="col text-right">
+                      <label>
+                        <span class="bmd-form-group bmd-form-group-sm">
+                          <input id="search" type="search" class="form-control form-control-sm" placeholder="Search records" aria-controls="datatables" value = "<?php echo $search?>">
+                        </span>
+                      </label>
+                    </div>
+                  </div>
                   <div class="table-responsive">
                     <table class="table">
-                      <thead class=" text-success">
-                          <th><?php echo  $resource['res_user']?></th>
-                          <th><?php echo  $resource['res_group_user']?></th>
-                          <th><?php echo  $resource['res_isactive']?></th>
+                      <thead class=" text-primary">
+                          <th><?php echo  lang('ui_user')?></th>
+                          <th><?php echo  lang('ui_group_user')?></th>
+                          <th><?php echo  lang('ui_isactive')?></th>
                           <th></th>
                       </thead>
                       <tbody>
@@ -50,16 +71,16 @@
                             ?>
                             
                             <td class="td-actions text-right">
-                              <button type="button" rel="tooltip" class="btn btn-success" data-original-title="" title="<?php echo  $resource['res_edit']?>" href="href="<?php echo base_url('muser/edit/').$value->Id;?>>
+                              <!-- <button type="button" rel="tooltip" class="btn btn-primary btn-round" data-original-title="" title="<?php echo  lang('ui_edit')?>" onclick="window.location.href='<?php echo base_url('muser/edit/').$value->Id;?>'">
                                 <i class="material-icons">edit</i>
-                              </button>
+                              </button> -->
                               <?php if($value->IsActive == 1) { ?>
 															  
-                                <button type="button" rel="tooltip" class="btn btn-success" data-original-title="" title="<?php echo  $resource['res_deactivate']?>" onclick = "delete_user('<?php echo $value->Id?>','<?php echo $value->Username?>')">
+                                <button type="button" rel="tooltip" class="btn btn-primary btn-round" data-original-title="" title="<?php echo  lang('ui_deactivate')?>" onclick = "delete_user('<?php echo $value->Id?>','<?php echo $value->Username?>')">
                                   <i class="material-icons">power</i>
                                 </button>
                               <?php } else { ?>
-															  <button type="button" rel="tooltip" class="btn btn-danger" data-original-title="" title="<?php echo  $resource['res_activate']?>" onclick="activate_user('<?php echo $value->Id?>','<?php echo $value->Username?>')">>
+															  <button type="button" rel="tooltip" class="btn btn-danger btn-round" data-original-title="" title="<?php echo  lang('ui_activate')?>" onclick="activate_user('<?php echo $value->Id?>','<?php echo $value->Username?>')">
                                   <i class="material-icons">power</i>
                                 </button>
                               <?php } ?>
@@ -91,7 +112,7 @@
         for($i=0 ; $i<count($msg); $i++)
         {
       ?>
-          setNotification("<?php echo $msg[$i]; ?>", 2, "bottom", "right");
+          setNotification("<?php echo lang($msg[$i]); ?>", 2, "bottom", "right");
       <?php 
         }
       }
@@ -102,7 +123,7 @@
         for($i=0 ; $i<count($msg); $i++)
         {
       ?>
-          setNotification("<?php echo $msg[$i]; ?>", 2, "bottom", "right");
+          setNotification("<?php echo lang($msg[$i]); ?>", 2, "bottom", "right");
       <?php 
         }
       }
@@ -113,16 +134,19 @@
         for($i=0 ; $i<count($msg); $i++)
         {
       ?>
-          setNotification("<?php echo $msg[$i]; ?>", 3, "bottom", "right");
+          setNotification("<?php echo lang($msg[$i]); ?>", 3, "bottom", "right");
       <?php 
         }
       }
     ?>
   }
-  $("#searchbutton").on("click",function() {
-    var search = $("#search").val();
-    //alert(search);
-    window.location =" <?php echo base_url('m_user');?>?search="+search;
+
+  $("#search").on("keyup",function(e) {
+    if (e.keyCode == 13) {
+      var search = $("#search").val();
+      //alert(search);
+      window.location ="<?php echo base_url('m_user');?>?search="+search;
+    }
   })   
 
   function delete_user(id, name){

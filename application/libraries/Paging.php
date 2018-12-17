@@ -51,29 +51,9 @@ class Paging {
         $CI->load->view('template/footer');
     }
 
-    public function set_resources_forbidden_page()
-    {
-        $CI =& get_instance();
-        $CI->load->library('session');
-
-        $resource['res_page_forbidden'] = lang('ui_page_forbidden');
-        $resource['res_contact_your_admin'] = lang('ui_contact_your_admin');
-        return $resource;
-    }
-
-    public function set_resources_maintenance_page()
-    {
-        $CI =& get_instance();
-        $CI->load->library('session');
-
-        $resource['res_page_maintenance'] = lang('ui_page_maintenance');
-        return $resource;
-    }
-
     private function set_resources_header_page()
     {
         
-
         $resource['flag'] = base_url('assets/bootstrapdashboard/img/flags/16/US.png');
         if($_SESSION['language']['language'] === 'indonesia'){
             $resource['flag'] = base_url('assets/bootstrapdashboard/img/flags/16/ID.png');;
@@ -109,17 +89,15 @@ class Paging {
         
     }
 
-    public function set_data_page_add($resource, $model = null, $enums = null)
+    public function set_data_page_add($model = null, $enums = null)
     {
-        $data['resource'] = $resource;
         $data['model'] = $model;
         $data['enums'] = $enums;
         return $data;
     }
 
-    public function set_data_page_edit($resource, $model = null, $enums = null)
+    public function set_data_page_edit($model = null, $enums = null)
     {
-        $data['resource'] = $resource;
         $data['model'] = $model;
         $data['enums'] = $enums;
         return $data;
@@ -135,7 +113,7 @@ class Paging {
         return $permited;
     }
 
-    public function set_data_page_index($resource, $modeldetail, $totalrow = null, $currentpage = 0, $search = null, $modelheader = null, $pagesize = null)
+    public function set_data_page_index($modeldetail, $totalrow = null, $currentpage = 0, $search = null, $modelheader = null, $pagesize = null)
     {
         $config = $this->get_config();
         $pagesz = $config['perpage']; //5 or whatever
@@ -206,7 +184,8 @@ class Paging {
         $data['firstpage'] = $firstpage;
         $data['lastpage'] = $lastpage;
         $data['search'] = $search;
-        $data['resource'] = $resource;
+        $data['firstrow'] = $startNumber;
+        $data['lastrow'] = count($modeldetail) < $pagesz ? $totalrow : $startNumber + $pagesz - 1;
         return $data;
     }
 
@@ -214,23 +193,29 @@ class Paging {
 
         $msg = array();
 
-        $msg = array_merge($msg, array(0=>lang('ui_datasaved')));
+        $msg = array_merge($msg, array(0=>'ui_datasaved'));
         return $msg;
     }
 
     public function get_delete_message(){
         $msg = array();
 
-        $msg = array_merge($msg, array(0=>lang('ui_datadeleted')));
+        $msg = array_merge($msg, array(0=>'ui_datadeleted'));
         return $msg;
     }
 
-    public function set_data_page_modal($resource, $modeldetail, $totalrow = null, $currentpage = 0, $search = null, $modelheader = null, $tabelname = null)
+    public function set_data_page_modal($modeldetail, $totalrow = null, $currentpage = 0, $search = null, $modelheader = null, $tabelname = null, $pagesize = null)
     {
         $config = $this->get_config();
         $totalpage = 0;
         $firstpage = 1;
         $lastpage = 3;
+        $pagesz = $config['perpagemodal'];
+        if(!empty($pagesize))
+        {
+            $pagesz = $pagesize;
+        }
+
         if($totalrow)
         {
             $totalpage = ceil($totalrow / $config['perpagemodal']);
@@ -279,6 +264,11 @@ class Paging {
             $lastpage = 0;
         }
 
+        $startNumber = 1;
+        if($currentpage > 1){
+            $startNumber = (($currentpage - 1)*$pagesz) + 1;
+        }
+
         $data[$tabelname]['modelheadermodal'] = $modelheader;
         $data[$tabelname]['modeldetailmodal'] = $modeldetail;
         $data[$tabelname]['totalrowmodal'] = $totalrow;
@@ -287,7 +277,8 @@ class Paging {
         $data[$tabelname]['firstpagemodal'] = $firstpage;
         $data[$tabelname]['lastpagemodal'] = $lastpage;
         $data[$tabelname]['searchmodal'] = $search;
-        $data[$tabelname]['resourcemodal'] = $resource;
+        $data[$tabelname]['firstrowmodal'] = $startNumber;
+        $data[$tabelname]['lastrowmodal'] = $totalrow < $pagesz ? $totalrow : $startNumber + $pagesz - 1;
         return $data;
     }
 
