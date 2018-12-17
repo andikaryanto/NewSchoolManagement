@@ -286,19 +286,19 @@
     function setNotification(message, title, position, align){
 
       if(title == 1){
-        var titlestr = "<?php echo $resource['res_warning'] ?>";
+        var titlestr = "<?php echo lang('ui_warning') ?>";
         var type = "warning";
       }
       else if(title == 2){
-        var titlestr = "<?php echo $resource['res_success'] ?>";
+        var titlestr = "<?php echo lang('ui_success') ?>";
         var type = "success";
       }
       else if(title == 3){
-        var titlestr = "<?php echo $resource['res_danger'] ?>";
+        var titlestr = "<?php echo lang('ui_danger') ?>";
         var type = "danger";
       }
       else{
-        var titlestr = "<?php echo $resource['res_info'] ?>";
+        var titlestr = "<?php echo lang('ui_info') ?>";
         var type = "info";
       }
 
@@ -353,15 +353,15 @@
       function deleteData(name, callback){
       bootbox.confirm({
       //title: "Destroy planet?",
-      message: "<div class='text-center'><?php echo $resource['res_want_delete']?> " + name + " ?</div>",
+      message: "<div class='text-center'><?php echo lang('ui_want_delete')?> " + name + " ?</div>",
         buttons: {
             cancel: {
                 className: 'btn btn-link',
-                label: "<?php echo $resource['res_cancel']?>"
+                label: "<?php echo lang('ui_cancel')?>"
             },
             confirm: {
                 className: 'btn btn-success btn-link',
-                label: "<?php echo $resource['res_confirm']?>"
+                label: "<?php echo lang('ui_confirm')?>"
             }
         },
         callback: function (result) {

@@ -24,14 +24,10 @@ class Helpers {
     }
 
     public function get_query_error_message($code){
-        $CI =& get_instance();
-        $CI->load->library('session');
-        $CI->lang->load('form_ui', $_SESSION['language']['language']);
-
         $msg = array();
 
         if($code == $this->queryErrorCode()['datainrefenrence']){
-            $msg = array_merge($msg, array(0=>$CI->lang->line('ui_datainreference')));
+            $msg = array_merge($msg, array(0=>lang('ui_datainreference')));
         }
 
         return $msg;

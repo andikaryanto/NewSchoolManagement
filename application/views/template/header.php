@@ -147,7 +147,7 @@
                 <li class="nav-item ">
                   <a class="nav-link" href="<?php echo base_url($master->IndexRoute);?>">
                     <!-- <span class="sidebar-mini"> E </span> -->
-                    <span class="sidebar-normal"> <?php echo $resource[$master->Resource]?> </span>
+                    <span class="sidebar-normal"> <?php echo lang($master->Resource)?> </span>
                   </a>
                 </li>
               <?php }?>
@@ -158,13 +158,13 @@
           <li class="nav-item ">
             <a class="nav-link" href="<?php echo base_url("muser");?>">
               <i class="material-icons">face</i>
-              <p> <?php echo $resource['res_user']?> </p>
+              <p> <?php echo lang('ui_user')?> </p>
             </a>
           </li>
           <li class="nav-item ">
             <a class="nav-link" href="<?php echo base_url("mgroupuser");?>">
               <i class="material-icons">face</i>
-              <p> <?php echo $resource['res_groupuser']?> </p>
+              <p> <?php echo lang('ui_groupuser')?> </p>
             </a>
           </li>
         </ul>

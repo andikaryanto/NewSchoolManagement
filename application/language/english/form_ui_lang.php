@@ -111,6 +111,7 @@ $lang['ui_live'] = "Live";
 $lang['ui_maintenance'] = "Maintenance";
 $lang['ui_page_maintenance'] = "Website is under maintenance, We will inform to you if maintanance is finished.";
 $lang['ui_class'] = "Class";
+$lang['ui_worker'] = "Worker";
 $lang['ui_school'] = "School";
 $lang['ui_master_schoolyear'] = "Master School Year";
 $lang['ui_schoolyear'] = "School Year";

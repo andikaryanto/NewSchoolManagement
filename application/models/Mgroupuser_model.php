@@ -9,14 +9,11 @@ class Mgroupuser_model extends CI_Model {
     public $uon;
     public $uby;
 
-    public function __construct()
-    {
+    public function __construct(){
         parent::__construct();
         $this->load->model(array("Mform_model"));
         $this->load->library('session');
         $this->load->library('paging');
-        // $this->lang->load('form_ui', !empty($_SESSION['language']['language']) ? $_SESSION['language']['language'] : $this->config->item('language'));
-        // $this->lang->load('err_msg', !empty($_SESSION['language']['language']) ? $_SESSION['language']['language'] : $this->config->item('language'));
     }
     
     public function get_alldata()

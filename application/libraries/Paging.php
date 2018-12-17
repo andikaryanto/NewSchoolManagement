@@ -37,11 +37,9 @@ class Paging {
     {
 
         $CI =& get_instance();
-        $resource = $this->set_resources_header_page();
         $CI->load->model(array("Mform_model"));
         $mastermenu = $CI->Mform_model->get_data_by_classname("Master");
 
-        $data['resource'] = $resource;
         $data['mastermenu'] = $mastermenu;
 
         $CI->load->view('template/header', $data); 
@@ -49,20 +47,17 @@ class Paging {
 
     public function load_footer()
     {
-        $resource = $this->set_resources_header_page();
-        $data['resource'] = $resource;
         $CI =& get_instance();
-        $CI->load->view('template/footer', $data);
+        $CI->load->view('template/footer');
     }
 
     public function set_resources_forbidden_page()
     {
         $CI =& get_instance();
         $CI->load->library('session');
-        $CI->lang->load('form_ui', $_SESSION['language']['language']);
 
-        $resource['res_page_forbidden'] = $CI->lang->line('ui_page_forbidden');
-        $resource['res_contact_your_admin'] = $CI->lang->line('ui_contact_your_admin');
+        $resource['res_page_forbidden'] = lang('ui_page_forbidden');
+        $resource['res_contact_your_admin'] = lang('ui_contact_your_admin');
         return $resource;
     }
 
@@ -70,57 +65,14 @@ class Paging {
     {
         $CI =& get_instance();
         $CI->load->library('session');
-        $CI->lang->load('form_ui', $_SESSION['language']['language']);
 
-        $resource['res_page_maintenance'] = $CI->lang->line('ui_page_maintenance');
+        $resource['res_page_maintenance'] = lang('ui_page_maintenance');
         return $resource;
     }
 
     private function set_resources_header_page()
     {
         
-        $CI =& get_instance();
-        $CI->load->library('session');
-        $CI->lang->load('form_ui', $_SESSION['language']['language']);
-
-        
-        $resource['res_warning'] = $CI->lang->line('ui_warning');
-        $resource['res_success'] = $CI->lang->line('ui_success');
-        $resource['res_danger'] = $CI->lang->line('ui_danger');
-        $resource['res_info'] = $CI->lang->line('ui_info');
-        $resource['res_want_delete'] = $CI->lang->line('ui_want_delete');
-        $resource['res_cancel'] = $CI->lang->line('ui_cancel');
-        $resource['res_confirm'] = $CI->lang->line('ui_confirm');
-
-        $resource['res_general'] = $CI->lang->line('ui_general');
-        $resource['res_disaster'] = $CI->lang->line('ui_disaster');
-        $resource['res_groupuser'] = $CI->lang->line('ui_groupuser');
-        $resource['res_user'] = $CI->lang->line('ui_user');
-        $resource['res_logout'] = $CI->lang->line('ui_logout');
-        $resource['res_changepassword'] = $CI->lang->line('ui_changepassword');
-        $resource['res_province'] = $CI->lang->line('ui_province');
-        $resource['res_city'] = $CI->lang->line('ui_city');
-        $resource['res_village'] = $CI->lang->line('ui_village');
-        $resource['res_subcity'] = $CI->lang->line('ui_subcity');
-        $resource['res_familycard'] = $CI->lang->line('ui_familycard');
-        $resource['res_animal'] = $CI->lang->line('ui_animal');
-        $resource['res_barrack'] = $CI->lang->line('ui_barrack');
-        $resource['res_transaction'] = $CI->lang->line('ui_transaction');
-        $resource['res_disaster_occur'] = $CI->lang->line('ui_disaster_occur');
-        $resource['res_receiveitem'] = $CI->lang->line('ui_receiveitem');
-        $resource['res_inventory'] = $CI->lang->line('ui_inventory');
-        $resource['res_item'] = $CI->lang->line('ui_item');
-        $resource['res_master_item'] = $CI->lang->line('ui_master_item');
-        $resource['res_uom'] = $CI->lang->line('ui_uom');
-        $resource['res_master_uom'] = $CI->lang->line('ui_master_uom');
-        $resource['res_warehouse'] = $CI->lang->line('ui_warehouse');
-        $resource['res_sitestatus'] = $CI->lang->line('ui_sitestatus');
-        $resource['res_class'] = $CI->lang->line('ui_class');
-        $resource['res_school'] = $CI->lang->line('ui_school');
-        $resource['res_schoolyear'] = $CI->lang->line('ui_schoolyear');
-        $resource['res_worker'] = $CI->lang->line('ui_worker');
-        $resource['res_subject'] = $CI->lang->line('ui_subject');
-        $resource['res_student'] = $CI->lang->line('ui_student');
 
         $resource['flag'] = base_url('assets/bootstrapdashboard/img/flags/16/US.png');
         if($_SESSION['language']['language'] === 'indonesia'){
@@ -259,24 +211,17 @@ class Paging {
     }
 
     public function get_success_message(){
-        $CI =& get_instance();
-        $CI->load->library('session');
-        $CI->lang->load('form_ui', $_SESSION['language']['language']);
 
         $msg = array();
 
-        $msg = array_merge($msg, array(0=>$CI->lang->line('ui_datasaved')));
+        $msg = array_merge($msg, array(0=>lang('ui_datasaved')));
         return $msg;
     }
 
     public function get_delete_message(){
-        $CI =& get_instance();
-        $CI->load->library('session');
-        $CI->lang->load('form_ui', $_SESSION['language']['language']);
-
         $msg = array();
 
-        $msg = array_merge($msg, array(0=>$CI->lang->line('ui_datadeleted')));
+        $msg = array_merge($msg, array(0=>lang('ui_datadeleted')));
         return $msg;
     }
 
