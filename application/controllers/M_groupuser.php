@@ -31,7 +31,7 @@ class M_groupuser extends CI_Controller
 
             $pagesize = $this->paging->get_config();
             $resultdata = $this->Mgroupuser_model->get_alldata();
-            $datapages = $this->Mgroupuser_model->get_datapages($page,  $pagesize['perpage'], $search);
+            $datapages = $this->Mgroupuser_model->get_datapages($page, $_SESSION['usersetting']->RowPerpage, $search);
             $rows = !empty($search) ? count($datapages) : count($resultdata);
             $data =  $this->paging->set_data_page_index($datapages, $rows, $page, $search);
             

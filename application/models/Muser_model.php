@@ -29,14 +29,25 @@ class Muser_model extends CI_Model {
         $this->db->select('a.*, b.GroupName');
         $this->db->from('m_user as a');
         $this->db->join('m_groupuser as b', 'a.GroupId = b.Id', 'left');
+        $this->db->join('m_groupuser as b', 'a.GroupId = b.Id', 'left');
         $this->db->where('a.Id', $id);
         $query = $this->db->get();
         return $query->row(); // a single row use row() instead of result()
     }
 
     public function get_usersetting_by_userid($id){
-        $this->db->select('a.*');
+        $this->db->select('a.*,
+                            b.Id as ColorId,
+                            b.Name as ColorName,
+                            b.Value as ColorValue,
+                            b.CssClass,
+                            b.CssPath,
+                            b.CssCustomPath,
+                            c.Id as LanguageId,
+                            c.Name as Language');
         $this->db->from('m_usersetting as a');
+        $this->db->join('g_color as b', 'a.ColorId = b.Id', 'left');
+        $this->db->join('g_language as c', 'a.LanguageId = c.Id', 'left');
         $this->db->where('a.UserId', $id);
         $query = $this->db->get();
         return $query->row();
@@ -113,6 +124,11 @@ class Muser_model extends CI_Model {
         $this->db->update('m_user', $data);
     }
 
+    public function edit_usersetting($data){
+        $this->db->where('Id', $data['id']);
+        $this->db->update('m_usersetting', $data);
+    }
+
     public function delete_data($id)
     {
         $this->db->set('IsActive', 0);
@@ -138,22 +154,16 @@ class Muser_model extends CI_Model {
     }
 
     public function create_usersetting_object($id = null, $userid = null,
-        $language = 'indonesia', 
-        $color = 'assets/material-dashboard/assets/css/material-dashboard.min.css', 
-        $colorvalue = '#9c27b0',
-        $background = 'assets/material-dashboard//assets/img/sidebar-1.jpg',
-        $customcolor = 'assets/material-dashboard/assets/css/Custom.css',
-        $customcolorvalue = '#9c27b0'){
+        $languageid = '1', 
+        $colorid = '1',
+        $rowperpage = 5){
             
         $data = array(
             'id' => $id,
             'userid' => $userid,
-            'language' => $language,
-            'color' => $color,
-            'colorvalue' => $colorvalue,
-            'background' => $background,
-            'customcolor' => $customcolor,
-            'customcolorvalue' => $customcolorvalue
+            'languageid' => $languageid,
+            'colorid' => $colorid,
+            'rowperpage' => $rowperpage
         );
         return  $data;
 

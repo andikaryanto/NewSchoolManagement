@@ -37,8 +37,6 @@ $lang['ui_add_data'] = "Tambah Data";
 $lang['ui_add_detail_data'] = "Tembah Detail Data";
 $lang['ui_edit_data'] = "Ubah Data";
 $lang['ui_role'] = "Akses";
-$lang['ui_page_forbidden'] = "Halaman ini tidak bisa dibuka dengan akun anda atau anda tidak memiliki izin untuk melakukan operasi ini.";
-$lang['ui_contact_your_admin'] = "Hubungi administrator anda";
 $lang['ui_read'] = "Lihat";
 $lang['ui_write'] = "Tambah/Ubah";
 $lang['ui_print'] = "Cetak";
@@ -134,7 +132,6 @@ $lang['ui_schoolyear'] = "Tahun Ajaran";
 $lang['ui_fromyear'] = "Dari Tahun";
 $lang['ui_toyear'] = "Sampai Tahun";
 $lang['ui_monthstart'] = "Bulan Mulai";
-$lang['ui_page_maintenance'] = "Laman web sedang dalam perbaikan, kami akan menginformasikan jika perbaikan telah selesai.";
 
 $lang['msg_orderuomconvertion'] = "Urutkan Perubahan ukuran dari paling BESAR ke KECIL. contoh : Box ke Pack (nomor urut = 1), Pack ke Pcs (nomor urut = 2) dan seterusnya";
 
@@ -174,3 +171,6 @@ $lang['ui_setting'] = "Pengaturan";
 $lang['ui_language'] = "Bahasa";
 $lang['ui_color'] = "Warna";
 $lang['ui_usersetting'] = "Pengaturan Pengguna";
+$lang['ui_rowperpage'] = "Baris Data";
+$lang['ui_forbidden'] = "Terlarang";
+$lang['ui_notfound'] = "Tidak ditemukan";

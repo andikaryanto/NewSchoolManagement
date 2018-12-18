@@ -15,35 +15,20 @@ class Migration_create_m_usersetting_table20181217062632 extends CI_Migration {
                     'type' => 'INT',
                     'constraint' => 11
                 ),
-                'Language' => array(
-                    'type' => 'VARCHAR',
-                    'constraint' => 100,
-                    'default' => 'indonesia'
+                'LanguageId' => array(
+                    'type' => 'INT',
+                    'constraint' => 11,
+                    'default' => 1
                 ),
-                'Color' => array(
-                    'type' => 'VARCHAR',
-                    'constraint' => 1000,
-                    'default' => 'assets/material-dashboard/assets/css/material-dashboard.min.css'
+                'ColorId' => array(
+                    'type' => 'INT',
+                    'constraint' => 11,
+                    'default' => 1
                 ),
-                'ColorValue' => array(
-                    'type' => 'VARCHAR',
-                    'constraint' => 100,
-                    'default' => '#9c27b0'
-                ),
-                'BackGround' => array(
-                    'type' => 'VARCHAR',
-                    'constraint' => 1000,
-                    'default' => 'assets/material-dashboard//assets/img/sidebar-1.jpg'
-                ),
-                'CustomColor' => array(
-                    'type' => 'VARCHAR',
-                    'constraint' => 1000,
-                    'default' => 'assets/material-dashboard/assets/css/Custom.css'
-                ),
-                'CustomColorValue' => array(
-                    'type' => 'VARCHAR',
-                    'constraint' => 1000,
-                    'default' => '#9c27b0'
+                'RowPerpage' => array(
+                    'type' => 'INT',
+                    'constraint' => 11,
+                    'default' => 5
                 )
             ));
             $this->dbforge->add_key('Id', TRUE);

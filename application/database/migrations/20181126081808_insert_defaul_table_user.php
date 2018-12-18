@@ -9,6 +9,12 @@ class Migration_insert_defaul_table_user extends CI_Migration {
             'Password' => '0d403ffb03c72dff96ee1d0de8c75ee8'
         ];
         $this->db->insert($this->table, $data);
+
+        $dataSetting = [
+            'UserId' => '1'
+        ];
+        
+        $this->db->insert('m_usersetting', $dataSetting);
     }
 
     public function down() {

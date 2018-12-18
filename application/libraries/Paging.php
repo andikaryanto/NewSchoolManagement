@@ -116,7 +116,7 @@ class Paging {
     public function set_data_page_index($modeldetail, $totalrow = null, $currentpage = 0, $search = null, $modelheader = null, $pagesize = null)
     {
         $config = $this->get_config();
-        $pagesz = $config['perpage']; //5 or whatever
+        $pagesz = $_SESSION['usersetting']->RowPerpage; //5 or whatever
         if(!empty($pagesize))
         {
             $pagesz = $pagesize;

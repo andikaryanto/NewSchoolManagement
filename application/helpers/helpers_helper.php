@@ -40,6 +40,11 @@ function getEnumName($enumName, $enumDetailId){
 
 }
 
+function replaceSession($name, $data){
+    $CI =& get_instance();
+    $CI->session->set_userdata($name, $data);
+}
+
 
 // function getLang($res){
 

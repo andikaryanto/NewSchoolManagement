@@ -76,7 +76,7 @@
   <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top text-white">
     <div class="container">
       <div class="navbar-wrapper">
-        <a class="navbar-brand" href="#pablo"><?php echo lang('ui_forbidden')?></a>
+        <a class="navbar-brand" href="#pablo"><?php echo lang('ui_notfound')?></a>
       </div>
       <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
         <span class="sr-only">Toggle navigation</span>
@@ -91,7 +91,7 @@
               <i class="material-icons">dashboard</i> Home
             </a>
           </li>
-        </ul>
+        </ul> 
       </div>
     </div>
   </nav>
@@ -101,9 +101,9 @@
       <div class="content-center">
         <div class="row">
           <div class="col-md-12">
-            <h1 class="title">403</h1>
-            <h2><?php echo lang('info_contact_your_admin')?></h2>
-            <h4><?php echo lang('info_page_forbidden')?></h4>
+            <h1 class="title">404</h1>
+            <h2><?php echo lang('info_youre_lost')?></h2>
+            <h4><?php echo lang('info_page_not_found')?></h4>
           </div>
         </div>
       </div>

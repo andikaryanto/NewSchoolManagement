@@ -32,7 +32,7 @@ class M_user extends CI_Controller
 
             $pagesize = $this->paging->get_config();
             $resultdata = $this->Muser_model->get_alldata();
-            $datapages = $this->Muser_model->get_datapages($page,  $pagesize['perpage'], $search);
+            $datapages = $this->Muser_model->get_datapages($page, $_SESSION['usersetting']->RowPerpage, $search);
             
             $rows = !empty($search) ? count($datapages) : count($resultdata);
 
@@ -201,7 +201,7 @@ class M_user extends CI_Controller
             'newpassword' => "",
             'confirmpassword' => ""
         );
-
+        $data['model'] = $model;
         $this->loadview('m_user/changePassword', $data);    
     }
 
@@ -227,8 +227,19 @@ class M_user extends CI_Controller
             $this->Muser_model->saveNewPassword($_SESSION['userdata']['username'], $oldpassword, $newpassword);
             $successmsg = $this->paging->get_success_message();
             $this->session->set_flashdata('success_msg', $successmsg);
-            redirect('home');
+            redirect('changePassword');
         }
+    }
+
+    public function savesetting(){
+        $language = $this->input->post('languageid');
+        $radiocolor = $this->input->post('radiocolor');
+        $rowperpage = $this->input->post('rowperpage');
+        $usersetting = $this->Muser_model->create_usersetting_object($_SESSION['usersetting']->Id, $_SESSION['userdata']['id'],$language, explode("~",$radiocolor)[1],  $rowperpage);
+        $this->Muser_model->edit_usersetting($usersetting);
+        $newdata = $this->Muser_model->get_usersetting_by_userid($_SESSION['userdata']['id']);
+        replaceSession('usersetting', $newdata);
+        redirect('settings');
     }
 
     private function loadview($viewName, $data)

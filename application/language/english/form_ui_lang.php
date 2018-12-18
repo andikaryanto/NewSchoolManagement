@@ -25,8 +25,6 @@ $lang['ui_add_data'] = "Add Data";
 $lang['ui_add_detail_data'] = "Add Detail Data";
 $lang['ui_edit_data'] = "Edit Data";
 $lang['ui_role'] = "Role";
-$lang['ui_page_forbidden'] = "This page is forbiden for your account or you dont have permission to do this opperation.";
-$lang['ui_contact_your_admin'] = "Contact your administrator";
 $lang['ui_read'] = "Read";
 $lang['ui_write'] = "Write";
 $lang['ui_print'] = "Print";
@@ -108,9 +106,7 @@ $lang['ui_receivedate'] = "Receive Date";
 $lang['ui_receiveno'] = "Receive No.";
 $lang['ui_sitestatus'] = "Site Status";
 $lang['ui_live'] = "Live";
-$lang['ui_maintenance'] = "Maintenance";
-$lang['ui_page_maintenance'] = "Website is under maintenance, We will inform to you if maintanance is finished.";
-$lang['ui_class'] = "Class";
+$lang['ui_maintenance'] = "Maintenance";$lang['ui_class'] = "Class";
 $lang['ui_worker'] = "Worker";
 $lang['ui_school'] = "School";
 $lang['ui_master_schoolyear'] = "Master School Year";
@@ -157,5 +153,8 @@ $lang['ui_setting'] = "Setting";
 $lang['ui_language'] = "Language";
 $lang['ui_color'] = "Color";
 $lang['ui_usersetting'] = "User Setting";
+$lang['ui_rowperpage'] = "Row Data";
+$lang['ui_forbidden'] = "Forbidden";
+$lang['ui_notfound'] = "Not Found";
 
 

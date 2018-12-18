@@ -50,7 +50,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 $route['default_controller'] = 'login';
-$route['404_override'] = '';
+$route['404_override'] = 'Error404';
 $route['translate_uri_dashes'] = FALSE;
 
 $route['login'] = 'login/login';
@@ -76,8 +76,9 @@ $route['muser/editsave'] = 'm_user/editsave';
 $route['muser/delete/(:num)'] = 'm_user/delete/$1';
 $route['muser/activate/(:num)'] = 'm_user/activate/$1';
 $route['changePassword'] = 'm_user/changePassword';
-$route['settings'] = 'm_user/setting';
 $route['saveChangePassword'] = 'm_user/saveNewPassword';
+$route['settings'] = 'm_user/setting';
+$route['savesettings'] = 'm_user/savesetting';
 
 
 $route['mkelas'] = 'm_kelas';

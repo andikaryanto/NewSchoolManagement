@@ -25,7 +25,7 @@ class Login extends CI_Controller
         $password = $this->input->post('loginPassword');
         
         $query = $this->Muser_model->get_sigle_data_user($username, $password);
-        echo json_encode($query);
+        // echo json_encode($query);
         if ($query)
         {
             if($query->IsLoggedIn == 0){
@@ -42,7 +42,7 @@ class Login extends CI_Controller
                 //$this->Muser_model->set_loggedin($username);
                 redirect('home');
             } else {
-                echo "<script>alert('user is already logged in');</script>";
+                // echo "<script>alert('user is already logged in');</script>";
                 $this->index();
             }
         }

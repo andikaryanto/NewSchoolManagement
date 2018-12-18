@@ -42,11 +42,23 @@ class Migration_create_g_language20181217092435 extends CI_Migration {
                 ),
                 'Name' => array(
                     'type' => 'Varchar',
-                    'constraint' => 50,
+                    'constraint' => 300,
                 ),
                 'Value' => array(
                     'type' => 'Varchar',
-                    'constraint' => 50,
+                    'constraint' => 300,
+                ),
+                'CssClass' => array(
+                    'type' => 'Varchar',
+                    'constraint' => 300,
+                ),
+                'CssPath' => array(
+                    'type' => 'Varchar',
+                    'constraint' => 300,
+                ),
+                'CssCustomPath' => array(
+                    'type' => 'Varchar',
+                    'constraint' => 300,
                 )
             ));
 
@@ -56,11 +68,18 @@ class Migration_create_g_language20181217092435 extends CI_Migration {
             $data = array('data' =>
                 array(
                     'Name' => 'primary',
-                    'Value' => '#9c27b0'
+                    'Value' => '#9c27b0',
+                    'CssClass' => 'text-primary',
+                    'CssPath' => 'assets/material-dashboard/assets/css/material-dashboard.min.css',
+                    'CssCustomPath' => 'assets/material-dashboard/assets/css/Custom.css',
+
                 ),
                 array(
                     'Name' => 'green',
-                    'Value' => '#4caf50'
+                    'Value' => '#4caf50',
+                    'CssClass' => 'text-success',
+                    'CssPath' => 'assets/material-dashboard/assets/css/material-dashboard.green.min.css',
+                    'CssCustomPath' => 'assets/material-dashboard/assets/css/Custom.green.css'
                 ),
             );
             

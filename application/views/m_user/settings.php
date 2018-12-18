@@ -10,35 +10,77 @@
                       <h4 class="card-title "><?php echo lang('ui_usersetting')?></h4>
                     </div>
                     <div class="col">
-                      <!-- <div class="text-right">
-                        <button type="button" rel="tooltip" class="btn btn-primary btn-round btn-fab" title="index" onclick="window.location.href='<?php echo base_url('mgroupuser');?>'">
-                          <i class="material-icons">list</i>
-                        </button>
-                      </div> -->
                     </div>
                   </div>
                 </div>
                 <div class="card-body">                 
-                  <form method = "post" action = "<?php echo base_url('mgroupuser/addsave');?>">
+                  <form method = "post" action = "<?php echo base_url('savesettings');?>">
+                    <input hidden id = "languageid" name = "languageid" type="text">
+                    <input hidden id = "rowperpage" name = "rowperpage" type="text">
                     <div class="form-group">
-                      <div class="col-lg-12 col-md-12 col-sm-12">
-                        <div class="dropdown bootstrap-select show-tick">
-                          <select class="selectpicker" data-style="select-with-transition" title="<?php echo lang('ui_language')?>">
-                            <?php 	
-                            foreach ($enums['languageenums'] as $value)
-                            { 
-                            ?>
-                              <option value ="<?php echo $value->Id?>"><?php echo $value->Name?></option>
-                            <?php 
-                            }
-                            ?>
-                          </select>
-                          <!-- <button type="button" class="btn dropdown-toggle select-with-transition bs-placeholder" data-toggle="dropdown" role="button" title="Choose City" aria-expanded="true"><div class="filter-option"><div class="filter-option-inner"><div class="filter-option-inner-inner">Choose City</div></div> </div><div class="ripple-container"></div></button> -->
+                      <div class = "row">
+                          <label class="col-sm-2 col-form-label"><?php echo lang('ui_language')?></label>
+                          <div class="col">
+                          <div class="dropdown bootstrap-select show-tick">
+                            <select id = "language" name ="language" class="selectpicker" data-style="select-with-transition" title ="<?php echo $_SESSION['usersetting']->Language?>" >
+                              <?php 	
+                              foreach ($enums['languageenums'] as $value)
+                              { 
+                              ?>
+                                <option value ="<?php echo $value->Id?>"><?php echo $value->Name?></option>
+                              <?php 
+                              }
+                              ?>
+                            </select>
+                          </div>
                         </div>
                       </div>
                     </div>
-                    <div class="form-group">       
-                      
+                    <div class="form-group">    
+                      <div class = "row">
+                        <label class="col-sm-2 col-form-label label-checkbox"><?php echo lang('ui_color')?></label>
+                        <div class="col-sm-10 checkbox-radios">
+                          <?php 	
+                          $i=1;
+                          foreach ($enums['colorenums'] as $value)
+                          { 
+                            $option = "option~".$value->Id;
+                          ?>
+                            <div class="form-check form-check-inline">
+                              <label class="form-check-label">
+                                <input class="form-check-input" type="radio" name="radiocolor" id="exampleRadios1" value="<?php echo $option?>" 
+                                  <?php if($_SESSION['usersetting']->ColorId == $value->Id){
+                                  ?>
+                                    checked
+                                  <?php
+                                  }?>
+                                > 
+                                <div style = "color : <?php echo $value->Value?>"><?php echo $value->Name?></div>
+                                <span class="circle">
+                                  <span class="check"></span>
+                                </span>
+                              </label>
+                            </div>
+                          <?php 
+                          $i++;
+                          }
+                          ?>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class = "row">
+                          <label class="col-sm-2 col-form-label"><?php echo lang('ui_rowperpage')?></label>
+                          <div class="col">
+                          <div class="dropdown bootstrap-select show-tick">
+                            <select id = "rowpage" name ="rowpage" class="selectpicker" data-style="select-with-transition" title ="<?php echo $_SESSION['usersetting']->RowPerpage?>" >
+                              <option value ="5">5</option>
+                              <option value ="10">10</option>
+                              <option value ="15">15</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                     <div class="form-group">       
                       <input type="submit" value="<?php echo lang('ui_save')?>" class="btn btn-primary">
@@ -53,6 +95,9 @@
 <script>
   $(document).ready(function() {    
     init();
+    $("#language").val("<?php echo $_SESSION['usersetting']->LanguageId?>");
+    $("#languageid").val("<?php echo $_SESSION['usersetting']->LanguageId?>");
+    $("#rowperpage").val("<?php echo $_SESSION['usersetting']->RowPerpage?>");
   });
 
   function init(){
@@ -69,5 +114,15 @@
     }
     ?>
   }
+  
+  $("#language").on("change", function(e){
+    var data = $(this).children("option:selected").val();
+    $("#languageid").val(data);
+  });
+
+  $("#rowpage").on("change", function(e){
+    var data = $(this).children("option:selected").val();
+    $("#rowperpage").val(data);
+  });
 
 </script>
