@@ -77,13 +77,9 @@
 <body class="">
   <div class="wrapper ">
     <div class="sidebar" data-color="green" data-background-color="black" data-image="<?php echo base_url('assets/material-dashboard//assets/img/sidebar-1.jpg');?>">
-      <!--
-        Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
 
-        Tip 2: you can also add an image using data-image tag
-    -->
       <div class="logo">
-		<a href="http://www.creative-tim.com" class="simple-text logo-mini">
+		    <a href="http://www.creative-tim.com" class="simple-text logo-mini">
           CT
         </a>
         <a href="http://www.creative-tim.com" class="simple-text logo-normal">
@@ -126,6 +122,55 @@
             </div>
           </div>
         </div>
+        <!-- <form class="navbar-form">
+          <span class="bmd-form-group"><div class="input-group no-border">
+            <input type="text" value="" class="form-control" placeholder="Search...">
+            <button type="submit" class="btn btn-white btn-round btn-just-icon">
+              <i class="material-icons">search</i>
+              <div class="ripple-container"></div>
+            </button>
+          </div></span>
+        </form>
+        <ul class="nav navbar-nav nav-mobile-menu">
+          <li class="nav-item">
+            <a class="nav-link" href="#pablo">
+              <i class="material-icons">dashboard</i>
+              <p class="d-lg-none d-md-block">
+                Stats
+              </p>
+            </a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="material-icons">notifications</i>
+              <span class="notification">5</span>
+              <p class="d-lg-none d-md-block">
+                Some Actions
+              </p>
+            <div class="ripple-container"></div></a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+              <a class="dropdown-item" href="#">Mike John responded to your email</a>
+              <a class="dropdown-item" href="#">You have 5 new tasks</a>
+              <a class="dropdown-item" href="#">You're now friend with Andrew</a>
+              <a class="dropdown-item" href="#">Another Notification</a>
+              <a class="dropdown-item" href="#">Another One</a>
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link" href="#pablo" id="navbarDropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="material-icons">person</i>
+              <p class="d-lg-none d-md-block">
+                Account
+              </p>
+            <div class="ripple-container"></div></a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProfile">
+              <a class="dropdown-item" href="#">Profile</a>
+              <a class="dropdown-item" href="#">Settings</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Log out</a>
+            </div>
+          </li>
+        </ul> -->
         <ul class="nav">
           <li class="nav-item active ">
             <a class="nav-link" href="../examples/dashboard.html">
@@ -167,15 +212,48 @@
               <p> <?php echo lang('ui_groupuser')?> </p>
             </a>
           </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="<?php echo base_url("mgroupuser");?>">
+              <i class="material-icons">face</i>
+              <p> <?php echo lang('ui_groupuser')?> </p>
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="<?php echo base_url("mgroupuser");?>">
+              <i class="material-icons">face</i>
+              <p> <?php echo lang('ui_groupuser')?> </p>
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="<?php echo base_url("mgroupuser");?>">
+              <i class="material-icons">face</i>
+              <p> <?php echo lang('ui_groupuser')?> </p>
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="<?php echo base_url("mgroupuser");?>">
+              <i class="material-icons">face</i>
+              <p> <?php echo lang('ui_groupuser')?> </p>
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="<?php echo base_url("mgroupuser");?>">
+              <i class="material-icons">face</i>
+              <p> <?php echo lang('ui_groupuser')?> </p>
+            </a>
+          </li>
         </ul>
-      <div class="ps-scrollbar-x-rail" style="left: 0px; bottom: 0px;"><div class="ps-scrollbar-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps-scrollbar-y-rail" style="top: 0px; height: 551px; right: 0px;"><div class="ps-scrollbar-y" tabindex="0" style="top: 0px; height: 495px;"></div></div></div>
+        <div class="ps-scrollbar-x-rail" style="left: 0px; bottom: 0px;"><div class="ps-scrollbar-x" tabindex="0" style="left: 0px; width: 0px;"></div></div>
+        <div class="ps-scrollbar-y-rail" style="top: 0px; height: 551px; right: 0px;"><div class="ps-scrollbar-y" tabindex="0" style="top: 0px; height: 240px;"></div></div>
+    
+      </div>
     </div>
     <div class="main-panel">
       <!-- Navbar -->
       <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
         <div class="container-fluid">
           <div class="navbar-wrapper">
-			<div class="navbar-minimize">
+			      <div class="navbar-minimize">
               <button id="minimizeSidebar" class="btn btn-just-icon btn-white btn-fab btn-round">
                 <i class="material-icons text_align-center visible-on-sidebar-regular">more_vert</i>
                 <i class="material-icons design_bullet-list-67 visible-on-sidebar-mini">view_list</i>
@@ -242,40 +320,4 @@
           </div>
         </div>
       </nav>
-      <script type = "text/javascript">
-        //$(document).ready(function(e){
-          // var notify = $.notify('<strong>Saving</strong> Do not close this page...', {
-          //   type: 'success',
-          //   allow_dismiss: false,
-          //   showProgressbar: true
-          // });
-
-          // setTimeout(function() {
-          //   notify.update('message', '<strong>Saving</strong> Page Data.');
-          // }, 1000);
-
-          // setTimeout(function() {
-          //   notify.update('message', '<strong>Saving</strong> User Data.');
-          // }, 2000);
-
-          // setTimeout(function() {
-          //   notify.update('message', '<strong>Saving</strong> Profile Data.');
-          // }, 3000);
-
-          // setTimeout(function() {
-          //   notify.update('message', '<strong>Checking</strong> for errors.');
-          // }, 4000);
-          
-          // setTimeout(function() {
-          //   setNotification("aaa",1, 'bottom','right');
-          // }, 1000);
-          
-          // setTimeout(function() {
-          //   setNotification("bbb",1, 'bottom','right');
-          // }, 2000);
-        //})
-
-        
-      </script>
-    
     
