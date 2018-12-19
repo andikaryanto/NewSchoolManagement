@@ -1,10 +1,10 @@
 <?php
 
-class Migration_create_g_language20181217092435 extends CI_Migration {
+class Migration_create_g_languages20181219070746 extends CI_Migration {
 
     public function up() {
         $this->load->helper('db_helper');
-        if (!$this->db->table_exists('g_language')){
+        if (!$this->db->table_exists('g_languages')){
             $this->dbforge->add_field(array(
                 'Id' => array(
                     'type' => 'INT',
@@ -17,7 +17,7 @@ class Migration_create_g_language20181217092435 extends CI_Migration {
                 )
             ));
             $this->dbforge->add_key('Id', TRUE);
-            $this->dbforge->create_table('g_language');
+            $this->dbforge->create_table('g_languages');
             
             $data = array('data' =>
                 array(
@@ -29,11 +29,11 @@ class Migration_create_g_language20181217092435 extends CI_Migration {
             );
             
             foreach ($data as $value){
-                $this->db->insert('g_language', $value);
+                $this->db->insert('g_languages', $value);
             }
         }
 
-        if (!$this->db->table_exists('g_color')){
+        if (!$this->db->table_exists('g_colors')){
             $this->dbforge->add_field(array(
                 'Id' => array(
                     'type' => 'INT',
@@ -63,7 +63,7 @@ class Migration_create_g_language20181217092435 extends CI_Migration {
             ));
 
             $this->dbforge->add_key('Id', TRUE);
-            $this->dbforge->create_table('g_color');
+            $this->dbforge->create_table('g_colors');
             
             $data = array('data' =>
                 array(
@@ -84,13 +84,12 @@ class Migration_create_g_language20181217092435 extends CI_Migration {
             );
             
             foreach ($data as $value){
-                $this->db->insert('g_color', $value);
+                $this->db->insert('g_colors', $value);
             }
         }
     }
 
     public function down() {
-        //$this->dbforge->drop_table('create_g_language20181217092435');
     }
 
 }

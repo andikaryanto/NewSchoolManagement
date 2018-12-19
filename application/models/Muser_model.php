@@ -20,16 +20,16 @@ class Muser_model extends CI_Model {
     
     public function get_alldata()
     {
-        $query = $this->db->get('m_user');
+        $query = $this->db->get('m_users');
         return $query->result();
     }
 
     public function get_data_by_id($id)
     {
         $this->db->select('a.*, b.GroupName');
-        $this->db->from('m_user as a');
-        $this->db->join('m_groupuser as b', 'a.GroupId = b.Id', 'left');
-        $this->db->join('m_groupuser as b', 'a.GroupId = b.Id', 'left');
+        $this->db->from('m_users as a');
+        $this->db->join('m_groupusers as b', 'a.GroupId = b.Id', 'left');
+        $this->db->join('m_groupusers as b', 'a.GroupId = b.Id', 'left');
         $this->db->where('a.Id', $id);
         $query = $this->db->get();
         return $query->row(); // a single row use row() instead of result()
@@ -45,9 +45,9 @@ class Muser_model extends CI_Model {
                             b.CssCustomPath,
                             c.Id as LanguageId,
                             c.Name as Language');
-        $this->db->from('m_usersetting as a');
-        $this->db->join('g_color as b', 'a.ColorId = b.Id', 'left');
-        $this->db->join('g_language as c', 'a.LanguageId = c.Id', 'left');
+        $this->db->from('m_usersettings as a');
+        $this->db->join('g_colors as b', 'a.ColorId = b.Id', 'left');
+        $this->db->join('g_languages as c', 'a.LanguageId = c.Id', 'left');
         $this->db->where('a.UserId', $id);
         $query = $this->db->get();
         return $query->row();
@@ -57,8 +57,8 @@ class Muser_model extends CI_Model {
     {
         $md5pass = encryptMd5("school".$username.$password);
         $this->db->select('a.*, b.GroupName');
-        $this->db->from('m_user as a');
-        $this->db->join('m_groupuser as b', 'a.GroupId = b.Id', 'left');
+        $this->db->from('m_users as a');
+        $this->db->join('m_groupusers as b', 'a.GroupId = b.Id', 'left');
         $this->db->where('UserName', $username);
         $this->db->where('Password', $md5pass);
         $this->db->where('IsActive', 1);
@@ -70,8 +70,8 @@ class Muser_model extends CI_Model {
     public function get_datapages($page, $pagesize, $search = null)
     {
         $this->db->select('a.*, b.GroupName');
-        $this->db->from('m_user as a');
-        $this->db->join('m_groupuser as b', 'a.GroupId = b.Id', 'left');
+        $this->db->from('m_users as a');
+        $this->db->join('m_groupusers as b', 'a.GroupId = b.Id', 'left');
         //$this->db->where('IsActive', 1);
         $this->db->where_not_in('UserName', 'superadmin');
         if(!empty($search))
@@ -90,8 +90,8 @@ class Muser_model extends CI_Model {
 
     public function get_data_by_name($name){
         $this->db->select('a.*, b.GroupName');
-        $this->db->from('m_user as a');
-        $this->db->join('m_groupuser as b', 'a.GroupId = b.Id', 'left');
+        $this->db->from('m_users as a');
+        $this->db->join('m_groupusers as b', 'a.GroupId = b.Id', 'left');
         $this->db->where('a.Username', $name);
         $query = $this->db->get();
         return $query->row();
@@ -100,33 +100,33 @@ class Muser_model extends CI_Model {
     public function set_loggedin($username){
         $this->db->set('IsLoggedIn', 1);
         $this->db->where('Username', $username);
-        $this->db->update('m_user');
+        $this->db->update('m_users');
     }
 
     public function set_logout($username){
         $this->db->set('IsLoggedIn', 0);
         $this->db->where('Username', $username);
-        $this->db->update('m_user');
+        $this->db->update('m_users');
     }
 
     public function save_data($data)
     {
-        if($this->db->insert('m_user', $data)){
+        if($this->db->insert('m_users', $data)){
             $user = $this->get_data_by_name($data['username']);
             $usersetting = $this->create_usersetting_object(null, $user->Id);
-            $this->db->insert('m_usersetting', $usersetting);
+            $this->db->insert('m_usersettings', $usersetting);
         }
     }
 
     public function edit_data($data)
     {
         $this->db->where('Id', $data['id']);
-        $this->db->update('m_user', $data);
+        $this->db->update('m_users', $data);
     }
 
     public function edit_usersetting($data){
         $this->db->where('Id', $data['id']);
-        $this->db->update('m_usersetting', $data);
+        $this->db->update('m_usersettings', $data);
     }
 
     public function delete_data($id)
@@ -134,14 +134,14 @@ class Muser_model extends CI_Model {
         $this->db->set('IsActive', 0);
         $this->db->set('GroupId', null);
         $this->db->where('Id', $id);
-        $this->db->update('m_user');
+        $this->db->update('m_users');
     }
 
     public function activate_data($id)
     {
         $this->db->set('IsActive', 1);
         $this->db->where('Id', $id);
-        $this->db->update('m_user');
+        $this->db->update('m_users');
     }
 
     public function saveNewPassword($username, $password, $newPassword){
@@ -150,7 +150,7 @@ class Muser_model extends CI_Model {
         $newmd5pass = encryptMd5("school".$username.$newPassword);
         $this->db->set('Password', $newmd5pass);
         $this->db->where('Password', $md5pass);
-        $this->db->update('m_user');
+        $this->db->update('m_users');
     }
 
     public function create_usersetting_object($id = null, $userid = null,
@@ -172,7 +172,7 @@ class Muser_model extends CI_Model {
     public function changeLanguage($username,$language){
         $this->db->set('Language', $language);
         $this->db->where('Username', $username);
-        $this->db->update('m_user');
+        $this->db->update('m_users');
     }
 
     public function create_object($id, $groupuserid, $groupname, $username, $password, $ion, $iby, $uon, $uby)
@@ -220,7 +220,7 @@ class Muser_model extends CI_Model {
     {
         $exist = false;
         $this->db->select('*');
-        $this->db->from('m_user');
+        $this->db->from('m_users');
         $this->db->where('UserName', $name);
         $query = $this->db->get();
 

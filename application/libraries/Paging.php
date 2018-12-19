@@ -13,14 +13,14 @@ class Paging {
 
     public function get_form_name_id()
     {
-        $data["m_school"] = "m_school";
-        $data["m_kelas"] = "m_kelas";
-        $data["m_groupuser"] = "m_groupuser";
-        $data["m_user"] = "m_user";
-        $data["m_schoolyear"] = "m_schoolyear";
-        $data["m_mapel"] = "m_mapel";
-        $data["m_worker"] = "m_worker";
-        $data["m_student"] = "m_student";
+        $data["m_school"] = "m_schools";
+        $data["m_kelas"] = "m_clases";
+        $data["m_groupuser"] = "m_groupusers";
+        $data["m_user"] = "m_users";
+        $data["m_schoolyear"] = "m_schoolyears";
+        $data["m_mapel"] = "m_subjects";
+        $data["m_worker"] = "m_workers";
+        $data["m_student"] = "m_students";
         return $data;
     }
 

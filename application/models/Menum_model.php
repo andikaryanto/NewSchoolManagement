@@ -5,7 +5,7 @@ class Menum_model extends CI_Model {
     public function get_data_by_id($id)
     {
         $this->db->select('*');
-        $this->db->from('m_enumdetail', $id);
+        $this->db->from('m_enumdetails', $id);
         $this->db->where('EnumId', $id);
         $this->db->order_by('Ordering');
         $query = $this->db->get();

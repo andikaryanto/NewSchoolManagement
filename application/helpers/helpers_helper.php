@@ -21,8 +21,8 @@ function getEnumName($enumName, $enumDetailId){
     //$CI->lang->load('form_ui', !empty($_SESSION['language']['language']) ? $_SESSION['language']['language'] : $CI->config->item('language'));
 
     $CI->db->select('b.*');
-    $CI->db->from('m_enum a');
-    $CI->db->join('m_enumdetail b','a.Id = b.EnumId','inner');
+    $CI->db->from('m_enums a');
+    $CI->db->join('m_enumdetails b','a.Id = b.EnumId','inner');
     $CI->db->where('a.Name', $enumName);
     $CI->db->where('b.Value', $enumValue);
     $data = $CI->db->get()->row();
@@ -45,6 +45,13 @@ function replaceSession($name, $data){
     $CI->session->set_userdata($name, $data);
 }
 
+function load_view($viewName, $data = null)
+{
+    $CI =& get_instance();
+    $CI->paging->load_header();
+    $CI->load->view($viewName, $data);
+    $CI->paging->load_footer();
+}
 
 // function getLang($res){
 

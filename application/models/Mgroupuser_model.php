@@ -18,14 +18,14 @@ class Mgroupuser_model extends CI_Model {
     
     public function get_alldata()
     {
-        $query = $this->db->get('m_groupuser');
+        $query = $this->db->get('m_groupusers');
         return $query->result();
     }
 
     public function get_data_by_id($id)
     {
         $this->db->select('*');
-        $this->db->from('m_groupuser');
+        $this->db->from('m_groupusers');
         $this->db->where('Id', $id);
         $query = $this->db->get();
         return $query->row(); // a single row use row() instead of result()
@@ -35,7 +35,7 @@ class Mgroupuser_model extends CI_Model {
     {
         
         $this->db->select('*');
-        $this->db->from('m_groupuser');
+        $this->db->from('m_groupusers');
         if(!empty($search))
         {
             $this->db->like('GroupName', $search);
@@ -54,7 +54,7 @@ class Mgroupuser_model extends CI_Model {
         //$group = array($groupid, null);
 
         $this->db->select('*');
-        $this->db->from('view_m_accessrole');
+        $this->db->from('view_m_accessroles');
         $this->db->where('GroupId', $groupid);
         $this->db->or_where('GroupId', null);
         $this->db->order_by('ClassName', 'ASC');
@@ -67,19 +67,19 @@ class Mgroupuser_model extends CI_Model {
 
     public function save_data($data)
     {
-        $this->db->insert('m_groupuser', $data);
+        $this->db->insert('m_groupusers', $data);
     }
 
     public function edit_data($data)
     {
         $this->db->where('Id', $data['id']);
-        $this->db->update('m_groupuser', $data);
+        $this->db->update('m_groupusers', $data);
     }
 
     public function delete_data($id)
     {
         $this->db->where('Id', $id);
-        if(!$this->db->delete('m_groupuser')){
+        if(!$this->db->delete('m_groupusers')){
             return $this->db->error();
         }
         else{
@@ -90,7 +90,7 @@ class Mgroupuser_model extends CI_Model {
     public function save_role($data)
     {
         $this->db->select('*');
-        $this->db->from('m_accessrole');
+        $this->db->from('m_accessroles');
         $this->db->where('GroupId', $data['groupid']);
         $this->db->where('FormId', $data['formid']);
         $query = $this->db->get()->row();
@@ -98,11 +98,11 @@ class Mgroupuser_model extends CI_Model {
         {
             $this->db->where('GroupId', $data['groupid']);
             $this->db->where('FormId', $data['formid']);
-            $this->db->update('m_accessrole', $data);
+            $this->db->update('m_accessroles', $data);
         }
         else
         {
-            $this->db->insert('m_accessrole', $data);
+            $this->db->insert('m_accessroles', $data);
         }
     }
 
@@ -155,7 +155,7 @@ class Mgroupuser_model extends CI_Model {
     {
         $exist = false;
         $this->db->select('*');
-        $this->db->from('m_groupuser');
+        $this->db->from('m_groupusers');
         $this->db->where('GroupName', $groupname);
         $query = $this->db->get();
 
@@ -200,7 +200,7 @@ class Mgroupuser_model extends CI_Model {
     {
         $permitted = false;
         $this->db->select('*');
-        $this->db->from('m_accessrole');
+        $this->db->from('m_accessroles');
         $this->db->where('GroupId', $groupid);
         $this->db->where('FormId', $formid);
         $this->db->where($role, 1);

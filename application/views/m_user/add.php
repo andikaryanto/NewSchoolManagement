@@ -7,12 +7,12 @@
                   
                   <div class="row">
                     <div class="col">
-                      <h4 class="card-title "><?php echo lang('ui_add_data')?></h4>
-                      <p class="card-category"> <?php echo lang('ui_master_user')?></p>
+                      <h4 class="card-title "><?= lang('ui_add_data')?></h4>
+                      <p class="card-category"> <?= lang('ui_master_user')?></p>
                     </div>
                     <div class="col">
                       <div class="text-right">
-                        <button type="button" rel="tooltip" class="btn btn-primary btn-round btn-fab" title="index" onclick="window.location.href='<?php echo base_url('muser');?>'">
+                        <button type="button" rel="tooltip" class="btn btn-primary btn-round btn-fab" title="index" onclick="window.location.href='<?= base_url('muser');?>'">
                           <i class="material-icons">list</i>
                         </button>
                       </div>
@@ -20,16 +20,16 @@
                   </div>
                 </div>
                 <div class="card-body">                 
-                  <form method = "post" action = "<?php echo base_url('muser/addsave');?>">
+                  <form method = "post" action = "<?= base_url('muser/addsave');?>">
                     <div class="form-group bmd-form-group">
-                      <label class = ""><?php echo lang('ui_name')?></label>
-                      <input id="named" type="text"  class="form-control " name = "named" value="<?php echo $model['username']?>" required>
+                      <label class = ""><?= lang('ui_name')?></label>
+                      <input id="named" type="text"  class="form-control " name = "named" value="<?= $model['username']?>" required>
                     </div>
                     <div class="form-group">
-                      <label><?php echo lang('ui_group_user')?></label>
+                      <label><?= lang('ui_group_user')?></label>
                       <div class="input-group has-success">
-                        <input hidden="true" id = "groupid" type="text" class="form-control" name = "groupid" value="<?php echo $model['groupid']?>">
-                        <input id = "groupname" type="text" class="form-control custom-readonly"  value="<?php echo $model['groupname']?>" readonly>
+                        <input hidden="true" id = "groupid" type="text" class="form-control" name = "groupid" value="<?= $model['groupid']?>">
+                        <input id = "groupname" type="text" class="form-control custom-readonly"  value="<?= $model['groupname']?>" readonly>
                         <!-- <span class="form-control-feedback text-primary">
                             <i class="material-icons">search</i>
                         </span> -->
@@ -39,11 +39,11 @@
                       </div>
                     </div>
                     <div class="form-group">       
-                      <label><?php echo lang('ui_password')?></label>
-                      <input id="password" type="password" class="form-control" name = "password" value="<?php echo $model['password']?>">
+                      <label><?= lang('ui_password')?></label>
+                      <input id="password" type="password" class="form-control" name = "password" value="<?= $model['password']?>">
                     </div>
                     <div class="form-group">       
-                      <input type="submit" value="<?php echo lang('ui_save')?>" class="btn btn-primary">
+                      <input type="submit" value="<?= lang('ui_save')?>" class="btn btn-primary">
                     </div>
                   </form>
                 </div>
@@ -108,7 +108,7 @@
       for($i=0 ; $i<count($msg); $i++)
       {
     ?>
-        setNotification("<?php echo lang($msg[$i]); ?>", 3, "bottom", "right");
+        setNotification("<?= lang($msg[$i]); ?>", 3, "bottom", "right");
     <?php 
       }
     }
@@ -121,7 +121,7 @@
     var search = $('#searchInput').val();
     $.ajax({
       type: "POST",
-      url: "<?php echo base_url('M_groupuser/groupusermodal')?>",
+      url: "<?= base_url('M_groupuser/groupusermodal')?>",
       data:{
             page: page,
             search : search
@@ -186,7 +186,7 @@
         append += "</nav>";
         append += "</div>";
         append += "<div class = 'col-lg-6 icon-custom-table-header'>";
-        append += "<?php echo lang('ui_showing')?>"+" "+groupuser['m_groupuser']['firstrowmodal']+" "+"<?php echo lang('ui_to')?>"+" "+groupuser['m_groupuser']['lastrowmodal']+" "+"<?php echo lang('ui_of')?>"+" "+groupuser['m_groupuser']['totalrowmodal']+" "+"<?php echo lang('ui_data')?>";
+        append += "<?= lang('ui_showing')?>"+" "+groupuser['m_groupuser']['firstrowmodal']+" "+"<?= lang('ui_to')?>"+" "+groupuser['m_groupuser']['lastrowmodal']+" "+"<?= lang('ui_of')?>"+" "+groupuser['m_groupuser']['totalrowmodal']+" "+"<?= lang('ui_data')?>";
         //append +="Total Data : "+groupuser['m_groupuser']['firstrow'];
         append += "</div>";
         append += "</div>";
@@ -215,7 +215,7 @@
 
   function setResourceModalGroupUser()
   {
-    $("#searchbutton").innerHtml = "<?php echo lang('ui_search')?>";
-    $("#groupUserModalLabel").text = "<?php echo lang('ui_groupuser')?>";
+    $("#searchbutton").innerHtml = "<?= lang('ui_search')?>";
+    $("#groupUserModalLabel").text = "<?= lang('ui_groupuser')?>";
   }
 </script>

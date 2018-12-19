@@ -5,7 +5,7 @@ class Migration_create_m_user_table extends CI_Migration {
     public function up() {
         $this->load->helper('db_helper');
         
-        if (!$this->db->table_exists('m_user')){
+        if (!$this->db->table_exists('m_users')){
             $this->dbforge->add_field(array(
                 'Id' => array(
                     'type' => 'INT',
@@ -60,8 +60,8 @@ class Migration_create_m_user_table extends CI_Migration {
                 )
             ));
             $this->dbforge->add_key('Id', TRUE);
-            $this->dbforge->create_table('m_user');
-            $this->db->query(add_foreign_key('m_user', 'GroupId', 'm_groupuser(Id)', 'RESTRICT', 'CASCADE'));
+            $this->dbforge->create_table('m_users');
+            $this->db->query(add_foreign_key('m_users', 'GroupId', 'm_groupusers(Id)', 'RESTRICT', 'CASCADE'));
         }
     }
 

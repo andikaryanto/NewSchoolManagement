@@ -11,7 +11,7 @@
         <div class="container-fluid">
           <!-- Page Header-->
           <header class="header-custom"> 
-            <h1 class="h3 display"><i class="fa fa-fire"></i><?php echo lang('ui_master_user')?></h1>
+            <h1 class="h3 display"><i class="fa fa-fire"></i><?= lang('ui_master_user')?></h1>
           </header>
           <div class="row">
             <div class="col-lg-12">
@@ -19,36 +19,36 @@
                 <div class="card-header">
 									<div class="row">
                     <div class = "col-lg-10">
-                      <h4><?php echo lang('ui_edit_data')?></h4> 
-                    </div><div class = "col-lg-2 icon-custom-table-header"><a href="<?php echo base_url('muser');?>"><i class="fa fa-table"></i> Index</a></div>
+                      <h4><?= lang('ui_edit_data')?></h4> 
+                    </div><div class = "col-lg-2 icon-custom-table-header"><a href="<?= base_url('muser');?>"><i class="fa fa-table"></i> Index</a></div>
                   </div>
                 </div>
                 <div class="card-body">
-                  <form method = "post" action = "<?php echo base_url('muser/editsave');?>">
+                  <form method = "post" action = "<?= base_url('muser/editsave');?>">
 
-                    <input hidden = "true" name="iduser" value="<?php echo $model['id']?>"/> 
+                    <input hidden = "true" name="iduser" value="<?= $model['id']?>"/> 
 
                     <div class="form-group">
-                      <label><?php echo lang('ui_name')?></label>
-                      <input hidden="true" id = "userid" type="text" class="form-control" name = "userid" value="<?php echo $model['id']?>">
-                      <input id="named" type="text" placeholder="<?php echo lang('ui_name')?>" class="form-control" name = "named" value="<?php echo $model['username']?>" required>
+                      <label><?= lang('ui_name')?></label>
+                      <input hidden="true" id = "userid" type="text" class="form-control" name = "userid" value="<?= $model['id']?>">
+                      <input id="named" type="text" placeholder="<?= lang('ui_name')?>" class="form-control" name = "named" value="<?= $model['username']?>" required>
                     </div>
                     <div class="form-group">
-                      <label><?php echo lang('ui_group_user')?></label>
+                      <label><?= lang('ui_group_user')?></label>
                       <div class="input-group">
-                        <input hidden="true" id = "groupid" type="text" class="form-control" name = "groupid" value="<?php echo $model['groupid']?>">
-                        <input readonly id = "groupname" placeholder="<?php echo lang('ui_group_user')?>" type="text" class="form-control" name = "groupname" value="<?php echo $model['groupname']?>">
+                        <input hidden="true" id = "groupid" type="text" class="form-control" name = "groupid" value="<?= $model['groupid']?>">
+                        <input readonly id = "groupname" placeholder="<?= lang('ui_group_user')?>" type="text" class="form-control" name = "groupname" value="<?= $model['groupname']?>">
                         <div class="input-group-append">
                           <button id="btnGroupModal" data-toggle="modal" type="button" class="btn btn-primary" onclick="getModalGroup(1);" data-target="#modalGroupUser"><i class="fa fa-search"></i></button>
                         </div>
                       </div>
                     </div>
                     <div class="form-group">       
-                      <label><?php echo lang('ui_password')?></label>
-                      <input id="password" type="password" placeholder="<?php echo lang('ui_password')?>" class="form-control" name = "password" value = "<?php echo $model['password']?>">
+                      <label><?= lang('ui_password')?></label>
+                      <input id="password" type="password" placeholder="<?= lang('ui_password')?>" class="form-control" name = "password" value = "<?= $model['password']?>">
                     </div>
                     <div class="form-group">       
-                      <input type="submit" value="<?php echo lang('ui_save')?>" class="btn btn-primary">
+                      <input type="submit" value="<?= lang('ui_save')?>" class="btn btn-primary">
                     </div>
                   </form>
                 </div>
@@ -113,7 +113,7 @@
       for($i=0 ; $i<count($msg); $i++)
       {
     ?>
-        setNotification("<?php echo lang($msg[$i]); ?>", 3, "bottom", "right");
+        setNotification("<?= lang($msg[$i]); ?>", 3, "bottom", "right");
     <?php 
       }
     }
@@ -126,7 +126,7 @@
     var search = $('#searchInput').val();
     $.ajax({
       type: "POST",
-      url: "<?php echo base_url('M_groupuser/groupusermodal')?>",
+      url: "<?= base_url('M_groupuser/groupusermodal')?>",
       data:{
             page: page,
             search : search

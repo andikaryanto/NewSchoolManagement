@@ -7,12 +7,12 @@
                   
                   <div class="row">
                     <div class="col">
-                      <h4 class="card-title "><?php echo lang('ui_changepassword')?></h4>
-                      <p class="card-category"> <?php echo lang('ui_user')?></p>
+                      <h4 class="card-title "><?= lang('ui_changepassword')?></h4>
+                      <p class="card-category"> <?= lang('ui_user')?></p>
                     </div>
                     <div class="col">
                       <!-- <div class="text-right">
-                        <button type="button" rel="tooltip" class="btn btn-primary btn-round btn-fab" title="index" onclick="window.location.href='<?php echo base_url('muser');?>'">
+                        <button type="button" rel="tooltip" class="btn btn-primary btn-round btn-fab" title="index" onclick="window.location.href='<?= base_url('muser');?>'">
                           <i class="material-icons">list</i>
                         </button>
                       </div> -->
@@ -21,21 +21,21 @@
                 </div>
                 <div class="card-body">
                  
-                  <form method = "post" action = "<?php echo base_url('saveChangePassword');?>">
+                  <form method = "post" action = "<?= base_url('saveChangePassword');?>">
                     <div class="form-group">
-                      <label><?php echo lang('ui_oldpassword')?></label>
-                      <input id="oldpassword" type="password" class="form-control" name = "oldpassword" value="<?php echo $model['oldpassword']?>" required>
+                      <label><?= lang('ui_oldpassword')?></label>
+                      <input id="oldpassword" type="password" class="form-control" name = "oldpassword" value="<?= $model['oldpassword']?>" required>
                     </div>
                     <div class="form-group">
-                      <label><?php echo lang('ui_newpassword')?></label>
-                      <input id="newpassword" type="password" class="form-control" name = "newpassword" value="<?php echo $model['newpassword']?>" required>
+                      <label><?= lang('ui_newpassword')?></label>
+                      <input id="newpassword" type="password" class="form-control" name = "newpassword" value="<?= $model['newpassword']?>" required>
                     </div>
                     <div class="form-group">
-                      <label><?php echo lang('ui_confirmpassword')?></label>
-                      <input id="confirmpassword" type="password" class="form-control" name = "confirmpassword" value="<?php echo $model['confirmpassword']?>" required>
+                      <label><?= lang('ui_confirmpassword')?></label>
+                      <input id="confirmpassword" type="password" class="form-control" name = "confirmpassword" value="<?= $model['confirmpassword']?>" required>
                     </div>
                     <div class="form-group">       
-                      <input type="submit" value="<?php echo lang('ui_save')?>" class="btn btn-primary">
+                      <input type="submit" value="<?= lang('ui_save')?>" class="btn btn-primary">
                     </div>
                   </form>
                 </div>
@@ -57,7 +57,7 @@ $(document).ready(function() {
         for($i=0 ; $i<count($msg); $i++)
         {
       ?>
-          setNotification("<?php echo lang($msg[$i]); ?>", 2, "bottom", "right");
+          setNotification("<?= lang($msg[$i]); ?>", 2, "bottom", "right");
       <?php 
         }
       }
@@ -68,7 +68,7 @@ $(document).ready(function() {
         for($i=0 ; $i<count($msg); $i++)
         {
       ?>
-          setNotification("<?php echo lang($msg[$i]); ?>", 3, "bottom", "right");
+          setNotification("<?= lang($msg[$i]); ?>", 3, "bottom", "right");
       <?php 
         }
       }

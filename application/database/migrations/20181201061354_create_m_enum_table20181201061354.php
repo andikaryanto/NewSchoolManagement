@@ -2,11 +2,11 @@
 
 class Migration_create_m_enum_table20181201061354 extends CI_Migration {
 
-    private $tabledetail = 'm_enumdetail';
+    private $tabledetail = 'm_enumdetails';
     public function up() {
         $this->load->helper('db_helper');
         
-        if (!$this->db->table_exists('m_enum')){
+        if (!$this->db->table_exists('m_enums')){
             $this->dbforge->add_field(array(
                 'Id' => array(
                     'type' => 'INT',
@@ -19,7 +19,7 @@ class Migration_create_m_enum_table20181201061354 extends CI_Migration {
                 )
             ));
             $this->dbforge->add_key('Id', TRUE);
-            $this->dbforge->create_table('m_enum');
+            $this->dbforge->create_table('m_enums');
 
             //insert data
             $data = array('data' =>
@@ -34,11 +34,11 @@ class Migration_create_m_enum_table20181201061354 extends CI_Migration {
                     'Name' => 'Religion'
                 ));
             foreach ($data as $value){
-                $this->db->insert('m_enum', $value);
+                $this->db->insert('m_enums', $value);
             }
         }
         
-        if (!$this->db->table_exists('m_enumdetail')){
+        if (!$this->db->table_exists('m_enumdetails')){
         //table detail
             $this->dbforge->add_field(array(
                 'Id' => array(
@@ -70,8 +70,8 @@ class Migration_create_m_enum_table20181201061354 extends CI_Migration {
             ));
 
             $this->dbforge->add_key('Id', TRUE);
-            $this->dbforge->create_table('m_enumdetail');
-            $this->db->query(add_foreign_key('m_enumdetail', 'EnumId', 'm_enum(Id)', 'RESTRICT', 'CASCADE'));
+            $this->dbforge->create_table('m_enumdetails');
+            $this->db->query(add_foreign_key('m_enumdetails', 'EnumId', 'm_enums(Id)', 'RESTRICT', 'CASCADE'));
 
             //insert data
             $data = array('data' =>
@@ -212,14 +212,14 @@ class Migration_create_m_enum_table20181201061354 extends CI_Migration {
                 )
             );
             foreach ($data as $value){
-                $this->db->insert('m_enumdetail', $value);
+                $this->db->insert('m_enumdetails', $value);
             }
         }
     }
 
     public function down() {
-        // $this->dbforge->drop_table('m_enumdetail');
-        // $this->dbforge->drop_table('m_enum');
+        // $this->dbforge->drop_table('m_enumdetails');
+        // $this->dbforge->drop_table('m_enums');
     }
 
 }

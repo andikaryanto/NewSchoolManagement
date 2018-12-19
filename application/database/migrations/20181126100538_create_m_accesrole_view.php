@@ -4,7 +4,7 @@ class Migration_create_m_accesrole_view extends CI_Migration {
 
     public function up() {
         $this->load->helper('db_helper');
-        $sql = "CREATE OR REPLACE VIEW view_m_accessrole
+        $sql = "CREATE OR REPLACE VIEW view_m_accessroles
                 as
                 SELECT a.Id AS GroupId,
                     b.Id AS FormId, 
@@ -17,8 +17,8 @@ class Migration_create_m_accesrole_view extends CI_Migration {
                     IFNULL(c.Print,0) AS Printt,
                     b.ClassName AS ClassName,
                     0 AS Header
-                FROM ((m_groupuser a JOIN m_form b) 
-                LEFT JOIN m_accessrole c ON(((c.FormId = b.Id) 
+                FROM ((m_groupusers a JOIN m_forms b) 
+                LEFT JOIN m_accessroles c ON(((c.FormId = b.Id) 
                     AND (c.GroupId = a.Id)))) 
                 UNION ALL 
                 SELECT DISTINCT NULL,
@@ -32,7 +32,7 @@ class Migration_create_m_accesrole_view extends CI_Migration {
                     NULL,
                     ClassName AS ClassName,
                     1 AS Header 
-                FROM m_form ORDER BY 10,11";
+                FROM m_forms ORDER BY 10,11";
         $query = $this->db->query($sql);
     }
 

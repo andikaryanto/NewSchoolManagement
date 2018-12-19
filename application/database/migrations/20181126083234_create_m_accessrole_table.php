@@ -5,7 +5,7 @@ class Migration_create_m_accessrole_table extends CI_Migration {
     public function up() {
         $this->load->helper('db_helper');
         
-        if (!$this->db->table_exists('m_accessrole')){
+        if (!$this->db->table_exists('m_accessroles')){
             $this->dbforge->add_field(array(
                 'Id' => array(
                     'type' => 'INT',
@@ -38,9 +38,9 @@ class Migration_create_m_accessrole_table extends CI_Migration {
                 ),
             ));
             $this->dbforge->add_key('Id', TRUE);
-            $this->dbforge->create_table('m_accessrole');
-            $this->db->query(add_foreign_key('m_accessrole', 'GroupId', 'm_groupuser(Id)', 'RESTRICT', 'CASCADE'));
-            $this->db->query(add_foreign_key('m_accessrole', 'FormId', 'm_form(Id)', 'RESTRICT', 'CASCADE'));
+            $this->dbforge->create_table('m_accessroles');
+            $this->db->query(add_foreign_key('m_accessroles', 'GroupId', 'm_groupusers(Id)', 'RESTRICT', 'CASCADE'));
+            $this->db->query(add_foreign_key('m_accessroles', 'FormId', 'm_forms(Id)', 'RESTRICT', 'CASCADE'));
         }   
     }
 

@@ -7,12 +7,12 @@
                   
                   <div class="row">
                     <div class="col">
-                      <h4 class="card-title "><?php echo  $modelheader->GroupName?></h4>
-                      <p class="card-category"> <?php echo lang('ui_master_groupuser')?></p>
+                      <h4 class="card-title "><?=  $modelheader->GroupName?></h4>
+                      <p class="card-category"> <?= lang('ui_master_groupuser')?></p>
                     </div>
                     <div class="col">
                       <div class="text-right">
-                        <button type="button" rel="tooltip" class="btn btn-primary btn-round btn-fab" title="index" onclick="window.location.href='<?php echo base_url('mgroupuser');?>'">
+                        <button type="button" rel="tooltip" class="btn btn-primary btn-round btn-fab" title="index" onclick="window.location.href='<?= base_url('mgroupuser');?>'">
                           <i class="material-icons">list</i>
                         </button>
                       </div>
@@ -24,12 +24,12 @@
                       <table id = "tblRole" class="table table-striped table-hover">
                           <thead class ="text-primary">
                               <tr>
-                              <th><?php echo lang('ui_module')?></th>
+                              <th><?= lang('ui_module')?></th>
                               <th>Alias</th>
-                              <th><?php echo lang('ui_read')?></th>
-                              <th><?php echo lang('ui_write')?></th>
-                              <th><?php echo lang('ui_delete')?></th>
-                              <th><?php echo lang('ui_print')?></th>
+                              <th><?= lang('ui_read')?></th>
+                              <th><?= lang('ui_write')?></th>
+                              <th><?= lang('ui_delete')?></th>
+                              <th><?= lang('ui_print')?></th>
                               </tr>
                           </thead>
                           <tbody>
@@ -39,18 +39,18 @@
                                   {
                               ?>
                               <tr>
-                                  <td id = "td<?php echo $i ?>formid" hidden = "true"><?php echo $value->FormId?></td>
+                                  <td id = "td<?= $i ?>formid" hidden = "true"><?= $value->FormId?></td>
                                   <?php if($value->Header == 0) { ?>
-                                    <td id = "td<?php echo $i ?>aliasname"><?php echo $value->AliasName?></td>
+                                    <td id = "td<?= $i ?>aliasname"><?= $value->AliasName?></td>
                                   <?php } else {?>
-                                    <td><b><?php echo $value->AliasName?></b></td>
+                                    <td><b><?= $value->AliasName?></b></td>
                                   <?php }?>
-                                  <td id = "td<?php echo $i ?>localname"><?php echo $value->LocalName?></td>
-                                  <td id = "td<?php echo $i ?>tdread">
+                                  <td id = "td<?= $i ?>localname"><?= $value->LocalName?></td>
+                                  <td id = "td<?= $i ?>tdread">
                                     <div class = "form-check">
                                         <label class="form-check-label">
                                             <?php if($value->Header ==0) { ?>
-                                                <input class = "form-check-input" id = "td<?php echo $i ?>read" type="checkbox" value = "td~<?php echo $i ?>~read" <?php if($value->Readd == 1)
+                                                <input class = "form-check-input" id = "td<?= $i ?>read" type="checkbox" value = "td~<?= $i ?>~read" <?php if($value->Readd == 1)
                                                                         {
                                                                     ?>
                                                                         checked=""
@@ -64,11 +64,11 @@
                                         </label>
                                     </div>
                                   </td>
-                                  <td id = "td<?php echo $i ?>tdwrite">
+                                  <td id = "td<?= $i ?>tdwrite">
                                     <div class = "form-check">
                                         <label class="form-check-label">
                                             <?php if($value->Header ==0) { ?>
-                                                <input class = "form-check-input" id = "td<?php echo $i ?>write" type="checkbox" value = "td~<?php echo $i ?>~write"<?php if($value->Writee == 1)
+                                                <input class = "form-check-input" id = "td<?= $i ?>write" type="checkbox" value = "td~<?= $i ?>~write"<?php if($value->Writee == 1)
                                                                         {
                                                                     ?>
                                                                         checked=""
@@ -82,11 +82,11 @@
                                         </label>
                                     </div>
                                   </td>
-                                  <td id = "td<?php echo $i ?>tddelete">                                  
+                                  <td id = "td<?= $i ?>tddelete">                                  
                                     <div class = "form-check">
                                         <label class="form-check-label">
                                             <?php if($value->Header ==0) { ?>
-                                                <input class = "form-check-input" id = "td<?php echo $i ?>delete" type="checkbox" value = "td~<?php echo $i ?>~delete" <?php if($value->Deletee == 1)
+                                                <input class = "form-check-input" id = "td<?= $i ?>delete" type="checkbox" value = "td~<?= $i ?>~delete" <?php if($value->Deletee == 1)
                                                                         {
                                                                     ?>
                                                                         checked=""
@@ -101,11 +101,11 @@
                                         </label>
                                     </div>
                                   </td>
-                                  <td id = "td<?php echo $i ?>tdprint">                                 
+                                  <td id = "td<?= $i ?>tdprint">                                 
                                     <div class = "form-check">
                                         <label class="form-check-label">
                                             <?php if($value->Header ==0) { ?>
-                                                <input class = "form-check-input" id ="td<?php echo $i ?>print" type="checkbox" value = "td~<?php echo $i ?>~print"<?php if($value->Printt == 1)
+                                                <input class = "form-check-input" id ="td<?= $i ?>print" type="checkbox" value = "td~<?= $i ?>~print"<?php if($value->Printt == 1)
                                                                         {
                                                                     ?>
                                                                         checked=""
@@ -138,8 +138,8 @@
 <script>
     $("#searchbutton").on("click",function() {
         var search = $("#search").val();
-        console.log('<?php echo json_encode($modeldetail);?>');
-        //window.location =" <?php echo base_url('m_groupuser');?>?search="+search;
+        console.log('<?= json_encode($modeldetail);?>');
+        //window.location =" <?= base_url('m_groupuser');?>?search="+search;
     });
 
     $("#btnSave").on("click",function() {
@@ -149,9 +149,9 @@
         for (i = 1; i < rowLength; i++) {
         $.ajax({
             type:"POST",
-            url:"<?php echo base_url('M_groupuser/saverole')?>",
+            url:"<?= base_url('M_groupuser/saverole')?>",
             data:{
-                groupid: <?php echo $modelheader->Id?>,
+                groupid: <?= $modelheader->Id?>,
                 formid : document.getElementById("td"+i+"formid").innerHTML,
                 read : $("#td"+i+"read").is(":checked") == true ? 1 : 0,
                 write : $("#td"+i+"write").is(":checked") == true ? 1 : 0,
@@ -169,9 +169,9 @@
         var numbid = this.value.split("~")[1];
         $.ajax({
             type:"POST",
-            url:"<?php echo base_url('M_groupuser/saverole')?>",
+            url:"<?= base_url('M_groupuser/saverole')?>",
             data:{
-                groupid: <?php echo $modelheader->Id?>,
+                groupid: <?= $modelheader->Id?>,
                 formid : document.getElementById("td"+numbid+"formid").innerHTML,
                 read : $("#td"+numbid+"read").is(":checked") == true ? 1 : 0,
                 write : $("#td"+numbid+"write").is(":checked") == true ? 1 : 0,

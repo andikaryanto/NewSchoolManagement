@@ -5,7 +5,7 @@ class Migration_create_m_from_table extends CI_Migration {
     public function up() {
         $this->load->helper('db_helper');
         
-        if (!$this->db->table_exists('m_form')){
+        if (!$this->db->table_exists('m_forms')){
             $this->dbforge->add_field(array(
                 'Id' => array(
                     'type' => 'INT',
@@ -40,7 +40,7 @@ class Migration_create_m_from_table extends CI_Migration {
                 )
             ));
             $this->dbforge->add_key('Id', TRUE);
-            $this->dbforge->create_table('m_form');
+            $this->dbforge->create_table('m_forms');
         }
     }
 

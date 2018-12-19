@@ -3,8 +3,8 @@
 
 <head>
   <meta charset="utf-8" />
-  <link rel="apple-touch-icon" sizes="76x76" href="<?php echo base_url('assets/material-dashboard/assets/img/apple-icon.png');?>">
-  <link rel="icon" type="image/png" href="<?php echo base_url('assets/material-dashboard/assets/img/favicon.png');?>">
+  <link rel="apple-touch-icon" sizes="76x76" href="<?= base_url('assets/material-dashboard/assets/img/apple-icon.png');?>">
+  <link rel="icon" type="image/png" href="<?= base_url('assets/material-dashboard/assets/img/favicon.png');?>">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <title>
     Material Dashboard by Creative Tim
@@ -12,25 +12,25 @@
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
   <!--     Fonts and icons     -->
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
-  <link rel="stylesheet" href="<?php echo base_url('assets/material-dashboard/font-awesome/css/font-awesome.min.css')?>">
+  <link rel="stylesheet" href="<?= base_url('assets/material-dashboard/font-awesome/css/font-awesome.min.css')?>">
   <!-- CSS Files -->
-  <link href="<?php echo base_url($_SESSION['usersetting']->CssPath);?>" rel="stylesheet" />
-  <link href="<?php echo base_url('assets/material-dashboard/assets/css/animate.css');?>" rel="stylesheet" />
-  <link href="<?php echo base_url($_SESSION['usersetting']->CssCustomPath);?>" rel="stylesheet" />
+  <link href="<?= base_url($_SESSION['usersetting']->CssPath);?>" rel="stylesheet" />
+  <link href="<?= base_url('assets/material-dashboard/assets/css/animate.css');?>" rel="stylesheet" />
+  <link href="<?= base_url($_SESSION['usersetting']->CssCustomPath);?>" rel="stylesheet" />
   <!-- CSS Just for demo purpose, don't include it in your project -->
-  <link href="<?php echo base_url('assets/material-dashboard/assets/demo/demo.css');?>" rel="stylesheet" />
+  <link href="<?= base_url('assets/material-dashboard/assets/demo/demo.css');?>" rel="stylesheet" />
 
   
   
-  <script src="<?php echo base_url('assets/material-dashboard/assets/js/core/jquery.min.js');?>"></script>
+  <script src="<?= base_url('assets/material-dashboard/assets/js/core/jquery.min.js');?>"></script>
   
-  <script src="<?php echo base_url('assets/material-dashboard/assets/js/bootstrap-notify.js');?>"></script>
-  <script src="<?php echo base_url('assets/material-dashboard/assets/js/bootbox.min.js');?>"></script>
+  <script src="<?= base_url('assets/material-dashboard/assets/js/bootstrap-notify.js');?>"></script>
+  <script src="<?= base_url('assets/material-dashboard/assets/js/bootbox.min.js');?>"></script>
 </head>
 
 <body class="">
   <div class="wrapper ">
-    <div class="sidebar" data-color="green" data-background-color="black" data-image="<?php echo base_url('assets/material-dashboard//assets/img/sidebar-1.jpg');?>">
+    <div class="sidebar" data-color="green" data-background-color="black" data-image="<?= base_url('assets/material-dashboard//assets/img/sidebar-1.jpg');?>">
 
       <div class="logo">
 		    <a href="http://www.creative-tim.com" class="simple-text logo-mini">
@@ -43,12 +43,12 @@
       <div class="sidebar-wrapper ps-container ps-theme-default ps-active-y" data-ps-id="af8bc3a6-63f8-c37d-ec22-0c6794f3a10c">
         <div class="user">
           <div class="photo">
-            <img src="<?php echo base_url('assets/material-dashboard/assets/img/faces/avatar.jpg');?>">
+            <img src="<?= base_url('assets/material-dashboard/assets/img/faces/avatar.jpg');?>">
           </div>
           <div class="user-info">
             <a data-toggle="collapse" href="#collapseExample" class="username">
               <span>
-                <?php echo $_SESSION['userdata']['username']?>
+                <?= $_SESSION['userdata']['username']?>
                 <b class="caret"></b>
               </span>
             </a>
@@ -144,9 +144,9 @@
               <?php foreach($mastermenu as $master) {?>
               
                 <li class="nav-item ">
-                  <a class="nav-link" href="<?php echo base_url($master->IndexRoute);?>">
+                  <a class="nav-link" href="<?= base_url($master->IndexRoute);?>">
                     <!-- <span class="sidebar-mini"> E </span> -->
-                    <span class="sidebar-normal"> <?php echo lang($master->Resource)?> </span>
+                    <span class="sidebar-normal"> <?= lang($master->Resource)?> </span>
                   </a>
                 </li>
               <?php }?>
@@ -155,15 +155,15 @@
           </li>
 
           <li class="nav-item ">
-            <a class="nav-link" href="<?php echo base_url("muser");?>">
+            <a class="nav-link" href="<?= base_url("muser");?>">
               <i class="material-icons">face</i>
-              <p> <?php echo lang('ui_user')?> </p>
+              <p> <?= lang('ui_user')?> </p>
             </a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="<?php echo base_url("mgroupuser");?>">
+            <a class="nav-link" href="<?= base_url("mgroupuser");?>">
               <i class="material-icons">face</i>
-              <p> <?php echo lang('ui_groupuser')?> </p>
+              <p> <?= lang('ui_groupuser')?> </p>
             </a>
           </li>
           
@@ -235,10 +235,10 @@
                   </p>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProfile">
-                  <a class="dropdown-item" href="<?php echo base_url('changePassword')?>"><?php echo lang('ui_changepassword')?></a>
-                  <a class="dropdown-item" href="<?php echo base_url('settings')?>"><?php echo lang('ui_setting')?></a>
+                  <a class="dropdown-item" href="<?= base_url('changePassword')?>"><?= lang('ui_changepassword')?></a>
+                  <a class="dropdown-item" href="<?= base_url('settings')?>"><?= lang('ui_setting')?></a>
                   <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="<?php echo base_url('login/dologout')?>"><?php echo lang('ui_logout')?></a>
+                  <a class="dropdown-item" href="<?= base_url('login/dologout')?>"><?= lang('ui_logout')?></a>
                 </div>
               </li>
             </ul>

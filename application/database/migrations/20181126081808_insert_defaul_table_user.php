@@ -2,7 +2,7 @@
 
 class Migration_insert_defaul_table_user extends CI_Migration {
 
-    private $table = 'm_user';
+    private $table = 'm_users';
     public function up() {
         $data = [
             'Username' => 'superadmin',
@@ -10,11 +10,6 @@ class Migration_insert_defaul_table_user extends CI_Migration {
         ];
         $this->db->insert($this->table, $data);
 
-        $dataSetting = [
-            'UserId' => '1'
-        ];
-        
-        $this->db->insert('m_usersetting', $dataSetting);
     }
 
     public function down() {

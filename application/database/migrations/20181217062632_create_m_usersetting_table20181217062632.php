@@ -4,7 +4,7 @@ class Migration_create_m_usersetting_table20181217062632 extends CI_Migration {
 
     public function up() {
         $this->load->helper('db_helper');
-        if (!$this->db->table_exists('m_usersetting')){
+        if (!$this->db->table_exists('m_usersettings')){
             $this->dbforge->add_field(array(
                 'Id' => array(
                     'type' => 'INT',
@@ -32,8 +32,15 @@ class Migration_create_m_usersetting_table20181217062632 extends CI_Migration {
                 )
             ));
             $this->dbforge->add_key('Id', TRUE);
-            $this->dbforge->create_table('m_usersetting');
-            $this->db->query(add_foreign_key('m_usersetting', 'UserId', 'm_user(Id)', 'CASCADE', 'CASCADE'));
+            $this->dbforge->create_table('m_usersettings');
+            $this->db->query(add_foreign_key('m_usersettings', 'UserId', 'm_users(Id)', 'CASCADE', 'CASCADE'));
+        
+            
+            $dataSetting = [
+                'UserId' => '1'
+            ];
+            
+            $this->db->insert('m_usersettings', $dataSetting);
         }
     }
 

@@ -8,7 +8,7 @@ class Mform_model extends CI_Model {
 
     public function get_alldata(){
         // get all data
-        $query = $this->db->get('m_form');
+        $query = $this->db->get('m_forms');
         return $query->result();
     }
 
@@ -22,7 +22,7 @@ class Mform_model extends CI_Model {
 
         $this->db->where('ClassName', $className);
         $this->db->where_not_in('Id', $notId);
-        $query = $this->db->get('m_form');
+        $query = $this->db->get('m_forms');
         return $query->result();
     }
 
@@ -30,7 +30,7 @@ class Mform_model extends CI_Model {
         // get data by primary key
 
         $this->db->where('FormName', $formname);
-        $query = $this->db->get('m_form');
+        $query = $this->db->get('m_forms');
         return $query->row();
     }
 

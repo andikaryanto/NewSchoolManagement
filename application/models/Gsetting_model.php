@@ -8,7 +8,7 @@ class Gsetting_model extends CI_Model {
 
     public function get_language(){
         $this->db->select('*');
-        $this->db->from('g_language');
+        $this->db->from('g_languages');
         $this->db->order_by('Id');
         $query = $this->db->get();
         return $query->result();
@@ -16,7 +16,7 @@ class Gsetting_model extends CI_Model {
 
     public function get_color(){
         $this->db->select('*');
-        $this->db->from('g_color');
+        $this->db->from('g_colors');
         $this->db->order_by('Id');
         $query = $this->db->get();
         return $query->result();
