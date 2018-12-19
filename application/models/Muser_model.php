@@ -1,13 +1,6 @@
 <?php  
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-class Muser_model extends CI_Model {
-    public $id;
-    public $name;
-    public $description;
-    public $ion;
-    public $iby;
-    public $uon;
-    public $uby;
+class Muser_model extends MY_Model {
 
     public function __construct()
     {
@@ -278,8 +271,20 @@ class Muser_model extends CI_Model {
         }
         return $warning;
 
-    }
+    }   
+    
+}
 
-    
-    
+class Muser_model_object extends Model_object {
+	
+	public function group_user()
+	{
+		$CI = get_instance();
+		
+		$CI->load->model('Mgroupuser_model');	// just another CI Power Model object
+		$groupuser = $CI->Mgroupuser_model->get($this->GroupId);
+		if ($groupuser)
+			return $groupuser;
+		return '';
+	}
 }

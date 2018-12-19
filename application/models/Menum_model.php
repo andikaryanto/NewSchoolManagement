@@ -1,6 +1,6 @@
 <?php  
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-class Menum_model extends CI_Model {
+class Menum_model extends MY_Model {
 
     public function get_data_by_id($id)
     {

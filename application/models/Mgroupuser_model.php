@@ -1,6 +1,6 @@
 <?php  
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-class Mgroupuser_model extends CI_Model {
+class Mgroupuser_model extends MY_Model {
     public $id;
     public $groupname;
     public $description;

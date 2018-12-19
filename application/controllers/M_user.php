@@ -33,12 +33,17 @@ class M_user extends CI_Controller
             $pagesize = $this->paging->get_config();
             $resultdata = $this->Muser_model->get_alldata();
             $datapages = $this->Muser_model->get_datapages($page, $_SESSION['usersetting']->RowPerpage, $search);
-            
-            $rows = !empty($search) ? count($datapages) : count($resultdata);
+            //$datapages = $this->Muser_model->has_brand()->get_list();
+            foreach ($datapages as $car)
+            {
+                echo 'Car: '.$car->Username.', Brand: '.$car->group_name()->GroupName.'<br>';
+            }
+            print_r($datapages);
+            // $rows = !empty($search) ? count($datapages) : count($resultdata);
 
-            $data =  $this->paging->set_data_page_index($datapages, $rows, $page, $search);
+            // $data =  $this->paging->set_data_page_index($datapages, $rows, $page, $search);
             
-            $this->loadview('m_user/index', $data);
+            // load_view('m_user/index', $data);
         }
        else
         {   
@@ -55,7 +60,7 @@ class M_user extends CI_Controller
             
             $model = $this->Muser_model->create_object(null, null,null, null, null, null, null, null, null);
             $data =  $this->paging->set_data_page_add($model);
-            $this->loadview('m_user/add', $data);   
+            load_view('m_user/add', $data);   
         }
         else
         {
@@ -84,7 +89,7 @@ class M_user extends CI_Controller
         {
             $this->session->set_flashdata('add_warning_msg',$validate);
             $data =  $this->paging->set_data_page_add($model);
-            $this->loadview('m_user/add', $data);   
+            load_view('m_user/add', $data);   
         }
         else{
             $date = date("Y-m-d H:i:s");
@@ -108,7 +113,7 @@ class M_user extends CI_Controller
             $model = $this->Muser_model->create_object($edit->Id, $edit->GroupId, $edit->GroupName, $edit->Username, $edit->Password, null, null, null, null);
             $data =  $this->paging->set_data_page_edit($model);
             //echo json_encode($edit);
-            $this->loadview('m_user/edit', $data);   
+            load_view('m_user/edit', $data);   
         }
         else{
             
@@ -137,7 +142,7 @@ class M_user extends CI_Controller
         {
             $this->session->set_flashdata('edit_warning_msg',$validate);
             $data =  $this->paging->set_data_page_edit($model);
-            $this->loadview('m_user/edit', $data);   
+            load_view('m_user/edit', $data);   
         }
         else
         {
@@ -178,7 +183,7 @@ class M_user extends CI_Controller
         $enums['colorenums'] =  $this->Gsetting_model->get_color();
         //$model = $this->Muser_model->get_data_by_id($_SESSION['userdata']['id']);
         $data = $this->paging->set_data_page_add(null, $enums);
-        $this->loadview('m_user/settings',$data);
+        load_view('m_user/settings',$data);
     }
 
     public function activate($id)
@@ -202,7 +207,7 @@ class M_user extends CI_Controller
             'confirmpassword' => ""
         );
         $data['model'] = $model;
-        $this->loadview('m_user/changePassword', $data);    
+        load_view('m_user/changePassword', $data);    
     }
 
     public function saveNewPassword(){
@@ -221,7 +226,7 @@ class M_user extends CI_Controller
         if($validate){
             $this->session->set_flashdata('warning_msg',$validate);
             $data =  $this->paging->set_data_page_add($model);
-            $this->loadview('m_user/changePassword', $data);    
+            load_view('m_user/changePassword', $data);    
         }
         else{
             $this->Muser_model->saveNewPassword($_SESSION['userdata']['username'], $oldpassword, $newpassword);

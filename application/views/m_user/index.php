@@ -52,12 +52,13 @@
                       </thead>
                       <tbody>
                       <?php
+                      //print_r($modeldetail);
 												foreach ($modeldetail as $value)
 												{
 											?>
 													<tr>
 														<td><?= $value->Username?></td>
-														<td><?= $value->GroupName?></td>
+														<td><?= $value->group_user()->GroupName?></td>
                             <?php 
                             if($value->IsActive == 1 ) {
                             ?>

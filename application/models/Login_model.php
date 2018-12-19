@@ -1,6 +1,6 @@
 <?php  
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-class Login_model extends CI_Model {
+class Login_model extends MY_Model {
 
     public function __construct()
     {
@@ -20,7 +20,7 @@ class Login_model extends CI_Model {
 
     public function get_sigle_data_user($username, $password)
     {
-        $query = $this->db->get_where('m_user', array('UserName' => $username, "Password" => $password));
+        $query = $this->db->get_where('m_users', array('UserName' => $username, "Password" => $password));
         return $query;
     }
 
