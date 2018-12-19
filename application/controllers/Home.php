@@ -18,6 +18,7 @@ class Home extends CI_Controller
     {
 
         //echo json_encode($this->session->userdata('language'));
+        echo json_encode($_SESSION['userdata']);
         if(!isset($_SESSION['userdata'])){
             redirect('login');
         }

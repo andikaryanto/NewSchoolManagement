@@ -429,6 +429,24 @@ class MY_Model extends CI_Model {
 		
 		return $row;
 	}
+
+	/**
+	 * Get new row with default values
+	 * 
+	 * @return Model_object
+	 */
+	public function new_object()
+	{
+		$row = new $this->row_type();
+		$fields = $this->db->field_data($this->table);
+		foreach ($fields as $field)
+		{
+			$name = $field->name;
+			$row->$name = NULL;
+		}
+		
+		return $row;
+	}
 	
 	/**
 	 * Check if table is already joind in the current query building

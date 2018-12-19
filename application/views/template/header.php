@@ -14,9 +14,9 @@
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
   <link rel="stylesheet" href="<?= base_url('assets/material-dashboard/font-awesome/css/font-awesome.min.css')?>">
   <!-- CSS Files -->
-  <link href="<?= base_url($_SESSION['usersetting']->CssPath);?>" rel="stylesheet" />
+  <!-- <link href="<?= base_url($_SESSION['userdata']->M_usersettings()->G_colors()->CssPath);?>" rel="stylesheet" /> -->
   <link href="<?= base_url('assets/material-dashboard/assets/css/animate.css');?>" rel="stylesheet" />
-  <link href="<?= base_url($_SESSION['usersetting']->CssCustomPath);?>" rel="stylesheet" />
+  <!-- <link href="<?= base_url($_SESSION['userdata']->M_usersettings()->G_colors()->CssCustomPath);?>" rel="stylesheet" /> -->
   <!-- CSS Just for demo purpose, don't include it in your project -->
   <link href="<?= base_url('assets/material-dashboard/assets/demo/demo.css');?>" rel="stylesheet" />
 
@@ -48,7 +48,7 @@
           <div class="user-info">
             <a data-toggle="collapse" href="#collapseExample" class="username">
               <span>
-                <?= $_SESSION['userdata']['username']?>
+                <?= $_SESSION['userdata']->Username?>
                 <b class="caret"></b>
               </span>
             </a>

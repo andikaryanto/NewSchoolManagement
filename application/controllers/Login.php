@@ -4,8 +4,7 @@ class Login extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('Login_model');
-        $this->load->model('Muser_model');
+        $this->load->model('M_users');
         $this->load->library('session');
 
     }
@@ -24,22 +23,21 @@ class Login extends CI_Controller
         $username = $this->input->post('loginUsername');
         $password = $this->input->post('loginPassword');
         
-        $query = $this->Muser_model->get_sigle_data_user($username, $password);
+        $query = $this->M_users->get_sigle_data_user($username, $password);
         // echo json_encode($query);
         if ($query)
         {
             if($query->IsLoggedIn == 0){
-                $userdata = $this->Muser_model->create_object($query->Id, $query->GroupId, $query->GroupName, $query->Username, null, null, null, null, null);
-                $this->session->set_userdata('userdata',$userdata);
-
-                $usersetting = $this->Muser_model->get_usersetting_by_userid($query->Id);
-                $this->session->set_userdata('usersetting',$usersetting);
-    
+                //$userdata = $this->M_users->create_object($query->Id, $query->GroupId, $query->GroupName, $query->Username, null, null, null, null, null);
+                $this->session->set_userdata('userdata',$query);
+                // $usersetting = $this->M_users->get_usersetting_by_userid($query->Id);
+                // $this->session->set_userdata('usersetting',$usersetting);
+                //print_r($_SESSION['userdata']->M_usersettings()->G_colors());
                 // $language = array(
                 //     'language' => $usersetting->Language
                 // );
                 // $this->session->set_userdata('language',$language);
-                //$this->Muser_model->set_loggedin($username);
+                //$this->M_users->set_loggedin($username);
                 redirect('home');
             } else {
                 // echo "<script>alert('user is already logged in');</script>";
@@ -53,11 +51,11 @@ class Login extends CI_Controller
 
     public function dologout()
     {
-        $username = $_SESSION['userdata']['username'];
+        $username = $_SESSION['userdata']->Username;
         unset(
             $_SESSION['userdata']
         );
-        $this->Muser_model->set_logout($username);
+        $this->M_users->set_logout($username);
         redirect('login');
     }
 

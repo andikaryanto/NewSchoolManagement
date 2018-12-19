@@ -37,8 +37,8 @@ class Paging {
     {
 
         $CI =& get_instance();
-        $CI->load->model(array("Mform_model"));
-        $mastermenu = $CI->Mform_model->get_data_by_classname("Master");
+        $CI->load->model(array("M_forms"));
+        $mastermenu = $CI->M_forms->get_data_by_classname("Master");
 
         $data['mastermenu'] = $mastermenu;
 
@@ -65,8 +65,6 @@ class Paging {
     public function is_session_set()
     {
         $CI =& get_instance();
-        $CI->load->library('session');
-        $CI->load->model(array('Login_model'));
         //$sitestatus = $CI->Gsitestatus_model->get_alldata();
         //if(isset($sitestatus) && $sitestatus->Status == 2){
             //echo json_encode($sitestatus);

@@ -14,8 +14,8 @@ class MY_Loader extends CI_Loader {
 		if (is_string($model) && $name == '')
 		{
 			$name = $model;
-			//$model = $model.'_model';
-			$model = $model;
+			$model = $model.'_model';
+			//$model = $model;
 		}
 		
 		parent::model($model, $name, $db_conn );

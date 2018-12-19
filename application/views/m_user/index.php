@@ -58,7 +58,7 @@
 											?>
 													<tr>
 														<td><?= $value->Username?></td>
-														<td><?= $value->group_user()->GroupName?></td>
+														<td><?= $value->M_groupusers()->GroupName?></td>
                             <?php 
                             if($value->IsActive == 1 ) {
                             ?>

@@ -1,17 +1,10 @@
 <?php  
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-class Mgroupuser_model extends MY_Model {
-    public $id;
-    public $groupname;
-    public $description;
-    public $ion;
-    public $iby;
-    public $uon;
-    public $uby;
+class M_groupusers_model extends MY_Model {
 
     public function __construct(){
         parent::__construct();
-        $this->load->model(array("Mform_model"));
+        $this->load->model(array("M_forms"));
         $this->load->library('session');
         $this->load->library('paging');
     }
@@ -218,7 +211,7 @@ class Mgroupuser_model extends MY_Model {
     {
         $formid = $form;
         if(isset($form)){
-            $forms = $this->Mform_model->get_data_by_formname($form);
+            $forms = $this->M_forms->get_data_by_formname($form);
             $formid = $forms->Id;
         }
 

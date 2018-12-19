@@ -1,14 +1,12 @@
 <?php  
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-class Muser_model extends MY_Model {
+class M_users_model extends MY_Model {
 
     public function __construct()
     {
         parent::__construct();
         
-        $this->load->helper('helpers');
-        $this->load->library('session');
-        $this->load->model('Mgroupuser_model');
+        $this->load->model('M_groupusers');
     }
     
     public function get_alldata()
@@ -28,56 +26,58 @@ class Muser_model extends MY_Model {
         return $query->row(); // a single row use row() instead of result()
     }
 
-    public function get_usersetting_by_userid($id){
-        $this->db->select('a.*,
-                            b.Id as ColorId,
-                            b.Name as ColorName,
-                            b.Value as ColorValue,
-                            b.CssClass,
-                            b.CssPath,
-                            b.CssCustomPath,
-                            c.Id as LanguageId,
-                            c.Name as Language');
-        $this->db->from('m_usersettings as a');
-        $this->db->join('g_colors as b', 'a.ColorId = b.Id', 'left');
-        $this->db->join('g_languages as c', 'a.LanguageId = c.Id', 'left');
-        $this->db->where('a.UserId', $id);
-        $query = $this->db->get();
-        return $query->row();
-    }
+    // public function get_usersetting_by_userid($id){
+    //     $this->db->select('a.*,
+    //                         b.Id as ColorId,
+    //                         b.Name as ColorName,
+    //                         b.Value as ColorValue,
+    //                         b.CssClass,
+    //                         b.CssPath,
+    //                         b.CssCustomPath,
+    //                         c.Id as LanguageId,
+    //                         c.Name as Language');
+    //     $this->db->from('m_usersettings as a');
+    //     $this->db->join('g_colors as b', 'a.ColorId = b.Id', 'left');
+    //     $this->db->join('g_languages as c', 'a.LanguageId = c.Id', 'left');
+    //     $this->db->where('a.UserId', $id);
+    //     $query = $this->db->get();
+    //     return $query->row();
+    // }
     
     public function get_sigle_data_user($username, $password)
     {
         $md5pass = encryptMd5("school".$username.$password);
-        $this->db->select('a.*, b.GroupName');
-        $this->db->from('m_users as a');
-        $this->db->join('m_groupusers as b', 'a.GroupId = b.Id', 'left');
-        $this->db->where('UserName', $username);
+        // $this->db->select('a.*, b.GroupName');
+        // $this->db->from('m_users as a');
+        // $this->db->join('m_groupusers as b', 'a.GroupId = b.Id', 'left');
+        $this->db->where('Username', $username);
         $this->db->where('Password', $md5pass);
         $this->db->where('IsActive', 1);
         //$this->db->where('IsLoggedIn', 0);
-        $query = $this->db->get();
-        return $query->row(); // a single row use row() instead of result()
+        //$query = $this->db->get();
+        if($this->get_list()){
+            return $this->get_list()[0];
+        } 
+        return null;
     }
 
     public function get_datapages($page, $pagesize, $search = null)
     {
-        $this->db->select('a.*, b.GroupName');
-        $this->db->from('m_users as a');
-        $this->db->join('m_groupusers as b', 'a.GroupId = b.Id', 'left');
-        //$this->db->where('IsActive', 1);
-        $this->db->where_not_in('UserName', 'superadmin');
+        // $this->db->select('a.*, b.GroupName');
+        // $this->db->from('m_users as a');
+        // $this->db->join('m_groupusers as b', 'a.GroupId = b.Id', 'left');
+        $this->db->where('IsActive', 1);
+        $this->db->where_not_in('Username', 'superadmin');
         if(!empty($search))
         {
-            $this->db->like('UserName', $search);
+            $this->db->like('Username', $search);
         }
         
-        $this->db->order_by('a.IsActive','DESC');
-        $this->db->order_by('a.UserName','ASC');
+        $this->db->order_by('IsActive','DESC');
+        $this->db->order_by('Username','ASC');
         $this->db->limit($pagesize, ($page-1)*$pagesize);
-        $query = $this->db->get();
-
-        return $query->result();
+        //$this->db->get();
+        return $this->get_list();
 
     }
 
@@ -214,7 +214,7 @@ class Muser_model extends MY_Model {
         $exist = false;
         $this->db->select('*');
         $this->db->from('m_users');
-        $this->db->where('UserName', $name);
+        $this->db->where('Username', $name);
         $query = $this->db->get();
 
         $row = $query->result();
@@ -275,16 +275,27 @@ class Muser_model extends MY_Model {
     
 }
 
-class Muser_model_object extends Model_object {
+class M_user_object extends Model_object {
 	
-	public function group_user()
+	public function M_groupusers()
 	{
 		$CI = get_instance();
 		
-		$CI->load->model('Mgroupuser_model');	// just another CI Power Model object
-		$groupuser = $CI->Mgroupuser_model->get($this->GroupId);
-		if ($groupuser)
+		$CI->load->model('M_groupusers');	// just another CI Power Model object
+		$groupuser = $CI->M_groupusers->get($this->GroupId);
+		if (isset($groupuser))
 			return $groupuser;
-		return '';
+		return $CI->M_groupusers->new_object();
+    }
+    
+    public function M_usersettings()
+	{
+		$CI = get_instance();
+		
+		$CI->load->model('M_usersettings');	// just another CI Power Model object
+		$usersettings = $CI->M_usersettings->get_data_by_userid($this->Id);
+		if (isset($usersettings))
+			return $usersettings;
+		return $CI->M_usersettings->new_object();
 	}
 }
