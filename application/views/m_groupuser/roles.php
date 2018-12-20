@@ -167,18 +167,21 @@
 
     $(":checkbox").on("change", function(e) {
         var numbid = this.value.split("~")[1];
+        var formid = document.getElementById("td"+numbid+"formid").innerHTML;
+        console.log(formid);
         $.ajax({
             type:"POST",
-            url:"<?= base_url('M_groupuser/saverole')?>",
+            url:"<?= base_url('m_groupuser/saverole')?>",
             data:{
                 groupid: <?= $modelheader->Id?>,
-                formid : document.getElementById("td"+numbid+"formid").innerHTML,
+                formid : formid,
                 read : $("#td"+numbid+"read").is(":checked") == true ? 1 : 0,
                 write : $("#td"+numbid+"write").is(":checked") == true ? 1 : 0,
                 delete : $("#td"+numbid+"delete").is(":checked") == true ? 1 : 0,
                 print : $("#td"+numbid+"print").is(":checked") == true ? 1 : 0
                 },
             success:function(data){
+                console.log(data);
             }
         });
     });

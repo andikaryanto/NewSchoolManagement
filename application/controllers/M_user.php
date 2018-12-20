@@ -7,7 +7,7 @@ class M_user extends CI_Controller
     {
         parent::__construct();
         //$this->load->database('natureuser', TRUE);
-        $this->load->model(array('M_users','M_groupusers', 'Gsetting'));
+        $this->load->model(array('M_users','M_groupusers', 'G_languages', 'G_colors'));
         $this->load->library(array('paging', 'session','helpers'));
         $this->load->helper('form');
         $this->paging->is_session_set();
@@ -17,7 +17,7 @@ class M_user extends CI_Controller
     {
         //echo json_encode($_SESSION);
         $form = $this->paging->get_form_name_id();
-        if($this->M_groupusers->is_permitted($_SESSION['userdata']['groupid'],$form['m_user'],'Read'))
+        if($this->M_groupusers->is_permitted($_SESSION['userdata']['GroupId'],$form['m_user'],'Read'))
         {
             $page = 1;
             $search = "";
@@ -30,12 +30,17 @@ class M_user extends CI_Controller
                 $search = $_GET["search"];
             }
 
-            $pagesize = $this->paging->get_config();
-            $resultdata = $this->M_users->get_alldata();
-            $datapages = $this->M_users->get_datapages($page, $_SESSION['usersetting']->RowPerpage, $search);
-            
-            $rows = !empty($search) ? count($datapages) : count($resultdata);
+            $params = array(
+                'page' => $page,
+                'pagesize' => $_SESSION['usersettings']['RowPerpage'],
+                'like' => array('Username' => $search),
+                'where_not_in' => array('Id', array(1))
+            );
 
+            //echo json_encode($params['where_not_in']);
+
+            $datapages = $this->M_users->get_list(null, null, $params);
+            $rows = !empty($search) ? count($datapages) : $this->M_users->count();
             $data =  $this->paging->set_data_page_index($datapages, $rows, $page, $search);
             
             load_view('m_user/index', $data);
@@ -50,7 +55,7 @@ class M_user extends CI_Controller
     public function add()
     {
         $form = $this->paging->get_form_name_id();
-        if($this->M_groupusers->is_permitted($_SESSION['userdata']['groupid'],$form['m_user'],'Write'))
+        if($this->M_groupusers->is_permitted($_SESSION['userdata']['GroupId'],$form['m_user'],'Write'))
         {
             
             $model = $this->M_users->create_object(null, null,null, null, null, null, null, null, null);
@@ -101,7 +106,7 @@ class M_user extends CI_Controller
     public function edit($id)
     {
         $form = $this->paging->get_form_name_id();
-        if($this->M_groupusers->is_permitted($_SESSION['userdata']['groupid'],$form['m_user'],'Write'))
+        if($this->M_groupusers->is_permitted($_SESSION['userdata']['GroupId'],$form['m_user'],'Write'))
         {
             
             $edit = $this->M_users->get_data_by_id($id);
@@ -155,7 +160,7 @@ class M_user extends CI_Controller
     public function delete($id)
     {
         $form = $this->paging->get_form_name_id();
-        if($this->M_groupusers->is_permitted($_SESSION['userdata']['groupid'],$form['m_user'],'Delete'))
+        if($this->M_groupusers->is_permitted($_SESSION['userdata']['GroupId'],$form['m_user'],'Delete'))
         {
             $delete = $this->M_users->delete_data($id);
             if(isset($delete)){
@@ -174,9 +179,8 @@ class M_user extends CI_Controller
     }
 
     public function setting(){
-        $enums['languageenums'] =  $this->Gsetting_model->get_language();
-        $enums['colorenums'] =  $this->Gsetting_model->get_color();
-        //$model = $this->M_users->get_data_by_id($_SESSION['userdata']['id']);
+        $enums['languageenums'] =  $this->G_languages->get_list();
+        $enums['colorenums'] =  $this->G_colors->get_list();
         $data = $this->paging->set_data_page_add(null, $enums);
         load_view('m_user/settings',$data);
     }
@@ -184,7 +188,7 @@ class M_user extends CI_Controller
     public function activate($id)
     {
         $form = $this->paging->get_form_name_id();
-        if($this->M_groupusers->is_permitted($_SESSION['userdata']['groupid'],$form['m_user'],'Write'))
+        if($this->M_groupusers->is_permitted($_SESSION['userdata']['GroupId'],$form['m_user'],'Write'))
         {
             $this->M_users->activate_data($id);
             redirect('muser');
@@ -235,7 +239,7 @@ class M_user extends CI_Controller
         $language = $this->input->post('languageid');
         $radiocolor = $this->input->post('radiocolor');
         $rowperpage = $this->input->post('rowperpage');
-        $usersetting = $this->M_users->create_usersetting_object($_SESSION['usersetting']->Id, $_SESSION['userdata']['id'],$language, explode("~",$radiocolor)[1],  $rowperpage);
+        $usersetting = $this->M_users->create_usersetting_object($_SESSION['usersettings']['Id'], $_SESSION['userdata']['id'],$language, explode("~",$radiocolor)[1],  $rowperpage);
         $this->M_users->edit_usersetting($usersetting);
         $newdata = $this->M_users->get_usersetting_by_userid($_SESSION['userdata']['id']);
         replaceSession('usersetting', $newdata);

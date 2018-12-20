@@ -4,71 +4,9 @@ class M_groupusers_model extends MY_Model {
 
     public function __construct(){
         parent::__construct();
-        $this->load->model(array("M_forms"));
-        $this->load->library('session');
-        $this->load->library('paging');
+        $this->load->model(array("M_forms", "M_accessroles"));
     }
     
-    public function get_alldata()
-    {
-        $query = $this->db->get('m_groupusers');
-        return $query->result();
-    }
-
-    public function get_data_by_id($id)
-    {
-        $this->db->select('*');
-        $this->db->from('m_groupusers');
-        $this->db->where('Id', $id);
-        $query = $this->db->get();
-        return $query->row(); // a single row use row() instead of result()
-    }
-
-    public function get_datapages($page, $pagesize, $search = null)
-    {
-        
-        $this->db->select('*');
-        $this->db->from('m_groupusers');
-        if(!empty($search))
-        {
-            $this->db->like('GroupName', $search);
-        }
-        $this->db->order_by('IOn','ASC');
-        $this->db->limit($pagesize, ($page-1)*$pagesize);
-        $query = $this->db->get();
-
-        return $query->result();
-
-    }
-
-    public function get_role($groupid)
-    {
-        //where 
-        //$group = array($groupid, null);
-
-        $this->db->select('*');
-        $this->db->from('view_m_accessroles');
-        $this->db->where('GroupId', $groupid);
-        $this->db->or_where('GroupId', null);
-        $this->db->order_by('ClassName', 'ASC');
-        $this->db->order_by('Header', 'DESC');
-        $this->db->order_by('FormName', 'ASC');
-        $query = $this->db->get();
-        
-        return $query->result();
-    }
-
-    public function save_data($data)
-    {
-        $this->db->insert('m_groupusers', $data);
-    }
-
-    public function edit_data($data)
-    {
-        $this->db->where('Id', $data['id']);
-        $this->db->update('m_groupusers', $data);
-    }
-
     public function delete_data($id)
     {
         $this->db->where('Id', $id);
@@ -80,80 +18,11 @@ class M_groupusers_model extends MY_Model {
         }
     }
 
-    public function save_role($data)
-    {
-        $this->db->select('*');
-        $this->db->from('m_accessroles');
-        $this->db->where('GroupId', $data['groupid']);
-        $this->db->where('FormId', $data['formid']);
-        $query = $this->db->get()->row();
-        if($query)
-        {
-            $this->db->where('GroupId', $data['groupid']);
-            $this->db->where('FormId', $data['formid']);
-            $this->db->update('m_accessroles', $data);
-        }
-        else
-        {
-            $this->db->insert('m_accessroles', $data);
-        }
-    }
-
-    public function create_object($id, $groupname, $description, $ion, $iby, $uon, $uby)
-    {
-        $data = array(
-            'id' => $id,
-            'groupname' => $groupname,
-            'description' => $description,
-            'ion' => $ion,
-            'iby' => $iby,
-            'uon' => $uon,
-            'uby' => $uby,
-        );
-
-        return $data;
-    }
-
-    public function create_object_role_tabel($groupid, $formid, $read, $write, $delete, $print)
-    {
-        $data = array(
-            'groupid' => $groupid,
-            'formid' => $formid,
-            'read' => $read,
-            'write' => $write,
-            'delete' => $delete,
-            'print' => $print
-        );
-
-        return $data;
-    }
-
-    public function create_object_role($groupid, $formid, $formname, $aliasname, $read, $write, $delete, $print)
-    {
-        $data = array(
-            'groupid' => $groupid,
-            'formid' => $formid,
-            'formname' => $formname,
-            'aliasname' => $aliasname,
-            'read' => $read,
-            'write' => $write,
-            'delete' => $delete,
-            'print' => $print
-        );
-
-        return $data;
-    }
-
     public function is_data_exist($groupname = null)
     {
         $exist = false;
-        $this->db->select('*');
-        $this->db->from('m_groupusers');
-        $this->db->where('GroupName', $groupname);
-        $query = $this->db->get();
-
-        $row = $query->result();
-        if(count($row) > 0){
+        //$this->db->where('GroupName', $groupname);
+        if($this->count(array('GroupName'=> $groupname)) > 0){
             $exist = true;
         }
         return $exist;
@@ -163,18 +32,17 @@ class M_groupusers_model extends MY_Model {
     {
         $nameexist = false;
         $warning = array();
-        
         if(!empty($oldmodel))
         {
-            if($model['groupname'] != $oldmodel['groupname'])
+            if($model->GroupName != $oldmodel->GroupName)
             {
-                $nameexist = $this->is_data_exist($model['groupname']);
+                $nameexist = $this->is_data_exist($model->GroupName);
             }
         }
         else{
-            if(!empty($model['groupname']))
+            if(!empty($model->GroupName))
             {
-                $nameexist = $this->is_data_exist($model['groupname']);
+                $nameexist = $this->is_data_exist($model->GroupName);
             }
             else{
                 $warning = array_merge($warning, array(0=>'ui_msg_group_name_can_not_null'));
@@ -216,7 +84,7 @@ class M_groupusers_model extends MY_Model {
         }
 
         $permitted = false;
-        if($this->paging->is_superadmin($_SESSION['userdata']['username'])
+        if($this->paging->is_superadmin($_SESSION['userdata']['Username'])
             ||  $this->has_role($groupid,$formid,$role)
         )
         {
@@ -225,4 +93,36 @@ class M_groupusers_model extends MY_Model {
         return $permitted;
     }
     
+}
+
+class M_groupuser_object extends Model_object {
+	
+	public function clone(){
+        $CI = get_instance();
+		
+		$CI->load->model('M_groupusers');
+        $new_data = $CI->M_groupusers->new_object();
+        $new_data->Id = $this->Id;
+        $new_data->GroupName = $this->GroupName;
+        $new_data->Description = $this->Id;
+        $new_data->IOn = $this->IOn;
+        $new_data->IBy = $this->IBy;
+        $new_data->UOn = $this->UOn;
+        $new_data->UBy = $this->UBy;
+        return $new_data;
+    }
+
+    public function View_m_accessrole(){
+        $CI = get_instance();
+        $CI->db->select('*');
+        $CI->db->from('view_m_accessroles');
+        $CI->db->where('GroupId', $this->Id);
+        $CI->db->or_where('GroupId', null);
+        $CI->db->order_by('ClassName', 'ASC');
+        $CI->db->order_by('Header', 'DESC');
+        $CI->db->order_by('FormName', 'ASC');
+        $query =$CI->db->get();
+        
+        return $query->result();
+    }
 }

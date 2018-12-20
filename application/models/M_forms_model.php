@@ -22,8 +22,7 @@ class M_forms_model extends MY_Model {
 
         $this->db->where('ClassName', $className);
         $this->db->where_not_in('Id', $notId);
-        $query = $this->db->get('m_forms');
-        return $query->result();
+        return $this->get_list();
     }
 
     public function get_data_by_formname($formname){  
@@ -72,4 +71,9 @@ class M_forms_model extends MY_Model {
         // resource language goes here
     }
 
+}
+
+class M_form_object extends Model_object {
+	
+	
 }

@@ -6,7 +6,7 @@ class M_groupuser extends CI_Controller
     {
         parent::__construct();
         //$this->load->database('naturedisaster', TRUE);
-        $this->load->model('M_groupusers');
+        $this->load->model(array('M_groupusers','M_accessroles'));
         $this->load->library(array('paging', 'session','helpers'));
         $this->load->helper('form');
         $this->paging->is_session_set();
@@ -14,9 +14,9 @@ class M_groupuser extends CI_Controller
 
     public function index()
     {
-        //echo $_SESSION['userdata']['username'];
+        //echo $_SESSION['userdata']['Username'];
         $form = $this->paging->get_form_name_id();
-        if($this->M_groupusers->is_permitted($_SESSION['userdata']['groupid'],$form['m_groupuser'],'Read'))
+        if($this->M_groupusers->is_permitted($_SESSION['userdata']['GroupId'],$form['m_groupuser'],'Read'))
         {
             $page = 1;
             $search = "";
@@ -29,10 +29,16 @@ class M_groupuser extends CI_Controller
                 $search = $_GET["search"];
             }
 
-            $pagesize = $this->paging->get_config();
-            $resultdata = $this->M_groupusers->get_alldata();
-            $datapages = $this->M_groupusers->get_datapages($page, $_SESSION['usersetting']->RowPerpage, $search);
-            $rows = !empty($search) ? count($datapages) : count($resultdata);
+            $params =array(
+                'page' => $page,
+                'pagesize' => $_SESSION['usersettings']['RowPerpage'],
+                'like' => array(
+                            'GroupName' => $search
+                        )
+            );
+
+            $datapages = $this->M_groupusers->get_list(null, null, $params);
+            $rows = !empty($search) ? count($datapages) : $this->M_groupusers->count();
             $data =  $this->paging->set_data_page_index($datapages, $rows, $page, $search);
             
             $this->loadview('m_groupuser/index', $data);
@@ -48,11 +54,16 @@ class M_groupuser extends CI_Controller
         $page = $this->input->post("page");
         $search = $this->input->post("search");
 
-        $pagesize = $this->paging->get_config();
-        $resultdata = $this->M_groupusers->get_alldata();
-        $datapages = $this->M_groupusers->get_datapages($page,  $pagesize['perpagemodal'], $search);
-        $rows = !empty($search) ? count($datapages) : count($resultdata);
+        $params =array(
+            'page' => $page,
+            'pagesize' => $_SESSION['usersettings']['RowPerpage'],
+            'like' => array(
+                        'GroupName' => $search
+                    )
+        );
 
+        $datapages = $this->M_groupusers->get_list(null, null, $params);
+        $rows = !empty($search) ? count($datapages) : $this->M_groupusers->count();
         $data =  $this->paging->set_data_page_modal($datapages, $rows, $page, $search, null, 'm_groupuser');      
         
         echo json_encode($data);
@@ -61,9 +72,9 @@ class M_groupuser extends CI_Controller
     public function add()
     {
         $form = $this->paging->get_form_name_id();
-        if($this->M_groupusers->is_permitted($_SESSION['userdata']['groupid'],$form['m_groupuser'],'Write'))
+        if($this->M_groupusers->is_permitted($_SESSION['userdata']['GroupId'],$form['m_groupuser'],'Write'))
         {
-            $model = $this->M_groupusers->create_object(null, null, null, null, null, null, null);
+            $model = $this->M_groupusers->new_object();
             $data =  $this->paging->set_data_page_add($model);
             $this->loadview('m_groupuser/add', $data);  
         }
@@ -81,7 +92,9 @@ class M_groupuser extends CI_Controller
         $name = $this->input->post('named');
         $description = $this->input->post('description');
         
-        $model = $this->M_groupusers->create_object(null, $name, $description, null, null, null, null);
+        $model = $this->M_groupusers->new_object();
+        $model->GroupName = $name;
+        $model->Description = $description;
 
         $validate = $this->M_groupusers->validate($model);
  
@@ -93,10 +106,10 @@ class M_groupuser extends CI_Controller
         }
         else{
             $date = date("Y-m-d H:i:s");
-            $model['ion'] = $date;
-            $model['iby'] = $_SESSION['userdata']['username'];
+            $model->IOn = $date;
+            $model->IBy = $_SESSION['userdata']['Username'];
     
-            $this->M_groupusers->save_data($model);
+            $model->save();
             $successmsg = $this->paging->get_success_message();
             $this->session->set_flashdata('success_msg', $successmsg);
             redirect('mgroupuser');
@@ -106,10 +119,9 @@ class M_groupuser extends CI_Controller
     public function edit($id)
     {
         $form = $this->paging->get_form_name_id();
-        if($this->M_groupusers->is_permitted($_SESSION['userdata']['groupid'],$form['m_groupuser'],'Write'))
+        if($this->M_groupusers->is_permitted($_SESSION['userdata']['GroupId'],$form['m_groupuser'],'Write'))
         {
-            $edit = $this->M_groupusers->get_data_by_id($id);
-            $model = $this->M_groupusers->create_object($edit->Id, $edit->GroupName, $edit->Description, null, null, null, null);
+            $model = $this->M_groupusers->get($id);
             $data =  $this->paging->set_data_page_edit($model);
             $this->loadview('m_groupuser/edit', $data);  
         }
@@ -121,12 +133,13 @@ class M_groupuser extends CI_Controller
 
     public function editsave()
     {
+        
+        $id = $this->input->post('idgroupuser');
         $name = $this->input->post('named');
         $description = $this->input->post('description');
 
-        $edit = $this->M_groupusers->get_data_by_id($this->input->post('idgroupuser'));
-        $model = $this->M_groupusers->create_object($edit->Id, $name, $description, $edit->IOn, $edit->IBy, null , null);
-        $oldmodel = $this->M_groupusers->create_object($edit->Id, $edit->GroupName, $edit->Description, $edit->IOn, $edit->IBy, $edit->UOn , $edit->UBy);
+        $model = $this->M_groupusers->get($id);
+        $oldmodel = $model->clone();
 
         $validate = $this->M_groupusers->validate($model, $oldmodel);
         if($validate)
@@ -138,23 +151,25 @@ class M_groupuser extends CI_Controller
         else
         {
             $date = date("Y-m-d H:i:s");
-            $model['uon'] = $date;
-            $model['uby'] = $_SESSION['userdata']['username'];
-
-            $this->M_groupusers->edit_data($model);
-            $successmsg = $this->paging->get_success_message();
-            $this->session->set_flashdata('success_msg', $successmsg);
-            redirect('mgroupuser');
+            $model->GroupName = $name;
+            $model->Description = $description;
+            $model->UOn = $date;
+            $model->UBy = $_SESSION['userdata']['Username'];
+            echo json_encode($model);
+            // $model->save();
+            // $successmsg = $this->paging->get_success_message();
+            // $this->session->set_flashdata('success_msg', $successmsg);
+            // redirect('mgroupuser');
         }
     }
 
     public function editrole($groupid)
     {
         $form = $this->paging->get_form_name_id();
-        if($this->M_groupusers->is_permitted($_SESSION['userdata']['groupid'],$form['m_groupuser'],'Write'))
+        if($this->M_groupusers->is_permitted($_SESSION['userdata']['GroupId'],$form['m_groupuser'],'Write'))
         {
-            $modelheader = $this->M_groupusers->get_data_by_id($groupid);
-            $modeldetail = $this->M_groupusers->get_role($groupid);
+            $modelheader = $this->M_groupusers->get($groupid);
+            $modeldetail = $modelheader->View_m_accessrole();
 
             $data =  $this->paging->set_data_page_index($modeldetail, null, null, null, $modelheader);
             
@@ -174,16 +189,40 @@ class M_groupuser extends CI_Controller
         $write = $this->input->post("write");
         $delete = $this->input->post("delete");
         $print = $this->input->post("print");
-        $data = $this->M_groupusers->create_object_role_tabel($groupid, $formid, $read, $write, $delete, $print);
 
-        $this->M_groupusers->save_role($data);
-        //echo $data;
+        $params = array(
+            'where' => array(
+                'FormId' => $formid,
+                'GroupId' => $groupid
+            )
+        );
+
+        $roles = $this->M_accessroles->get(null, null, $params);
+        if($roles){
+            $update_roles = $this->M_accessroles->get($roles->Id);
+            $update_roles->Read = $read;
+            $update_roles->Write = $write;
+            $update_roles->Delete = $delete;
+            $update_roles->Print = $print;
+            $update_roles->save();
+            echo json_encode($update_roles);
+        } else {
+            $new_roles = $this->M_accessroles->new_object();
+            $new_roles->FormId = $formid;
+            $new_roles->GroupId = $groupid;
+            $new_roles->Read = $read;
+            $new_roles->Write = $write;
+            $new_roles->Delete = $delete;
+            $new_roles->Print = $print;
+            $new_roles->save();
+            echo json_encode($new_roles);
+        }
     }
 
     public function delete($id)
     {
         $form = $this->paging->get_form_name_id();
-        if($this->M_groupusers->is_permitted($_SESSION['userdata']['groupid'],$form['m_groupuser'],'Delete'))
+        if($this->M_groupusers->is_permitted($_SESSION['userdata']['GroupId'],$form['m_groupuser'],'Delete'))
         {
             $delete = $this->M_groupusers->delete_data($id);
             if(isset($delete)){

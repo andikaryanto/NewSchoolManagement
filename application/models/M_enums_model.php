@@ -1,6 +1,6 @@
 <?php  
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-class Menum_model extends MY_Model {
+class M_enums_model extends MY_Model {
 
     public function get_data_by_id($id)
     {
@@ -11,4 +11,9 @@ class Menum_model extends MY_Model {
         $query = $this->db->get();
         return $query->result();
     }
+}
+
+class M_enum_object extends Model_object {
+	
+	
 }

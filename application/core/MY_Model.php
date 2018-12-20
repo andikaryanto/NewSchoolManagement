@@ -169,6 +169,7 @@ class MY_Model extends CI_Model {
 		$joins = (isset($params['joins']) ? $params['joins'] : FALSE);			// define JOIN clauses array or array of arrays (table, cond, type)
 		$distinct = (isset($params['distinct']) ? $params['distinct'] : FALSE);	// make select DISTINCT
 		$select = (isset($params['select']) ? $params['select'] : FALSE);		// other fields to append in select clause
+		$where_not_in = (isset($params['where_not_in']) ? $params['where_not_in'] : FALSE);			// add custom WHERE string
 		$where = (isset($params['where']) ? $params['where'] : FALSE);			// add custom WHERE string
 		
 		if ($this->_is_caching)
@@ -200,7 +201,10 @@ class MY_Model extends CI_Model {
 		
 		if ($where)
 			$this->db->where($where);
-		
+
+		if ($where_not_in)
+			$this->db->where_not_in($where_not_in);
+
 		if ($order_by)
 			$this->db->order_by($order_by);
 		
@@ -447,7 +451,7 @@ class MY_Model extends CI_Model {
 		
 		return $row;
 	}
-	
+
 	/**
 	 * Check if table is already joind in the current query building
 	 * @param string $table

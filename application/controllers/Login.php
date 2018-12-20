@@ -5,7 +5,6 @@ class Login extends CI_Controller
     {
         parent::__construct();
         $this->load->model('M_users');
-        $this->load->library('session');
 
     }
 
@@ -24,23 +23,18 @@ class Login extends CI_Controller
         $password = $this->input->post('loginPassword');
         
         $query = $this->M_users->get_sigle_data_user($username, $password);
-        // echo json_encode($query);
+        //echo json_encode($query);
         if ($query)
         {
             if($query->IsLoggedIn == 0){
-                //$userdata = $this->M_users->create_object($query->Id, $query->GroupId, $query->GroupName, $query->Username, null, null, null, null, null);
-                $this->session->set_userdata('userdata',$query);
-                // $usersetting = $this->M_users->get_usersetting_by_userid($query->Id);
-                // $this->session->set_userdata('usersetting',$usersetting);
-                //print_r($_SESSION['userdata']->M_usersettings()->G_colors());
-                // $language = array(
-                //     'language' => $usersetting->Language
-                // );
-                // $this->session->set_userdata('language',$language);
-                //$this->M_users->set_loggedin($username);
+
+                $this->session->set_userdata('userdata',get_object_vars($query));
+                $this->session->set_userdata('usersettings',get_object_vars($query->M_usersettings()));
+                $this->session->set_userdata('languages',get_object_vars($query->M_usersettings()->G_languages()));
+                $this->session->set_userdata('colors',get_object_vars($query->M_usersettings()->G_colors()));
+                //echo json_encode($this->session->userdata('userdata'));
                 redirect('home');
             } else {
-                // echo "<script>alert('user is already logged in');</script>";
                 $this->index();
             }
         }

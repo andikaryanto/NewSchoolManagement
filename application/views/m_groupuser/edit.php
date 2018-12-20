@@ -21,14 +21,14 @@
                 </div>
                 <div class="card-body">                 
                   <form method = "post" action = "<?= base_url('mgroupuser/editsave');?>">
-                    <input hidden name ="idgroupuser" id="idgroupuser" value="<?= $model['id']?>">
+                    <input hidden name ="idgroupuser" id="idgroupuser" value="<?= $model->Id?>">
                     <div class="form-group">
                       <label><?= lang('ui_name')?></label>
-                      <input id="named" type="text"  class="form-control" name = "named" value="<?= $model['groupname']?>" required>
+                      <input id="named" type="text"  class="form-control" name = "named" value="<?= $model->GroupName?>" required>
                     </div>
                     <div class="form-group">       
                       <label><?= lang('ui_description')?></label>
-                      <textarea id="description" type="text" class="form-control" name = "description" ><?= $model['description']?></textarea>
+                      <textarea id="description" type="text" class="form-control" name = "description" ><?= $model->Description?></textarea>
                     </div>
                     <div class="form-group">       
                       <input type="submit" value="<?= lang('ui_save')?>" class="btn btn-primary">

@@ -22,7 +22,7 @@
                           <label class="col-sm-2 col-form-label"><?= lang('ui_language')?></label>
                           <div class="col">
                           <div class="dropdown bootstrap-select show-tick">
-                            <select id = "language" name ="language" class="selectpicker" data-style="select-with-transition" title ="<?= $_SESSION['usersetting']->Language?>" >
+                            <select id = "language" name ="language" class="selectpicker" data-style="select-with-transition" title ="<?= $_SESSION['languages']['Name']?>" >
                               <?php 	
                               foreach ($enums['languageenums'] as $value)
                               { 
@@ -49,7 +49,7 @@
                             <div class="form-check form-check-inline">
                               <label class="form-check-label">
                                 <input class="form-check-input" type="radio" name="radiocolor" id="exampleRadios1" value="<?= $option?>" 
-                                  <?php if($_SESSION['usersetting']->ColorId == $value->Id){
+                                  <?php if($_SESSION['usersettings']['ColorId'] == $value->Id){
                                   ?>
                                     checked
                                   <?php
@@ -73,7 +73,7 @@
                           <label class="col-sm-2 col-form-label"><?= lang('ui_rowperpage')?></label>
                           <div class="col">
                           <div class="dropdown bootstrap-select show-tick">
-                            <select id = "rowpage" name ="rowpage" class="selectpicker" data-style="select-with-transition" title ="<?= $_SESSION['usersetting']->RowPerpage?>" >
+                            <select id = "rowpage" name ="rowpage" class="selectpicker" data-style="select-with-transition" title ="<?= $_SESSION['usersettings']['RowPerpage']?>" >
                               <option value ="5">5</option>
                               <option value ="10">10</option>
                               <option value ="15">15</option>

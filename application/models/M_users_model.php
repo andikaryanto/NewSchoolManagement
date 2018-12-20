@@ -20,52 +20,29 @@ class M_users_model extends MY_Model {
         $this->db->select('a.*, b.GroupName');
         $this->db->from('m_users as a');
         $this->db->join('m_groupusers as b', 'a.GroupId = b.Id', 'left');
-        $this->db->join('m_groupusers as b', 'a.GroupId = b.Id', 'left');
         $this->db->where('a.Id', $id);
         $query = $this->db->get();
         return $query->row(); // a single row use row() instead of result()
     }
-
-    // public function get_usersetting_by_userid($id){
-    //     $this->db->select('a.*,
-    //                         b.Id as ColorId,
-    //                         b.Name as ColorName,
-    //                         b.Value as ColorValue,
-    //                         b.CssClass,
-    //                         b.CssPath,
-    //                         b.CssCustomPath,
-    //                         c.Id as LanguageId,
-    //                         c.Name as Language');
-    //     $this->db->from('m_usersettings as a');
-    //     $this->db->join('g_colors as b', 'a.ColorId = b.Id', 'left');
-    //     $this->db->join('g_languages as c', 'a.LanguageId = c.Id', 'left');
-    //     $this->db->where('a.UserId', $id);
-    //     $query = $this->db->get();
-    //     return $query->row();
-    // }
     
     public function get_sigle_data_user($username, $password)
     {
         $md5pass = encryptMd5("school".$username.$password);
-        // $this->db->select('a.*, b.GroupName');
-        // $this->db->from('m_users as a');
-        // $this->db->join('m_groupusers as b', 'a.GroupId = b.Id', 'left');
-        $this->db->where('Username', $username);
-        $this->db->where('Password', $md5pass);
-        $this->db->where('IsActive', 1);
-        //$this->db->where('IsLoggedIn', 0);
-        //$query = $this->db->get();
-        if($this->get_list()){
-            return $this->get_list()[0];
-        } 
-        return null;
+        $where = array(
+            'Username'=> $username,
+            'Password'=> $md5pass,
+            'IsActive'=> 1
+        );
+
+        $params = array(
+            'where' => $where
+        );
+
+       return $this->get(null, null, $params);
     }
 
     public function get_datapages($page, $pagesize, $search = null)
     {
-        // $this->db->select('a.*, b.GroupName');
-        // $this->db->from('m_users as a');
-        // $this->db->join('m_groupusers as b', 'a.GroupId = b.Id', 'left');
         $this->db->where('IsActive', 1);
         $this->db->where_not_in('Username', 'superadmin');
         if(!empty($search))
@@ -76,7 +53,6 @@ class M_users_model extends MY_Model {
         $this->db->order_by('IsActive','DESC');
         $this->db->order_by('Username','ASC');
         $this->db->limit($pagesize, ($page-1)*$pagesize);
-        //$this->db->get();
         return $this->get_list();
 
     }
@@ -276,7 +252,23 @@ class M_users_model extends MY_Model {
 }
 
 class M_user_object extends Model_object {
-	
+    
+    public function clone(){
+        $CI = get_instance();
+		
+		$CI->load->model('M_users');
+        $new_data = $CI->M_users->new_object();
+        $new_data->Id = $this->Id;
+        $new_data->GroupId = $this->GroupId;
+        $new_data->UserName = $this->UserName;
+        $new_data->Description = $this->Id;
+        $new_data->IOn = $this->IOn;
+        $new_data->IBy = $this->IBy;
+        $new_data->UOn = $this->UOn;
+        $new_data->UBy = $this->UBy;
+        return $new_data;
+    }
+
 	public function M_groupusers()
 	{
 		$CI = get_instance();

@@ -6,8 +6,6 @@ class Home extends CI_Controller
         parent::__construct();
         //$this->load->database('naturedisaster', TRUE);
         //$this->load->model('Login_model');
-        $this->load->library('session');
-        $this->load->library('paging');
         //$this->lang->load('form_ui', $_SESSION['language']['language']);
         
         //$this->paging->is_session_set();
@@ -16,9 +14,8 @@ class Home extends CI_Controller
 
     public function index()
     {
-
         //echo json_encode($this->session->userdata('language'));
-        echo json_encode($_SESSION['userdata']);
+        //echo json_encode($this->session->userdata('userdata'));
         if(!isset($_SESSION['userdata'])){
             redirect('login');
         }

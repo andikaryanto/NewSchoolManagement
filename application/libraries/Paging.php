@@ -42,6 +42,11 @@ class Paging {
 
         $data['mastermenu'] = $mastermenu;
 
+        //print_r($data['mastermenu']);
+        // foreach($mastermenu as $menu){
+        //     echo $menu->Resource." ";
+        // }
+        //print_r($_SESSION['usersettings']);
         $CI->load->view('template/header', $data); 
     }
 
@@ -55,7 +60,7 @@ class Paging {
     {
         
         $resource['flag'] = base_url('assets/bootstrapdashboard/img/flags/16/US.png');
-        if($_SESSION['language']['language'] === 'indonesia'){
+        if($_SESSION['languages']['Name'] === 'indonesia'){
             $resource['flag'] = base_url('assets/bootstrapdashboard/img/flags/16/ID.png');;
         }
 
@@ -114,7 +119,7 @@ class Paging {
     public function set_data_page_index($modeldetail, $totalrow = null, $currentpage = 0, $search = null, $modelheader = null, $pagesize = null)
     {
         $config = $this->get_config();
-        $pagesz = $_SESSION['usersetting']->RowPerpage; //5 or whatever
+        $pagesz = $_SESSION['usersettings']['RowPerpage']; //5 or whatever
         if(!empty($pagesize))
         {
             $pagesz = $pagesize;

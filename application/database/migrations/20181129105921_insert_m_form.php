@@ -12,7 +12,7 @@ class Migration_insert_m_form extends CI_Migration {
                 'AliasName' => 'master group user',
                 'LocalName' => 'master grup pengguna',
                 'ClassName' => 'Master',
-                'Resource' => 'res_groupuser',
+                'Resource' => 'ui_groupuser',
                 'IndexRoute' => 'mgroupuser'
             ),
             array(
@@ -20,7 +20,7 @@ class Migration_insert_m_form extends CI_Migration {
                 'AliasName' => 'master user',
                 'LocalName' => 'master pengguna',
                 'ClassName' => 'Master',
-                'Resource' => 'res_user',
+                'Resource' => 'ui_user',
                 'IndexRoute' => 'muser'
             ),
             array(
@@ -28,7 +28,7 @@ class Migration_insert_m_form extends CI_Migration {
                 'AliasName' => 'master school',
                 'LocalName' => 'master sekolah',
                 'ClassName' => 'Master',
-                'Resource' => 'res_school',
+                'Resource' => 'ui_school',
                 'IndexRoute' => 'mschool'
             ),
             array(
@@ -36,7 +36,7 @@ class Migration_insert_m_form extends CI_Migration {
                 'AliasName' => 'master class',
                 'LocalName' => 'master kelas',
                 'ClassName' => 'Master',
-                'Resource' => 'res_class',
+                'Resource' => 'ui_class',
                 'IndexRoute' => 'mclass'
             ),
             array(
@@ -44,7 +44,7 @@ class Migration_insert_m_form extends CI_Migration {
                 'AliasName' => 'master school year',
                 'LocalName' => 'master tahun ajaran',
                 'ClassName' => 'Master',
-                'Resource' => 'res_schoolyear',
+                'Resource' => 'ui_schoolyear',
                 'IndexRoute' => 'mschoolyear'
             ),
             array(
@@ -52,7 +52,7 @@ class Migration_insert_m_form extends CI_Migration {
                 'AliasName' => 'master worker',
                 'LocalName' => 'master pekerja',
                 'ClassName' => 'Master',
-                'Resource' => 'res_worker',
+                'Resource' => 'ui_worker',
                 'IndexRoute' => 'mworker'
             ),
             array(
@@ -60,7 +60,7 @@ class Migration_insert_m_form extends CI_Migration {
                 'AliasName' => 'master subject',
                 'LocalName' => 'master mata pelajaran',
                 'ClassName' => 'Master',
-                'Resource' => 'res_subject',
+                'Resource' => 'ui_subject',
                 'IndexRoute' => 'msubject'
             )
         );
