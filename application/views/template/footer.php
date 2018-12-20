@@ -73,8 +73,8 @@
   <!-- Library for adding dinamically elements -->
   <script src="<?= base_url('assets/material-dashboard/assets/js/plugins/arrive.min.js');?>"></script>
   <!--  Google Maps Plugin    -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
-  <script async="" defer="" src="https://buttons.github.io/buttons.js"></script>
+  <!-- <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+  <script async="" defer="" src="https://buttons.github.io/buttons.js"></script> -->
   <!-- Chartist JS -->
   <script src="<?= base_url('assets/material-dashboard/assets/js/plugins/chartist.min.js');?>"></script>
   <!--  Notifications Plugin    -->

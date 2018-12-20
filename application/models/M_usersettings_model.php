@@ -24,10 +24,12 @@ class M_usersetting_object extends Model_object {
 	{
 		$CI = get_instance();
 		
-		$CI->load->model('G_languages');	// just another CI Power Model object
-		$languages = $CI->G_languages->get($this->LanguageId);
-		if (isset($languages))
-			return $languages;
+        $CI->load->model('G_languages');	// just another CI Power Model object
+        if($this->LanguageId){
+            $languages = $CI->G_languages->get($this->LanguageId);
+            if (isset($languages))
+                return $languages;
+        }
 		return $CI->G_languages->new_object();
     }
 
@@ -36,9 +38,11 @@ class M_usersetting_object extends Model_object {
 		$CI = get_instance();
 		
 		$CI->load->model('G_colors');	// just another CI Power Model object
-		$colors = $CI->G_colors->get($this->ColorId);
-		if (isset($colors))
-			return $colors;
+        if($this->ColorId){
+            $colors = $CI->G_colors->get($this->ColorId);
+            if (isset($colors))
+                return $colors;
+        }
 		return $CI->G_colors->new_object();
     }
 }

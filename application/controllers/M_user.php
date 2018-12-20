@@ -34,12 +34,12 @@ class M_user extends CI_Controller
                 'page' => $page,
                 'pagesize' => $_SESSION['usersettings']['RowPerpage'],
                 'like' => array('Username' => $search),
-                'where_not_in' => array('Id', array(1))
+                'where' => array('Username !=' => 'superadmin')
             );
 
             //echo json_encode($params['where_not_in']);
 
-            $datapages = $this->M_users->get_list(null, null, $params);
+            $datapages = $this->M_users->get_list(null, 'Username', $params);
             $rows = !empty($search) ? count($datapages) : $this->M_users->count();
             $data =  $this->paging->set_data_page_index($datapages, $rows, $page, $search);
             
@@ -58,7 +58,7 @@ class M_user extends CI_Controller
         if($this->M_groupusers->is_permitted($_SESSION['userdata']['GroupId'],$form['m_user'],'Write'))
         {
             
-            $model = $this->M_users->create_object(null, null,null, null, null, null, null, null, null);
+            $model = $this->M_users->new_object();
             $data =  $this->paging->set_data_page_add($model);
             load_view('m_user/add', $data);   
         }
@@ -76,12 +76,13 @@ class M_user extends CI_Controller
         $err_exist  = false;
        
         $groupid    = $this->input->post('groupid');
-        $groupname  = $this->input->post('groupname');
         $username   = $this->input->post('named');
         $password   = $this->input->post('password');
 
-        $model  = $this->M_users->create_object(null,$groupid, $groupname, $username, $password, null, null, null, null);
-        $modeltabel = $this->M_users->create_object_tabel(null, $groupid, $username, $password, null, null, null , null);
+        $model = $this->M_users->new_object();
+        $model->GroupId = $groupid;
+        $model->Username = $username;
+        $model->Password = $password;
 
         $validate = $this->M_users->validate($model);
  
@@ -93,10 +94,10 @@ class M_user extends CI_Controller
         }
         else{
             $date = date("Y-m-d H:i:s");
-            $modeltabel['ion'] = $date;
-            $modeltabel['iby'] = $_SESSION['userdata']['username'];
+            $model->IOn = $date;
+            $model->UOn = $_SESSION['userdata']['username'];
     
-            $this->M_users->save_data($modeltabel);
+            $model->save();
             $successmsg = $this->paging->get_success_message();
             $this->session->set_flashdata('success_msg', $successmsg);
             redirect('muser');

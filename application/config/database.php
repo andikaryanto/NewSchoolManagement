@@ -107,7 +107,7 @@ else if(ENVIRONMENT === 'development'){
 		'dbdriver' => 'mysqli',
 		'dbprefix' => '',
 		'pconnect' => FALSE,
-		'db_debug' => TRUE,//(ENVIRONMENT !== 'production'),
+		'db_debug' => FALSE,//(ENVIRONMENT !== 'production'),
 		'cache_on' => FALSE,
 		'cachedir' => '',
 		'char_set' => 'utf8',

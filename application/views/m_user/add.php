@@ -21,15 +21,16 @@
                 </div>
                 <div class="card-body">                 
                   <form method = "post" action = "<?= base_url('muser/addsave');?>">
+                    <input hidden id = "groupid" type="text" class="form-control" name = "groupid" value="<?= $model->GroupId?>">
                     <div class="form-group bmd-form-group">
                       <label class = ""><?= lang('ui_name')?></label>
-                      <input id="named" type="text"  class="form-control " name = "named" value="<?= $model['username']?>" required>
+                      <input id="named" type="text"  class="form-control " name = "named" value="<?= $model->Username?>" required>
                     </div>
                     <div class="form-group">
                       <label><?= lang('ui_group_user')?></label>
                       <div class="input-group has-success">
-                        <input hidden="true" id = "groupid" type="text" class="form-control" name = "groupid" value="<?= $model['groupid']?>">
-                        <input id = "groupname" type="text" class="form-control custom-readonly"  value="<?= $model['groupname']?>" readonly>
+                        
+                        <input id = "groupname" type="text" class="form-control custom-readonly"  value="<?= $model->M_groupusers()->GroupName?>" readonly>
                         <!-- <span class="form-control-feedback text-primary">
                             <i class="material-icons">search</i>
                         </span> -->
@@ -40,7 +41,7 @@
                     </div>
                     <div class="form-group">       
                       <label><?= lang('ui_password')?></label>
-                      <input id="password" type="password" class="form-control" name = "password" value="<?= $model['password']?>">
+                      <input id="password" type="password" class="form-control" name = "password" value="<?= $model->Password?>">
                     </div>
                     <div class="form-group">       
                       <input type="submit" value="<?= lang('ui_save')?>" class="btn btn-primary">

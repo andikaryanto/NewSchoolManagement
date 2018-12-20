@@ -72,9 +72,6 @@
                             ?>
                             
                             <td class="td-actions text-right">
-                              <!-- <button type="button" rel="tooltip" class="btn btn-primary btn-round" data-original-title="" title="<?=  lang('ui_edit')?>" onclick="window.location.href='<?= base_url('muser/edit/').$value->Id;?>'">
-                                <i class="material-icons">edit</i>
-                              </button> -->
                               <?php if($value->IsActive == 1) { ?>
 															  
                                 <button type="button" rel="tooltip" class="btn btn-primary btn-round" data-original-title="" title="<?=  lang('ui_deactivate')?>" onclick = "delete_user('<?= $value->Id?>','<?= $value->Username?>')">

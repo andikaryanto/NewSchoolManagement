@@ -28,7 +28,7 @@
   <script src="<?= base_url('assets/material-dashboard/assets/js/bootbox.min.js');?>"></script>
 </head>
 
-<body class="">
+<body>
   <div class="wrapper ">
     <div class="sidebar" data-color="green" data-background-color="black" data-image="<?= base_url('assets/material-dashboard//assets/img/sidebar-1.jpg');?>">
 

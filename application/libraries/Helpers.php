@@ -27,7 +27,7 @@ class Helpers {
         $msg = array();
 
         if($code == $this->queryErrorCode()['datainrefenrence']){
-            $msg = array_merge($msg, array(0=>lang('ui_datainreference')));
+            $msg = array_merge($msg, array(0=>'ui_datainreference'));
         }
 
         return $msg;

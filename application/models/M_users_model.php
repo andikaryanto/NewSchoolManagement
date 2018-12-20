@@ -207,15 +207,15 @@ class M_users_model extends MY_Model {
 
         if(!empty($oldmodel))
         {
-            if($model['username'] != $oldmodel['username'])
+            if($model->Username != $oldmodel->Username)
             {
-                $nameexist = $this->is_data_exist($model['username']);
+                $nameexist = $this->is_data_exist($model->Username);
             }
         }
         else{
-            if(!empty($model['username']))
+            if(!empty($model->Username))
             {
-                $nameexist = $this->is_data_exist($model['username']);
+                $nameexist = $this->is_data_exist($model->Username);
             }
             else{
                 $warning = array_merge($warning, array(0=>'err_msg_name_can_not_null'));
@@ -225,10 +225,10 @@ class M_users_model extends MY_Model {
         if($nameexist)
             $warning = array_merge($warning, array(0=>'err_msg_name_exist'));
 
-        if(empty($model['groupid']))
+        if(empty($model->GroupId))
             $warning = array_merge($warning, array(0=>'err_msg_groupuser_can_not_null'));
 
-        if(empty($model['password']))
+        if(empty($model->Password))
             $warning = array_merge($warning, array(0=>'err_msg_password_can_not_null'));
 
         
@@ -261,7 +261,7 @@ class M_user_object extends Model_object {
         $new_data->Id = $this->Id;
         $new_data->GroupId = $this->GroupId;
         $new_data->UserName = $this->UserName;
-        $new_data->Description = $this->Id;
+        $new_data->Password = $this->Password;
         $new_data->IOn = $this->IOn;
         $new_data->IBy = $this->IBy;
         $new_data->UOn = $this->UOn;
@@ -273,10 +273,12 @@ class M_user_object extends Model_object {
 	{
 		$CI = get_instance();
 		
-		$CI->load->model('M_groupusers');	// just another CI Power Model object
-		$groupuser = $CI->M_groupusers->get($this->GroupId);
-		if (isset($groupuser))
-			return $groupuser;
+        $CI->load->model('M_groupusers');	// just another CI Power Model objec 
+        if(isset($this->GroupId)){
+            $groupuser = $CI->M_groupusers->get($this->GroupId);
+            if (isset($groupuser))
+                return $groupuser;
+        }
 		return $CI->M_groupusers->new_object();
     }
     
@@ -285,9 +287,11 @@ class M_user_object extends Model_object {
 		$CI = get_instance();
 		
 		$CI->load->model('M_usersettings');	// just another CI Power Model object
-		$usersettings = $CI->M_usersettings->get_data_by_userid($this->Id);
-		if (isset($usersettings))
-			return $usersettings;
+        if(isset($this->Id)){
+            $usersettings = $CI->M_usersettings->get_data_by_userid($this->Id);
+            if (isset($usersettings))
+                return $usersettings;
+        }
 		return $CI->M_usersettings->new_object();
 	}
 }

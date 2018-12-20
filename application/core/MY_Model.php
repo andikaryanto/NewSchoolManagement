@@ -193,17 +193,25 @@ class MY_Model extends CI_Model {
 			$this->_autojoin_fields(TRUE, $filter);	// reverse autojoin
 		}
 		
+		// if ($like)
+		// 	$this->_likes($filter);
+
 		if ($like)
-			$this->_likes($filter);
+			$this->db->like($like);
 		
 		if ($filter)
 			$this->db->where($filter);
 		
-		if ($where)
-			$this->db->where($where);
+		if ($where){
+			foreach($where as $key => $value){
+				$this->db->where($key, $value);
+			}
+		}
 
 		if ($where_not_in)
-			$this->db->where_not_in($where_not_in);
+		foreach($where_not_in as $key => $value){
+			$this->db->where_not_in($key, $value);
+		}
 
 		if ($order_by)
 			$this->db->order_by($order_by);
@@ -279,8 +287,11 @@ class MY_Model extends CI_Model {
 			$this->_autojoin_fields(TRUE, $filter);	// reverse autojoin
 		}
 		
+		// if ($like)
+		// 	$this->_likes($filter);
+
 		if ($like)
-			$this->_likes($filter);
+			$this->db->like($like);
 		
 		if ($filter)
 			$this->db->where($filter);
@@ -403,7 +414,9 @@ class MY_Model extends CI_Model {
 		if (!$soft)
 		{
 			// hard delete the record(s)
-			$this->db->delete($this->table, $filter);
+			if(!$this->db->delete($this->table, $filter)){
+				return $this->db->error();
+			}
 		}
 		
 		$this->db->trans_complete();
