@@ -17,17 +17,6 @@ class M_groupuser extends CI_Controller
         $form = $this->paging->get_form_name_id();
         if($this->M_groupusers->is_permitted($_SESSION['userdata']['GroupId'],$form['m_groupuser'],'Read'))
         {
-            $page = 1;
-            $search = "";
-            if(!empty($_GET["page"]))
-            {
-                $page = $_GET["page"];
-            }
-            if(!empty($_GET["search"]))
-            {
-                $search = $_GET["search"];
-            }
-
             $params = array(
                 'like' => array(
                     'GroupName' => $search
@@ -35,8 +24,6 @@ class M_groupuser extends CI_Controller
             );
 
             $datapages = $this->M_groupusers->get_list(null, null, $params);
-            // $rows = !empty($search) ? count($datapages) : $this->M_groupusers->count();
-            // $data =  $this->paging->set_data_page_index($datapages, $rows, $page, $search);
             $data['model'] = $datapages;
             $this->loadview('m_groupuser/index', $data);
         }

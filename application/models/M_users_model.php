@@ -78,41 +78,6 @@ class M_users_model extends MY_Model {
         $this->db->update('m_users');
     }
 
-    public function save_data($data)
-    {
-        if($this->db->insert('m_users', $data)){
-            $user = $this->get_data_by_name($data['username']);
-            $usersetting = $this->create_usersetting_object(null, $user->Id);
-            $this->db->insert('m_usersettings', $usersetting);
-        }
-    }
-
-    public function edit_data($data)
-    {
-        $this->db->where('Id', $data['id']);
-        $this->db->update('m_users', $data);
-    }
-
-    public function edit_usersetting($data){
-        $this->db->where('Id', $data['id']);
-        $this->db->update('m_usersettings', $data);
-    }
-
-    public function delete_data($id)
-    {
-        $this->db->set('IsActive', 0);
-        $this->db->set('GroupId', null);
-        $this->db->where('Id', $id);
-        $this->db->update('m_users');
-    }
-
-    public function activate_data($id)
-    {
-        $this->db->set('IsActive', 1);
-        $this->db->where('Id', $id);
-        $this->db->update('m_users');
-    }
-
     public function saveNewPassword($username, $password, $newPassword){
         
         $md5pass = encryptMd5("school".$username.$password);

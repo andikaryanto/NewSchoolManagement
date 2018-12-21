@@ -19,30 +19,14 @@ class M_user extends CI_Controller
         $form = $this->paging->get_form_name_id();
         if($this->M_groupusers->is_permitted($_SESSION['userdata']['GroupId'],$form['m_user'],'Read'))
         {
-            $page = 1;
-            $search = "";
-            if(!empty($_GET["page"]))
-            {
-                $page = $_GET["page"];
-            }
-            if(!empty($_GET["search"]))
-            {
-                $search = $_GET["search"];
-            }
-
             $params = array(
-                'page' => $page,
-                'pagesize' => $_SESSION['usersettings']['RowPerpage'],
-                'like' => array('Username' => $search),
                 'where' => array('Username !=' => 'superadmin')
             );
 
             //echo json_encode($params['where_not_in']);
 
             $datapages = $this->M_users->get_list(null, 'Username', $params);
-            $rows = !empty($search) ? count($datapages) : $this->M_users->count();
-            $data =  $this->paging->set_data_page_index($datapages, $rows, $page, $search);
-            
+            $data['model'] = $datapages;
             load_view('m_user/index', $data);
         }
        else
@@ -83,9 +67,11 @@ class M_user extends CI_Controller
         $model->GroupId = $groupid;
         $model->Username = $username;
         $model->Password = $password;
-        $model->CreatedBy = $_SESSION['userdata']['username'];
-
-
+        $model->IsLoggedIn = 0;
+        $model->IsActive = 1;
+        $model->Language = 'indonesia';
+        $model->CreatedBy = $_SESSION['userdata']['Username'];
+        //echo json_encode($model);
         $validate = $this->M_users->validate($model);
  
         if($validate)
@@ -189,7 +175,11 @@ class M_user extends CI_Controller
         $form = $this->paging->get_form_name_id();
         if($this->M_groupusers->is_permitted($_SESSION['userdata']['GroupId'],$form['m_user'],'Write'))
         {
-            $this->M_users->activate_data($id);
+            $muser = $this->M_users->get($id);
+            if($muser){
+                $muser->IsActive = $muser->IsActive ? 0 : 1;
+                $muser->save();
+            }
             redirect('muser');
         }
         else
