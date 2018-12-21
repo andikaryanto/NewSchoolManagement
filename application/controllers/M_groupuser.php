@@ -29,17 +29,15 @@ class M_groupuser extends CI_Controller
             }
 
             $params = array(
-                'page' => $page,
-                'pagesize' => $_SESSION['usersettings']['RowPerpage'],
                 'like' => array(
                     'GroupName' => $search
                 )
             );
 
             $datapages = $this->M_groupusers->get_list(null, null, $params);
-            $rows = !empty($search) ? count($datapages) : $this->M_groupusers->count();
-            $data =  $this->paging->set_data_page_index($datapages, $rows, $page, $search);
-            
+            // $rows = !empty($search) ? count($datapages) : $this->M_groupusers->count();
+            // $data =  $this->paging->set_data_page_index($datapages, $rows, $page, $search);
+            $data['model'] = $datapages;
             $this->loadview('m_groupuser/index', $data);
         }
         else
@@ -94,6 +92,7 @@ class M_groupuser extends CI_Controller
         $model = $this->M_groupusers->new_object();
         $model->GroupName = $name;
         $model->Description = $description;
+        $model->CreatedBy = $_SESSION['userdata']['Username'];
 
         $validate = $this->M_groupusers->validate($model);
  
@@ -104,9 +103,6 @@ class M_groupuser extends CI_Controller
             $this->loadview('m_groupuser/add', $data);   
         }
         else{
-            $date = date("Y-m-d H:i:s");
-            $model->IOn = $date;
-            $model->IBy = $_SESSION['userdata']['Username'];
     
             $model->save();
             $successmsg = $this->paging->get_success_message();
@@ -139,6 +135,10 @@ class M_groupuser extends CI_Controller
 
         $model = $this->M_groupusers->get($id);
         $oldmodel = $model->clone();
+        
+        $model->GroupName = $name;
+        $model->Description = $description;
+        $model->ModifiedBy = $_SESSION['userdata']['Username'];
 
         $validate = $this->M_groupusers->validate($model, $oldmodel);
         if($validate)
@@ -149,12 +149,6 @@ class M_groupuser extends CI_Controller
         }
         else
         {
-            $date = date("Y-m-d H:i:s");
-            $model->GroupName = $name;
-            $model->Description = $description;
-            $model->UOn = $date;
-            $model->UBy = $_SESSION['userdata']['Username'];
-            // json_encode($model);
             $model->save();
             $successmsg = $this->paging->get_success_message();
             $this->session->set_flashdata('success_msg', $successmsg);
@@ -218,7 +212,28 @@ class M_groupuser extends CI_Controller
         }
     }
 
-    public function delete($id)
+    public function delete(){
+        $id = $this->input->post("id");
+        $form = $this->paging->get_form_name_id();
+        if($this->M_groupusers->is_permitted($_SESSION['userdata']['GroupId'],$form['m_groupuser'],'Delete'))
+        {   
+            $deleteData = $this->M_groupusers->get($id);
+            $delete = $deleteData->delete();
+            if(isset($delete)){
+                $deletemsg = $this->helpers->get_query_error_message($delete['code']);
+                //$this->session->set_flashdata('warning_msg', $deletemsg);
+                echo json_encode(delete_status($deletemsg, FALSE));
+            } else {
+                $deletemsg = $this->paging->get_delete_message();
+                //$this->session->set_flashdata('delete_msg', $deletemsg);
+                echo json_encode(delete_status($deletemsg));
+            }
+        } else {
+            echo json_encode(delete_status(FALSE, TRUE));
+        }
+    }
+
+    public function deletes($id)
     {
         $form = $this->paging->get_form_name_id();
         if($this->M_groupusers->is_permitted($_SESSION['userdata']['GroupId'],$form['m_groupuser'],'Delete'))

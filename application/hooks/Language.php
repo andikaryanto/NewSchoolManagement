@@ -17,8 +17,8 @@ class LanguageLoader {
 
     function Initialize() {
         $CI =& get_instance();
-        $usersetting = $this->CI->session->userdata('usersetting');
+        //$usersetting = $this->CI->session->userdata('usersettings');
         $CI->load->helper(array('language'));
-        $CI->lang->load(array('form_ui','err_msg','info_msg'), !empty($usersetting->Language) ? $usersetting->Language : $this->CI->config->item('language'));
+        $CI->lang->load(array('form_ui','err_msg','info_msg'), !empty($_SESSION['languages']['Name']) ? $_SESSION['languages']['Name'] : $this->CI->config->item('language'));
     }
 }

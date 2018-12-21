@@ -82,7 +82,7 @@ class M_groupusers_model extends MY_Model {
             $forms = $this->M_forms->get_data_by_formname($form);
             $formid = $forms->Id;
         }
-
+        
         $permitted = false;
         if($this->paging->is_superadmin($_SESSION['userdata']['Username'])
             ||  $this->has_role($groupid,$formid,$role)

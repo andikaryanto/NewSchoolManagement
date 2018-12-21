@@ -23,7 +23,6 @@ class Login extends CI_Controller
         $password = $this->input->post('loginPassword');
         
         $query = $this->M_users->get_sigle_data_user($username, $password);
-        //echo json_encode($query);
         if ($query)
         {
             if($query->IsLoggedIn == 0){

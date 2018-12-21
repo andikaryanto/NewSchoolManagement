@@ -18,7 +18,6 @@
     <link href="<?= base_url('assets/material-dashboard/assets/demo/demo.css');?>" rel="stylesheet" />
   </head>
   <body class="off-canvas-sidebar"> 
-  
   <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top text-white">
     <div class="container">
       <div class="navbar-wrapper">
@@ -188,12 +187,12 @@
   <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
   <script src="<?= base_url('assets/material-dashboard/assets/js/plugins/nouislider.min.js');?>"></script>
   <!-- Include a polyfill for ES6 Promises (optional) for IE11, UC Browser and Android browser support SweetAlert -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/core.js"></script> -->
   <!-- Library for adding dinamically elements -->
   <script src="<?= base_url('assets/material-dashboard/assets/js/plugins/arrive.min.js');?>"></script>
   <!--  Google Maps Plugin    -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
-  <script async="" defer="" src="https://buttons.github.io/buttons.js"></script>
+  <!-- <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+  <script async="" defer="" src="https://buttons.github.io/buttons.js"></script> -->
   <!-- Chartist JS -->
   <script src="<?= base_url('assets/material-dashboard/assets/js/plugins/chartist.min.js');?>"></script>
   <!--  Notifications Plugin    -->

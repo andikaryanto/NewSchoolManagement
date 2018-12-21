@@ -7,7 +7,7 @@ class M_user extends CI_Controller
     {
         parent::__construct();
         //$this->load->database('natureuser', TRUE);
-        $this->load->model(array('M_users','M_groupusers', 'G_languages', 'G_colors'));
+        $this->load->model(array('M_users','M_groupusers', 'G_languages', 'G_colors', 'M_usersettings'));
         $this->load->library(array('paging', 'session','helpers'));
         $this->load->helper('form');
         $this->paging->is_session_set();
@@ -83,6 +83,8 @@ class M_user extends CI_Controller
         $model->GroupId = $groupid;
         $model->Username = $username;
         $model->Password = $password;
+        $model->CreatedBy = $_SESSION['userdata']['username'];
+
 
         $validate = $this->M_users->validate($model);
  
@@ -93,10 +95,6 @@ class M_user extends CI_Controller
             load_view('m_user/add', $data);   
         }
         else{
-            $date = date("Y-m-d H:i:s");
-            $model->IOn = $date;
-            $model->UOn = $_SESSION['userdata']['username'];
-    
             $model->save();
             $successmsg = $this->paging->get_success_message();
             $this->session->set_flashdata('success_msg', $successmsg);
@@ -240,10 +238,18 @@ class M_user extends CI_Controller
         $language = $this->input->post('languageid');
         $radiocolor = $this->input->post('radiocolor');
         $rowperpage = $this->input->post('rowperpage');
-        $usersetting = $this->M_users->create_usersetting_object($_SESSION['usersettings']['Id'], $_SESSION['userdata']['id'],$language, explode("~",$radiocolor)[1],  $rowperpage);
-        $this->M_users->edit_usersetting($usersetting);
-        $newdata = $this->M_users->get_usersetting_by_userid($_SESSION['userdata']['id']);
-        replaceSession('usersetting', $newdata);
+        //$usersetting = $this->M_users->create_usersetting_object($_SESSION['usersettings']['Id'], $_SESSION['userdata']['id'],$language, explode("~",$radiocolor)[1],  $rowperpage);
+        $usersetting = $this->M_usersettings->get($_SESSION['usersettings']['Id']);
+        $usersetting->LanguageId = $language;
+        $usersetting->ColorId = explode("~",$radiocolor)[1];
+        $usersetting->RowPerpage = $rowperpage;
+        $usersetting->save();
+
+        $languages = $this->G_languages->get($language);
+        $colors = $this->G_colors->get(explode("~",$radiocolor)[1]);
+        replaceSession('usersettings', get_object_vars($usersetting));
+        replaceSession('languages', get_object_vars($languages));
+        replaceSession('colors', get_object_vars($colors));
         redirect('settings');
     }
 

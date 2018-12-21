@@ -53,6 +53,13 @@ function load_view($viewName, $data = null)
     $CI->paging->load_footer();
 }
 
+function delete_status($msg = NULL, $status = TRUE, $isforbidden = FALSE){
+    $delete['msg'] = $msg;
+    $delete['status'] = $status;
+    $delete['isforbidden'] = $isforbidden;
+    return $delete;
+}
+
 // function getLang($res){
 
 //     $CI =& get_instance();

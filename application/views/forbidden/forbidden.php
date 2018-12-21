@@ -13,9 +13,10 @@
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
   <link rel="stylesheet" href="<?php echo base_url('assets/material-dashboard/font-awesome/css/font-awesome.min.css')?>">
   <!-- CSS Files -->
-  <link href="<?php echo base_url($_SESSION['usersetting']->CssPath);?>" rel="stylesheet" />
-  <link href="<?php echo base_url('assets/material-dashboard/assets/css/animate.css');?>" rel="stylesheet" />
-  <link href="<?php echo base_url($_SESSION['usersetting']->CssCustomPath);?>" rel="stylesheet" />
+  <link href="<?= base_url($_SESSION['colors']['CssPath']);?>" rel="stylesheet" />
+  <!-- <link href="<?= base_url('assets/material-dashboard/assets/css/jquery.dataTables.min.css');?>" rel="stylesheet" /> -->
+  <link href="<?= base_url('assets/material-dashboard/assets/css/animate.css');?>" rel="stylesheet" />
+  <link href="<?= base_url($_SESSION['colors']['CssCustomPath']);?>" rel="stylesheet" />
   <!-- CSS Just for demo purpose, don't include it in your project -->
   <link href="<?php echo base_url('assets/material-dashboard/assets/demo/demo.css');?>" rel="stylesheet" />
 

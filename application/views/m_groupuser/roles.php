@@ -43,7 +43,7 @@
                                   <?php if($value->Header == 0) { ?>
                                     <td id = "td<?= $i ?>aliasname"><?= $value->AliasName?></td>
                                   <?php } else {?>
-                                    <td><b><?= $value->AliasName?></b></td>
+                                    <td><h5 style = "font-weight: 500;"><?= $value->AliasName?></h5></td>
                                   <?php }?>
                                   <td id = "td<?= $i ?>localname"><?= $value->LocalName?></td>
                                   <td id = "td<?= $i ?>tdread">
@@ -138,7 +138,6 @@
 <script>
     $("#searchbutton").on("click",function() {
         var search = $("#search").val();
-        console.log('<?= json_encode($modeldetail);?>');
         //window.location =" <?= base_url('m_groupuser');?>?search="+search;
     });
 
@@ -168,7 +167,6 @@
     $(":checkbox").on("change", function(e) {
         var numbid = this.value.split("~")[1];
         var formid = document.getElementById("td"+numbid+"formid").innerHTML;
-        console.log(formid);
         $.ajax({
             type:"POST",
             url:"<?= base_url('m_groupuser/saverole')?>",
@@ -181,7 +179,6 @@
                 print : $("#td"+numbid+"print").is(":checked") == true ? 1 : 0
                 },
             success:function(data){
-                console.log(data);
             }
         });
     });

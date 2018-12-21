@@ -331,8 +331,8 @@ class MY_Model extends CI_Model {
 		}
 		
 		// modified date
-		if (in_array('modified', $table_fields))
-			$row->modified = mysqldatetime(now());
+		if (in_array('Modified', $table_fields))
+			$row->Modified = mysqldatetime(now());
 		
 		$new_id = 0;
 		/* @var $query CI_DB_result */
@@ -345,8 +345,8 @@ class MY_Model extends CI_Model {
 			}
 			
 			// created date
-			if (in_array('created', $table_fields))
-				$row->created = mysqldatetime(now());
+			if (in_array('Created', $table_fields))
+				$row->Created = mysqldatetime(now());
 			
 			// insert
 			$this->db->insert($this->table, $row);

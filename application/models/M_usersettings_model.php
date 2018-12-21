@@ -11,7 +11,7 @@ class M_usersettings_model extends MY_Model {
     public function get_data_by_userid($userid){
 
         $condition = array(
-            'where' => "UserId = ".$userid
+            'where' => array("UserId" => $userid)
         );
         return $this->get(null, null, $condition);
     }

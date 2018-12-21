@@ -20,22 +20,22 @@ class Migration_create_m_group_user_table extends CI_Migration {
                     'type' => 'varchar',
                     'constraint' => 300
                 ),
-                'IOn' => array(
-                    'type' => 'datetime',
-                    'null' => true
-                ),
-                'IBy' => array(
+                'CreatedBy' => array(
                     'type' => 'varchar',
                     'constraint' => 50,
                     'null' => true
                 ),
-                'UOn' => array(
+                'ModifiedBy' => array(
+                    'type' => 'varchar',
+                    'constraint' => 50,
+                    'null' => true
+                ),
+                'Created' => array(
                     'type' => 'datetime',
                     'null' => true
                 ),
-                'UBy' => array(
-                    'type' => 'varchar',
-                    'constraint' => 50,
+                'Modified' => array(
+                    'type' => 'datetime',
                     'null' => true
                 )
 

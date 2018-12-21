@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="<?= base_url('assets/material-dashboard/font-awesome/css/font-awesome.min.css')?>">
   <!-- CSS Files -->
   <link href="<?= base_url($_SESSION['colors']['CssPath']);?>" rel="stylesheet" />
+  <!-- <link href="<?= base_url('assets/material-dashboard/assets/css/jquery.dataTables.min.css');?>" rel="stylesheet" /> -->
   <link href="<?= base_url('assets/material-dashboard/assets/css/animate.css');?>" rel="stylesheet" />
   <link href="<?= base_url($_SESSION['colors']['CssCustomPath']);?>" rel="stylesheet" />
   <!-- CSS Just for demo purpose, don't include it in your project -->

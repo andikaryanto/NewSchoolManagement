@@ -203,7 +203,7 @@ class Paging {
     public function get_delete_message(){
         $msg = array();
 
-        $msg = array_merge($msg, array(0=>'ui_datadeleted'));
+        $msg = array_merge($msg, array(0=>lang('ui_datadeleted')));
         return $msg;
     }
 

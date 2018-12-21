@@ -65,7 +65,7 @@ $route['mgroupuser/add'] = 'm_groupuser/add';
 $route['mgroupuser/addsave'] = 'm_groupuser/addsave';
 $route['mgroupuser/edit/(:num)'] = 'm_groupuser/edit/$1';
 $route['mgroupuser/editsave'] = 'm_groupuser/editsave';
-$route['mgroupuser/delete/(:num)'] = 'm_groupuser/delete/$1';
+$route['mgroupuser/delete'] = 'm_groupuser/delete';
 $route['mgroupuser/editrole/(:num)'] = 'm_groupuser/editrole/$1';
 
 $route['muser'] = 'm_user';

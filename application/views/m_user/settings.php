@@ -77,6 +77,7 @@
                               <option value ="5">5</option>
                               <option value ="10">10</option>
                               <option value ="15">15</option>
+                              <option value ="20">20</option>
                             </select>
                           </div>
                         </div>
@@ -95,9 +96,9 @@
 <script>
   $(document).ready(function() {    
     init();
-    $("#language").val("<?= $_SESSION['usersetting']->LanguageId?>");
-    $("#languageid").val("<?= $_SESSION['usersetting']->LanguageId?>");
-    $("#rowperpage").val("<?= $_SESSION['usersetting']->RowPerpage?>");
+    $("#language").val("<?= $_SESSION['languages']['Name']?>");
+    $("#languageid").val("<?= $_SESSION['languages']['Id']?>");
+    $("#rowperpage").val("<?= $_SESSION['usersettings']['RowPerpage']?>");
   });
 
   function init(){
