@@ -43,7 +43,11 @@ class M_user extends CI_Controller
         {
             
             $model = $this->M_users->new_object();
-            $data =  $this->paging->set_data_page_add($model);
+            $modal_group = $this->M_groupusers->get_list();
+            $data_modal = array(
+                'modal_group' => $modal_group
+            );
+            $data =  $this->paging->set_data_page_add($model, null, $data_modal);
             load_view('m_user/add', $data);   
         }
         else

@@ -36,7 +36,7 @@
                                   <th><?=  lang('ui_user')?></th>
                                   <th><?=  lang('ui_group_user')?></th>
                                   <th><?=  lang('ui_isactive')?></th>
-                                  <th></th>
+                                  <th class="disabled-sorting text-right">Actions</th>
                               </thead>
                               <tfoot class=" text-primary">
                                 <tr role = "row">
@@ -53,7 +53,7 @@
                                 foreach ($model as $value)
                                 {
                               ?>
-                                  <tr id = <?= $value->Id?>>
+                                  <tr role = "row" id = <?= $value->Id?>>
                                     <td><?= $value->Username?></td>
                                     <td><?= $value->M_groupusers()->GroupName?></td>
                                     <?php 
@@ -122,7 +122,6 @@
         $tr = $(this).closest('tr');
         var data = table.row($tr).data();
         var id = $tr.attr('id');
-        alert(id);
         window.location = "<?= base_url('muser/activate/');?>" + id;
      });
   }

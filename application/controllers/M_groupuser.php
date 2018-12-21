@@ -17,13 +17,8 @@ class M_groupuser extends CI_Controller
         $form = $this->paging->get_form_name_id();
         if($this->M_groupusers->is_permitted($_SESSION['userdata']['GroupId'],$form['m_groupuser'],'Read'))
         {
-            $params = array(
-                'like' => array(
-                    'GroupName' => $search
-                )
-            );
 
-            $datapages = $this->M_groupusers->get_list(null, null, $params);
+            $datapages = $this->M_groupusers->get_list();
             $data['model'] = $datapages;
             $this->loadview('m_groupuser/index', $data);
         }

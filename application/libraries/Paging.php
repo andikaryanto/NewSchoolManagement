@@ -92,17 +92,19 @@ class Paging {
         
     }
 
-    public function set_data_page_add($model = null, $enums = null)
+    public function set_data_page_add($model = null, $enums = null, $data_modal = array())
     {
         $data['model'] = $model;
         $data['enums'] = $enums;
+        $data['datamodal'] = $data_modal;
         return $data;
     }
 
-    public function set_data_page_edit($model = null, $enums = null)
+    public function set_data_page_edit($model = null, $enums = null, $data_modal = array())
     {
         $data['model'] = $model;
         $data['enums'] = $enums;
+        $data['datamodal'] = $data_modal;
         return $data;
     }
 
