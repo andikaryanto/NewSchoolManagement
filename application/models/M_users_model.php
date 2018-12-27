@@ -8,23 +8,7 @@ class M_users_model extends MY_Model {
         
         $this->load->model('M_groupusers');
     }
-    
-    public function get_alldata()
-    {
-        $query = $this->db->get('m_users');
-        return $query->result();
-    }
 
-    public function get_data_by_id($id)
-    {
-        $this->db->select('a.*, b.GroupName');
-        $this->db->from('m_users as a');
-        $this->db->join('m_groupusers as b', 'a.GroupId = b.Id', 'left');
-        $this->db->where('a.Id', $id);
-        $query = $this->db->get();
-        return $query->row(); // a single row use row() instead of result()
-    }
-    
     public function get_sigle_data_user($username, $password)
     {
         $md5pass = encryptMd5("school".$username.$password);
@@ -41,43 +25,6 @@ class M_users_model extends MY_Model {
        return $this->get(null, null, $params);
     }
 
-    public function get_datapages($page, $pagesize, $search = null)
-    {
-        $this->db->where('IsActive', 1);
-        $this->db->where_not_in('Username', 'superadmin');
-        if(!empty($search))
-        {
-            $this->db->like('Username', $search);
-        }
-        
-        $this->db->order_by('IsActive','DESC');
-        $this->db->order_by('Username','ASC');
-        $this->db->limit($pagesize, ($page-1)*$pagesize);
-        return $this->get_list();
-
-    }
-
-    public function get_data_by_name($name){
-        $this->db->select('a.*, b.GroupName');
-        $this->db->from('m_users as a');
-        $this->db->join('m_groupusers as b', 'a.GroupId = b.Id', 'left');
-        $this->db->where('a.Username', $name);
-        $query = $this->db->get();
-        return $query->row();
-    }
-
-    public function set_loggedin($username){
-        $this->db->set('IsLoggedIn', 1);
-        $this->db->where('Username', $username);
-        $this->db->update('m_users');
-    }
-
-    public function set_logout($username){
-        $this->db->set('IsLoggedIn', 0);
-        $this->db->where('Username', $username);
-        $this->db->update('m_users');
-    }
-
     public function saveNewPassword($username, $password, $newPassword){
         
         $md5pass = encryptMd5("school".$username.$password);
@@ -85,69 +32,6 @@ class M_users_model extends MY_Model {
         $this->db->set('Password', $newmd5pass);
         $this->db->where('Password', $md5pass);
         $this->db->update('m_users');
-    }
-
-    public function create_usersetting_object($id = null, $userid = null,
-        $languageid = '1', 
-        $colorid = '1',
-        $rowperpage = 5){
-            
-        $data = array(
-            'id' => $id,
-            'userid' => $userid,
-            'languageid' => $languageid,
-            'colorid' => $colorid,
-            'rowperpage' => $rowperpage
-        );
-        return  $data;
-
-    }
-
-    public function changeLanguage($username,$language){
-        $this->db->set('Language', $language);
-        $this->db->where('Username', $username);
-        $this->db->update('m_users');
-    }
-
-    public function create_object($id, $groupuserid, $groupname, $username, $password, $ion, $iby, $uon, $uby)
-    {
-        $md5pass = null;
-        if(!empty($password))
-            $md5pass = encryptMd5("school".$username.$password);
-
-        $data = array(
-            'id' => $id,
-            'groupid' => $groupuserid,
-            'groupname' => $groupname,
-            'username' => $username,
-            'password' => $md5pass,
-            'ion' => $ion,
-            'iby' => $iby,
-            'uon' => $uon,
-            'uby' => $uby,
-        );
-
-        return $data;
-    }
-
-    public function create_object_tabel($id, $groupuserid,$username, $password, $ion, $iby, $uon, $uby)
-    {
-        $md5pass = null;
-        if(!empty($password))
-            $md5pass = encryptMd5("school".$username.$password);
-
-        $data = array(
-            'id' => $id,
-            'groupid' => $groupuserid,
-            'username' => $username,
-            'password' => $md5pass,
-            'ion' => $ion,
-            'iby' => $iby,
-            'uon' => $uon,
-            'uby' => $uby,
-        );
-
-        return $data;
     }
 
     public function is_data_exist($name = null)
@@ -217,23 +101,7 @@ class M_users_model extends MY_Model {
 }
 
 class M_user_object extends Model_object {
-    
-    public function clone(){
-        $CI = get_instance();
-		
-		$CI->load->model('M_users');
-        $new_data = $CI->M_users->new_object();
-        $new_data->Id = $this->Id;
-        $new_data->GroupId = $this->GroupId;
-        $new_data->UserName = $this->UserName;
-        $new_data->Password = $this->Password;
-        $new_data->IOn = $this->IOn;
-        $new_data->IBy = $this->IBy;
-        $new_data->UOn = $this->UOn;
-        $new_data->UBy = $this->UBy;
-        return $new_data;
-    }
-
+   
 	public function M_groupusers()
 	{
 		$CI = get_instance();
@@ -258,5 +126,16 @@ class M_user_object extends Model_object {
                 return $usersettings;
         }
 		return $CI->M_usersettings->new_object();
-	}
+    }
+    
+    public function save_with_detail(){
+        $id = $this->save();
+        $user_settings = $this->M_usersettings();
+        $user_settings->UserId = $id;
+        $user_settings->LanguageId = 1;
+        $user_settings->ColorId = 1;
+        $user_settings->RowPerpage = 5;
+        $user_settings->save();
+        return $id;
+    }
 }

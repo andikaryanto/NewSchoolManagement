@@ -8,12 +8,12 @@
                   <div class="row">
                     <div class="col">
                       <h4 class="card-title "><?= lang('ui_data')?></h4>
-                      <p class="card-category"> <?= lang('ui_master_groupuser')?></p>
+                      <p class="card-category"> <?= lang('ui_pmaster_city')?></p>
                     </div>
                     
                     <div class="col">
                       <div class="text-right">
-                        <button type="button" rel="tooltip" class="btn btn-primary btn-round btn-fab" title="<?= lang('ui_add')?>" onclick="window.location.href='<?= base_url('mgroupuser/add');?>'">
+                        <button type="button" rel="tooltip" class="btn btn-primary btn-round btn-fab" title="<?= lang('ui_add')?>" onclick="window.location.href='<?= base_url('mcity/add');?>'">
                           <i class="material-icons">add</i>
                         </button>
                       </div>
@@ -31,7 +31,7 @@
                       <div class="row">
                         <div class="col-sm-12">
                           <div class="table-responsive">
-                            <table data-page-length="<?= $_SESSION['usersettings']['RowPerpage']?>" id = "tableGroupUser" class="table table-striped table-no-bordered table-hover dataTable dtr-inline collapsed" cellspacing="0" width="100%" style="width: 100%;" role="grid" aria-describedby="datatables_info">
+                            <table data-page-length="<?= $_SESSION['usersettings']['RowPerpage']?>" id = "tableProvince" class="table table-striped table-no-bordered table-hover dataTable dtr-inline collapsed" cellspacing="0" width="100%" style="width: 100%;" role="grid" aria-describedby="datatables_info">
                               <thead class=" text-primary">
                                 <tr role = "row">
                                   <!-- <th># </th> -->
@@ -54,11 +54,10 @@
                                 {
                               ?>
                                   <tr role = "row" id = <?= $value->Id?>>
-                                    <td><?= $value->GroupName?></td>
+                                    <td><?= $value->Name?></td>
                                     <td><?= $value->Description?></td>
                                     <td class = "td-actions text-right">
                                       <a href="#" rel="tooltip" title="<?=  lang('ui_edit')?>" class="btn btn-link btn-success btn-just-icon edit"><i class="material-icons">edit</i></a>
-                                      <a href="#" rel="tooltip" title="<?=  lang('ui_role')?>" class="btn btn-link btn-success btn-just-icon role"><i class="material-icons">face</i></a>
                                       <a href="#" rel="tooltip" title="<?=  lang('ui_delete')?>" class="btn btn-link btn-danger btn-just-icon delete"><i class="material-icons">delete</i></a>
                                     </td>
                                   </tr>
@@ -91,7 +90,7 @@
   });
 
   function dataTable(){
-    $('#tableGroupUser').DataTable({
+    $('#tableProvince').DataTable({
       "pagingType": "full_numbers",
       "lengthMenu": [[5, 10, 15, 20, -1], [5, 10, 15, 20, "All"]],
       responsive: true,
@@ -101,13 +100,13 @@
       }
     }); 
 
-    var table = $('#tableGroupUser').DataTable();
+    var table = $('#tableProvince').DataTable();
      // Edit record
      table.on( 'click', '.edit', function () {
         $tr = $(this).closest('tr');
 
         var id = $tr.attr('id');
-        window.location = "<?= base_url('mgroupuser/edit/');?>" + id;
+        window.location = "<?= base_url('mcity/edit/');?>" + id;
      } );
 
      // Delete a record
@@ -121,7 +120,7 @@
             
             $.ajax({
               type : "POST",
-              url : "<?= base_url('mgroupuser/delete/');?>",
+              url : "<?= base_url('mcity/delete/');?>",
               data : {id : id},
               success : function(data){
                 var status = $.parseJSON(data);
@@ -148,12 +147,6 @@
         });
      });
 
-    //Like record
-    table.on( 'click', '.role', function () {
-        $tr = $(this).closest('tr');
-        var id = $tr.attr('id');
-        window.location = "<?= base_url('mgroupuser/editrole/');?>" + id;
-    });
   }
 
   function init(){

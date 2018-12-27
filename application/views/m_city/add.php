@@ -1,4 +1,4 @@
-      <div class="content">
+<div class="content">
         <div class="container-fluid">
           <div class="row">
             <div class="col-md-12">
@@ -8,11 +8,11 @@
                   <div class="row">
                     <div class="col">
                       <h4 class="card-title "><?= lang('ui_add_data')?></h4>
-                      <p class="card-category"> <?= lang('ui_master_user')?></p>
+                      <p class="card-category"> <?= lang('ui_master_province')?></p>
                     </div>
                     <div class="col">
                       <div class="text-right">
-                        <button type="button" rel="tooltip" class="btn btn-primary btn-round btn-fab" title="index" onclick="window.location.href='<?= base_url('muser');?>'">
+                        <button type="button" rel="tooltip" class="btn btn-primary btn-round btn-fab" title="index" onclick="window.location.href='<?= base_url('mprovince');?>'">
                           <i class="material-icons">list</i>
                         </button>
                       </div>
@@ -20,28 +20,28 @@
                   </div>
                 </div>
                 <div class="card-body">                 
-                  <form method = "post" action = "<?= base_url('muser/addsave');?>">
-                    <input hidden id = "groupid" type="text" class="form-control" name = "groupid" value="<?= $model->GroupId?>">
-                    <div class="form-group bmd-form-group">
-                      <label class = ""><?= lang('ui_name')?></label>
-                      <input id="named" type="text"  class="form-control " name = "named" value="<?= $model->Username?>" required>
+                  <form method = "post" action = "<?= base_url('mprovince/addsave');?>">
+                    <div class="form-group">
+                      <label><?= lang('ui_name')?></label>
+                      <input id="named" type="text"  class="form-control" name = "named" value="<?= $model->Name?>" required>
                     </div>
                     <div class="form-group">
-                      <label><?= lang('ui_group_user')?></label>
+                      <label><?= lang('ui_province')?></label>
                       <div class="input-group has-success">
                         
-                        <input id = "groupname" type="text" class="form-control custom-readonly"  value="<?= $model->M_groupusers()->GroupName?>" readonly>
+                        <input hidden id = "provinceid" type="text" class="form-control" name = "provinceid" value="<?= $model->ProvinceId?>">
+                        <input id = "provincename" type="text" class="form-control custom-readonly"  value="<?= $model->M_provinces()->Name?>" readonly>
                         <!-- <span class="form-control-feedback text-primary">
                             <i class="material-icons">search</i>
                         </span> -->
                         <div class="input-group-append">
-                          <button id="btnGroupModal" data-toggle="modal" type="button" class="btn btn-primary" data-target="#modalGroupUser"><i class="fa fa-search"></i></button>
+                          <button id="btnProvinceModal" data-toggle="modal" type="button" class="btn btn-primary" data-target="#modalProvinces"><i class="fa fa-search"></i></button>
                         </div>
                       </div>
                     </div>
                     <div class="form-group">       
-                      <label><?= lang('ui_password')?></label>
-                      <input id="password" type="password" class="form-control" name = "password" value="<?= $model->Password?>">
+                      <label><?= lang('ui_description')?></label>
+                      <textarea id="description" type="text" class="form-control" name = "description" ><?= $model->Description?></textarea>
                     </div>
                     <div class="form-group">       
                       <input type="submit" value="<?= lang('ui_save')?>" class="btn btn-primary">
@@ -52,14 +52,13 @@
             </div>
           </div>
         </div>
-      </section>
 
-<!-- modal -->
-<div id="modalGroupUser" tabindex="-1" role="dialog" aria-labelledby="groupUserModalLabel" aria-hidden="true" class="modal fade text-left">
+               <!-- modal -->
+<div id="modalProvinces" tabindex="-1" role="dialog" aria-labelledby="provinceModalLabel" aria-hidden="true" class="modal fade text-left">
   <div role="document" class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 id="groupUserModalLabel" class="modal-title">Group User</h5>
+        <h5 id="provinceModalLabel" class="modal-title">Group User</h5>
         <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
       </div>
       <div class="card-body">
@@ -73,26 +72,23 @@
             <div class="row">
               <div class="col-sm-12">
                 <div class="table-responsive">
-                  <table data-page-length="<?= $_SESSION['usersettings']['RowPerpage']?>" id = "tableModalGroupUser" class="table table-striped table-no-bordered table-hover dataTable dtr-inline collapsed" cellspacing="0" width="100%" style="width: 100%;" role="grid" aria-describedby="datatables_info">
+                  <table data-page-length="<?= $_SESSION['usersettings']['RowPerpage']?>" id = "tablemodalProvinces" class="table table-striped table-no-bordered table-hover dataTable dtr-inline collapsed" cellspacing="0" width="100%" style="width: 100%;" role="grid" aria-describedby="datatables_info">
                     <thead class=" text-primary">
-                        <th><?=  lang('ui_group_user')?></th>
-                        <!-- <th><?=  lang('ui_description')?></th> -->
+                        <th><?=  lang('ui_province')?></th>
                     </thead>
                     <tfoot class=" text-primary">
                       <tr role = "row">
-                        <!-- <th># </th> -->
-                        <th><?=  lang('ui_group_user')?></th>
-                        <!-- <th><?=  lang('ui_description')?></th> -->
+                        <th><?=  lang('ui_province')?></th>
                       </tr>
                     </tfoot>
                     <tbody>
                     <?php
                       //print_r($modeldetail);
-                        foreach ($datamodal['modal_group'] as $value)
+                        foreach ($datamodal['modal_province'] as $value)
                         {
                       ?>
                           <tr class = "rowdetail" role = "row" id = <?= $value->Id?>>
-                            <td><?= $value->GroupName?></td>
+                            <td><?= $value->Name?></td>
                             <!-- <td><?= $value->Description?></td> -->
                           </tr>
                       <?php
@@ -110,13 +106,39 @@
   </div>
 </div>
 
-<script type = "text/javascript">
+<script>
   $(document).ready(function() {    
     init();
-    loadModalGroup("#tableModalGroupUser");
+    loadModal("#tablemodalProvinces");
   });
 
-  function loadModalGroup(idtable){
+  function init(){
+    <?php 
+    if($this->session->flashdata('add_warning_msg'))
+    {
+      $msg = $this->session->flashdata('add_warning_msg');
+      for($i=0 ; $i<count($msg); $i++)
+      {
+    ?>
+        setNotification("<?= lang($msg[$i]); ?>", 3, "bottom", "right");
+    <?php 
+      }
+    }
+    
+    if($this->session->flashdata('success_msg'))
+    {
+      $msg = $this->session->flashdata('success_msg');
+      for($i=0 ; $i<count($msg); $i++)
+      {
+    ?>
+        setNotification("<?= lang($msg[$i]); ?>", 2, "bottom", "right");
+    <?php 
+      }
+    }
+    ?>
+  }
+
+   function loadModal(idtable){
     console.log(idtable);
     $(idtable).DataTable({
       "pagingType": "full_numbers",
@@ -136,36 +158,10 @@
         var data = table.row($tr).data();
         var id = $tr.attr('id');
 
-        $("#groupid").val(id);
-        $("#groupname").val(data[0]);
-        $('#modalGroupUser').modal('hide');
+        $("#povinceid").val(id);
+        $("#provincename").val(data[0]);
+        $('#modalProvinces').modal('hide');
      } );
   }
 
-  function init(){
-    <?php 
-    if($this->session->flashdata('add_warning_msg'))
-    {
-      $msg = $this->session->flashdata('add_warning_msg');
-      for($i=0 ; $i<count($msg); $i++)
-      {
-    ?>
-        setNotification("<?= lang($msg[$i]); ?>", 3, "bottom", "right");
-    <?php 
-      }
-    }
-
-    if($this->session->flashdata('success_msg'))
-    {
-      $msg = $this->session->flashdata('success_msg');
-      for($i=0 ; $i<count($msg); $i++)
-      {
-    ?>
-        setNotification("<?= lang($msg[$i]); ?>", 2, "bottom", "right");
-    <?php 
-      }
-    }
-    ?>
-  }
-  
 </script>

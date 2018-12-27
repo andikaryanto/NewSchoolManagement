@@ -261,73 +261,35 @@ class $name extends CI_Controller {
 
         $id = '$id';
         $data = '$data';
+        $newname = plural($name)."_model";
+        $objectname = $name."_object";
 
         $arrayobject = '$data = array(
         );
         return $data;';
 
         $validateparam = '$model, $oldmodel = null';
-
-        $pagesparam = '$page, $pagesize, $search = null';
-
-        $loadviewcontent = '$this->paging->load_header();
-		$this->load->view($viewName, $data);
-        $this->paging->load_footer();';
         
-        $path = APPPATH . "models/$name.php";
+        $path = APPPATH . "models/$newname.php";
 
         $my_model = fopen($path, "w") or die("Unable to create model file!");
 
         $model_template = "<?php  
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-class $name extends CI_Model {
+class $newname extends MY_Model {
 
     public function __construct(){
         parent::__construct();
-    }
-
-    public function get_alldata(){
-        // get all data
-    }
-
-    public function get_data_by_id($id){  
-        // get data by primary key
-    }
-
-    public function get_datapages($pagesparam){  
-        // your datapages
-    }
-
-    public function save_data($data){  
-        // your save data
-    }
-
-    public function edit_data($data){  
-        // your edit data
-    }
-
-    public function delete_data($id){
-        // delete data
-    }
-
-    public function create_object(){
-        // create object goes here
-        $arrayobject
-    }
-
-    public function create_object_tabel(){
-        //create object goes here
-        $arrayobject
     }
 
     public function validate($validateparam){
         //validate goes here
     }
 
-    public function set_resources(){
-        // resource language goes here
-    }
+}
 
+class $objectname extends Model_object {
+   
 }";
 
         fwrite($my_model, $model_template);

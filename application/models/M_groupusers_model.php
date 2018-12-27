@@ -21,7 +21,6 @@ class M_groupusers_model extends MY_Model {
     public function is_data_exist($groupname = null)
     {
         $exist = false;
-        //$this->db->where('GroupName', $groupname);
         if($this->count(array('GroupName'=> $groupname)) > 0){
             $exist = true;
         }
@@ -96,21 +95,6 @@ class M_groupusers_model extends MY_Model {
 }
 
 class M_groupuser_object extends Model_object {
-	
-	public function clone(){
-        $CI = get_instance();
-		
-		$CI->load->model('M_groupusers');
-        $new_data = $CI->M_groupusers->new_object();
-        $new_data->Id = $this->Id;
-        $new_data->GroupName = $this->GroupName;
-        $new_data->Description = $this->Id;
-        $new_data->IOn = $this->IOn;
-        $new_data->IBy = $this->IBy;
-        $new_data->UOn = $this->UOn;
-        $new_data->UBy = $this->UBy;
-        return $new_data;
-    }
 
     public function View_m_accessrole(){
         $CI = get_instance();

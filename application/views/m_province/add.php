@@ -8,11 +8,11 @@
                   <div class="row">
                     <div class="col">
                       <h4 class="card-title "><?= lang('ui_add_data')?></h4>
-                      <p class="card-category"> <?= lang('ui_master_groupuser')?></p>
+                      <p class="card-category"> <?= lang('ui_master_province')?></p>
                     </div>
                     <div class="col">
                       <div class="text-right">
-                        <button type="button" rel="tooltip" class="btn btn-primary btn-round btn-fab" title="index" onclick="window.location.href='<?= base_url('mgroupuser');?>'">
+                        <button type="button" rel="tooltip" class="btn btn-primary btn-round btn-fab" title="index" onclick="window.location.href='<?= base_url('mprovince');?>'">
                           <i class="material-icons">list</i>
                         </button>
                       </div>
@@ -20,10 +20,10 @@
                   </div>
                 </div>
                 <div class="card-body">                 
-                  <form method = "post" action = "<?= base_url('mgroupuser/addsave');?>">
+                  <form method = "post" action = "<?= base_url('mprovince/addsave');?>">
                     <div class="form-group">
                       <label><?= lang('ui_name')?></label>
-                      <input id="named" type="text"  class="form-control" name = "named" value="<?= $model->GroupName?>" required>
+                      <input id="named" type="text"  class="form-control" name = "named" value="<?= $model->Name?>" required>
                     </div>
                     <div class="form-group">       
                       <label><?= lang('ui_description')?></label>
@@ -39,10 +39,14 @@
           </div>
         </div>
 
+ 
+
 <script>
   $(document).ready(function() {    
     init();
   });
+
+ 
 
   function init(){
     <?php 

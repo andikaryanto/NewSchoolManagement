@@ -33,6 +33,7 @@ $lang['ui_work_status1'] = "Worker Status";
 $lang['ui_description'] = "Deskripsi";
 $lang['ui_search'] = "Cari";
 $lang['ui_save'] = "Simpan";
+$lang['ui_saveandnew'] = "Simpan dan Baru";
 $lang['ui_add_data'] = "Tambah Data";
 $lang['ui_add_detail_data'] = "Tembah Detail Data";
 $lang['ui_edit_data'] = "Ubah Data";

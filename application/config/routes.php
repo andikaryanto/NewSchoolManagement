@@ -103,6 +103,20 @@ $route['mschoolyear/editsave'] = 'm_schoolyear/editsave';
 $route['mschoolyear/delete/(:num)'] = 'm_schoolyear/delete/$1';
 $route['mschoolyear/activate/(:num)'] = 'm_schoolyear/activate/$1';
 
+$route['mprovince'] = 'm_province';
+$route['mprovince/add'] = 'm_province/add';
+$route['mprovince/addsave'] = 'm_province/addsave';
+$route['mprovince/edit/(:num)'] = 'm_province/edit/$1';
+$route['mprovince/editsave'] = 'm_province/editsave';
+$route['mprovince/delete'] = 'm_province/delete';
+
+$route['mcity'] = 'm_city';
+$route['mcity/add'] = 'm_city/add';
+$route['mcity/addsave'] = 'm_city/addsave';
+$route['mcity/edit/(:num)'] = 'm_city/edit/$1';
+$route['mcity/editsave'] = 'm_city/editsave';
+$route['mcity/delete'] = 'm_city/delete';
+
 //API
 $route['api/mdisaster']['GET'] = 'api_mdisaster/get_disaster';
 $route['api/mdisaster/(:any)/(:any)'] = 'api_mdisaster/get_disaster/$1/$2';

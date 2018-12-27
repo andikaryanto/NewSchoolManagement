@@ -21,6 +21,8 @@ class Paging {
         $data["m_mapel"] = "m_subjects";
         $data["m_worker"] = "m_workers";
         $data["m_student"] = "m_students";
+        $data["m_province"] = "m_provinces";
+        $data["m_city"] = "m_cities";
         return $data;
     }
 

@@ -25,7 +25,7 @@ class M_user extends CI_Controller
 
             //echo json_encode($params['where_not_in']);
 
-            $datapages = $this->M_users->get_list(null, 'Username', $params);
+            $datapages = $this->M_users->get_list(null, 'Created', $params);
             $data['model'] = $datapages;
             load_view('m_user/index', $data);
         }
@@ -85,10 +85,10 @@ class M_user extends CI_Controller
             load_view('m_user/add', $data);   
         }
         else{
-            $model->save();
+            $new_data = $model->save_with_detail();
             $successmsg = $this->paging->get_success_message();
             $this->session->set_flashdata('success_msg', $successmsg);
-            redirect('muser');
+            redirect('muser/add');
         }
     }
 

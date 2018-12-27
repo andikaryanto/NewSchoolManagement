@@ -21,6 +21,7 @@ $lang['ui_name'] = "Name";
 $lang['ui_description'] = "Description";
 $lang['ui_search'] = "Search";
 $lang['ui_save'] = "Save";
+$lang['ui_saveandnew'] = "Save dan New";
 $lang['ui_add_data'] = "Add Data";
 $lang['ui_add_detail_data'] = "Add Detail Data";
 $lang['ui_edit_data'] = "Edit Data";

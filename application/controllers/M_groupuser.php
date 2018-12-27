@@ -18,36 +18,16 @@ class M_groupuser extends CI_Controller
         if($this->M_groupusers->is_permitted($_SESSION['userdata']['GroupId'],$form['m_groupuser'],'Read'))
         {
 
-            $datapages = $this->M_groupusers->get_list();
+            $datapages = $this->M_groupusers->get_list(null, "Created", null);
             $data['model'] = $datapages;
-            $this->loadview('m_groupuser/index', $data);
+            load_view('m_groupuser/index', $data);
         }
         else
         {   
             $this->load->view('forbidden/forbidden');
         }
     }
-
-    public function groupusermodal()
-    {
-        $page = $this->input->post("page");
-        $search = $this->input->post("search");
-
-        $params =array(
-            'page' => $page,
-            'pagesize' => $_SESSION['usersettings']['RowPerpage'],
-            'like' => array(
-                        'GroupName' => $search
-                    )
-        );
-
-        $datapages = $this->M_groupusers->get_list(null, 'GroupName', $params);
-        $rows = !empty($search) ? count($datapages) : $this->M_groupusers->count();
-        $data =  $this->paging->set_data_page_modal($datapages, $rows, $page, $search, null, 'm_groupuser');      
-        
-        echo json_encode($data);
-    }
-
+    
     public function add()
     {
         $form = $this->paging->get_form_name_id();
@@ -55,7 +35,7 @@ class M_groupuser extends CI_Controller
         {
             $model = $this->M_groupusers->new_object();
             $data =  $this->paging->set_data_page_add($model);
-            $this->loadview('m_groupuser/add', $data);  
+            load_view('m_groupuser/add', $data);  
         }
         else
         {
@@ -82,14 +62,14 @@ class M_groupuser extends CI_Controller
         {
             $this->session->set_flashdata('add_warning_msg',$validate);
             $data =  $this->paging->set_data_page_add($model);
-            $this->loadview('m_groupuser/add', $data);   
+            load_view('m_groupuser/add', $data);   
         }
         else{
     
             $model->save();
             $successmsg = $this->paging->get_success_message();
             $this->session->set_flashdata('success_msg', $successmsg);
-            redirect('mgroupuser');
+            redirect('mgroupuser/add');
         }
     }
 
@@ -100,7 +80,7 @@ class M_groupuser extends CI_Controller
         {
             $model = $this->M_groupusers->get($id);
             $data =  $this->paging->set_data_page_edit($model);
-            $this->loadview('m_groupuser/edit', $data);  
+            load_view('m_groupuser/edit', $data);  
         }
         else
         {
@@ -127,7 +107,7 @@ class M_groupuser extends CI_Controller
         {
             $this->session->set_flashdata('edit_warning_msg',$validate);
             $data =  $this->paging->set_data_page_edit($model);
-            $this->loadview('m_groupuser/edit', $data);   
+            load_view('m_groupuser/edit', $data);   
         }
         else
         {
@@ -148,7 +128,7 @@ class M_groupuser extends CI_Controller
 
             $data =  $this->paging->set_data_page_index($modeldetail, null, null, null, $modelheader);
             
-            $this->loadview('m_groupuser/roles', $data); 
+            load_view('m_groupuser/roles', $data); 
         }
         else
         {
@@ -236,12 +216,5 @@ class M_groupuser extends CI_Controller
             $this->load->view('forbidden/forbidden');
         }   
     }
-
-    private function loadview($viewName, $data)
-	{
-		$this->paging->load_header();
-		$this->load->view($viewName, $data);
-		$this->paging->load_footer();
-    }    
     
 }

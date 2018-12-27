@@ -671,6 +671,24 @@ class Model_object {
 			trigger_error('Call to undefined method '.__CLASS__.'::'.$name.'()', E_USER_ERROR);
 		}
 	}
+
+	/**
+	 * Return a clone to get this record as new object model
+	 */
+	public function clone()
+	{
+		$CI = &get_instance();
+		$model = $this->model();
+		$row = new $CI->$model->row_type();
+		$fields = $CI->db->field_data($CI->$model->table);
+		foreach ($fields as $field)
+		{
+			$name = $field->name;
+			$row->$name = $this->$name;
+		}
+		
+		return $row;
+	}
 	
 	/**
 	 * Return an array to get this record by its primary key
