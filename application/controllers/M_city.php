@@ -50,10 +50,12 @@ class M_city extends CI_Controller
         $warning = array();
         $err_exist = false;
         $name = $this->input->post('named');
+        $provinceid = $this->input->post('provinceid');
         $description = $this->input->post('description');
         
         $model = $this->M_cities->new_object();
         $model->Name = $name;
+        $model->ProvinceId = $provinceid;
         $model->Description = $description;
         $model->CreatedBy = $_SESSION['userdata']['Username'];
 
@@ -62,7 +64,11 @@ class M_city extends CI_Controller
         if($validate)
         {
             $this->session->set_flashdata('add_warning_msg',$validate);
-            $data =  $this->paging->set_data_page_add($model);
+            $modal_province = $this->M_provinces->get_list();
+            $data_modal = array(
+                'modal_province' => $modal_province
+            );
+            $data =  $this->paging->set_data_page_add($model, null, $data_modal);
             load_view('m_city/add', $data);   
         }
         else{
@@ -80,7 +86,11 @@ class M_city extends CI_Controller
         if($this->M_groupusers->is_permitted($_SESSION['userdata']['GroupId'],$form['m_city'],'Write'))
         {
             $model = $this->M_cities->get($id);
-            $data =  $this->paging->set_data_page_edit($model);
+            $modal_province = $this->M_provinces->get_list();
+            $data_modal = array(
+                'modal_province' => $modal_province
+            );
+            $data =  $this->paging->set_data_page_edit($model, null, $data_modal);
             load_view('m_city/edit', $data);  
         }
         else
@@ -94,6 +104,7 @@ class M_city extends CI_Controller
         
         $id = $this->input->post('idcity');
         $name = $this->input->post('named');
+        $provinceid = $this->input->post('provinceid');
         $description = $this->input->post('description');
 
         $model = $this->M_cities->get($id);
@@ -101,6 +112,7 @@ class M_city extends CI_Controller
         //print_r($oldmodel);
         
         $model->Name = $name;
+        $model->ProvinceId = $provinceid;
         $model->Description = $description;
         $model->ModifiedBy = $_SESSION['userdata']['Username'];
         
@@ -110,7 +122,12 @@ class M_city extends CI_Controller
         if($validate)
         {
             $this->session->set_flashdata('edit_warning_msg',$validate);
-            $data =  $this->paging->set_data_page_edit($model);
+
+            $modal_province = $this->M_provinces->get_list();
+            $data_modal = array(
+                'modal_province' => $modal_province
+            );
+            $data =  $this->paging->set_data_page_edit($model, null, $data_modal);
             load_view('m_city/edit', $data);   
         }
         else

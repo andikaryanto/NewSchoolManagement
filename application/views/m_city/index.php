@@ -37,6 +37,7 @@
                                   <!-- <th># </th> -->
                                   <th><?=  lang('ui_name')?></th>
                                   <th><?=  lang('ui_description')?></th>
+                                  <th><?=  lang('ui_province')?></th>
                                   <th class="disabled-sorting text-right">Actions</th>
                                 </tr>
                               </thead>
@@ -45,6 +46,7 @@
                                   <!-- <th># </th> -->
                                   <th><?=  lang('ui_name')?></th>
                                   <th><?=  lang('ui_description')?></th>
+                                  <th><?=  lang('ui_province')?></th>
                                   <th class="disabled-sorting text-right">Actions</th>
                                 </tr>
                               </tfoot>
@@ -56,6 +58,7 @@
                                   <tr role = "row" id = <?= $value->Id?>>
                                     <td><?= $value->Name?></td>
                                     <td><?= $value->Description?></td>
+                                    <td><?= $value->M_provinces()->Name?></td>
                                     <td class = "td-actions text-right">
                                       <a href="#" rel="tooltip" title="<?=  lang('ui_edit')?>" class="btn btn-link btn-success btn-just-icon edit"><i class="material-icons">edit</i></a>
                                       <a href="#" rel="tooltip" title="<?=  lang('ui_delete')?>" class="btn btn-link btn-danger btn-just-icon delete"><i class="material-icons">delete</i></a>

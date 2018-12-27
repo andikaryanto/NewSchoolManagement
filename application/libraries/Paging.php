@@ -25,7 +25,7 @@ class Paging {
         $data["m_city"] = "m_cities";
         return $data;
     }
-
+    
     public function get_enum_name()
     {
         $data["months"] = 1;

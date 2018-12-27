@@ -6,6 +6,15 @@ class M_cities_model extends MY_Model {
         parent::__construct();
     }
 
+    public function is_data_exist($name = null)
+    {
+        $exist = false;
+        if($this->count(array('Name'=> $name)) > 0){
+            $exist = true;
+        }
+        return $exist;
+    }
+
     public function validate($model, $oldmodel = null){
         $nameexist  = false;
         $warning    = array();
@@ -46,7 +55,7 @@ class M_city_object extends Model_object {
 		
         $CI->load->model('M_provinces');	// just another CI Power Model objec 
         if(isset($this->ProvinceId)){
-            $province = $CI->M_provinces->get($this->GroupId);
+            $province = $CI->M_provinces->get($this->ProvinceId);
             if (isset($province))
                 return $province;
         }

@@ -8,11 +8,11 @@
                   <div class="row">
                     <div class="col">
                       <h4 class="card-title "><?= lang('ui_add_data')?></h4>
-                      <p class="card-category"> <?= lang('ui_master_province')?></p>
+                      <p class="card-category"> <?= lang('ui_master_city')?></p>
                     </div>
                     <div class="col">
                       <div class="text-right">
-                        <button type="button" rel="tooltip" class="btn btn-primary btn-round btn-fab" title="index" onclick="window.location.href='<?= base_url('mprovince');?>'">
+                        <button type="button" rel="tooltip" class="btn btn-primary btn-round btn-fab" title="index" onclick="window.location.href='<?= base_url('mcity');?>'">
                           <i class="material-icons">list</i>
                         </button>
                       </div>
@@ -20,7 +20,7 @@
                   </div>
                 </div>
                 <div class="card-body">                 
-                  <form method = "post" action = "<?= base_url('mprovince/addsave');?>">
+                  <form method = "post" action = "<?= base_url('mcity/addsave');?>">
                     <div class="form-group">
                       <label><?= lang('ui_name')?></label>
                       <input id="named" type="text"  class="form-control" name = "named" value="<?= $model->Name?>" required>
@@ -58,7 +58,7 @@
   <div role="document" class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 id="provinceModalLabel" class="modal-title">Group User</h5>
+        <h5 id="provinceModalLabel" class="modal-title"><?= lang('ui_province')?></h5>
         <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
       </div>
       <div class="card-body">
@@ -158,7 +158,7 @@
         var data = table.row($tr).data();
         var id = $tr.attr('id');
 
-        $("#povinceid").val(id);
+        $("#provinceid").val(id);
         $("#provincename").val(data[0]);
         $('#modalProvinces').modal('hide');
      } );
