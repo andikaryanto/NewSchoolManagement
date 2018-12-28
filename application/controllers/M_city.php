@@ -12,10 +12,13 @@ class M_city extends CI_Controller
     public function index()
     {
         $form = $this->paging->get_form_name_id();
-        if($this->M_groupusers->is_permitted($_SESSION['userdata']['GroupId'],$form['m_city'],'Read'))
+        if($this->M_groupusers->is_permitted($_SESSION['userdata']['M_Groupuser_Id'],$form['m_city'],'Read'))
         {
+            $params = array(
+                'order' => array('Created' => 'ASC')
+            );
 
-            $datapages = $this->M_cities->get_list(null, "Created", null);
+            $datapages = $this->M_cities->get_list(null, null, $params);
             $data['model'] = $datapages;
             load_view('m_city/index', $data);
         }
@@ -28,7 +31,7 @@ class M_city extends CI_Controller
     function add()
     {
         $form = $this->paging->get_form_name_id();
-        if($this->M_groupusers->is_permitted($_SESSION['userdata']['GroupId'],$form['m_city'],'Write'))
+        if($this->M_groupusers->is_permitted($_SESSION['userdata']['M_Groupuser_Id'],$form['m_city'],'Write'))
         {
             $model = $this->M_cities->new_object(); 
             $modal_province = $this->M_provinces->get_list();
@@ -55,7 +58,7 @@ class M_city extends CI_Controller
         
         $model = $this->M_cities->new_object();
         $model->Name = $name;
-        $model->ProvinceId = $provinceid;
+        $model->M_Province_Id = $provinceid;
         $model->Description = $description;
         $model->CreatedBy = $_SESSION['userdata']['Username'];
 
@@ -83,7 +86,7 @@ class M_city extends CI_Controller
     public function edit($id)
     {
         $form = $this->paging->get_form_name_id();
-        if($this->M_groupusers->is_permitted($_SESSION['userdata']['GroupId'],$form['m_city'],'Write'))
+        if($this->M_groupusers->is_permitted($_SESSION['userdata']['M_Groupuser_Id'],$form['m_city'],'Write'))
         {
             $model = $this->M_cities->get($id);
             $modal_province = $this->M_provinces->get_list();
@@ -108,11 +111,11 @@ class M_city extends CI_Controller
         $description = $this->input->post('description');
 
         $model = $this->M_cities->get($id);
-        $oldmodel = $model->clone();
+        $oldmodel = clone $model;
         //print_r($oldmodel);
         
         $model->Name = $name;
-        $model->ProvinceId = $provinceid;
+        $model->M_Province_Id = $provinceid;
         $model->Description = $description;
         $model->ModifiedBy = $_SESSION['userdata']['Username'];
         
@@ -142,7 +145,7 @@ class M_city extends CI_Controller
     public function delete(){
         $id = $this->input->post("id");
         $form = $this->paging->get_form_name_id();
-        if($this->M_groupusers->is_permitted($_SESSION['userdata']['GroupId'],$form['m_city'],'Delete'))
+        if($this->M_groupusers->is_permitted($_SESSION['userdata']['M_Groupuser_Id'],$form['m_city'],'Delete'))
         {   
             $deleteData = $this->M_cities->get($id);
             $delete = $deleteData->delete();

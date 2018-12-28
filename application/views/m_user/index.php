@@ -55,7 +55,7 @@
                               ?>
                                   <tr role = "row" id = <?= $value->Id?>>
                                     <td><?= $value->Username?></td>
-                                    <td><?= $value->M_groupusers()->GroupName?></td>
+                                    <td><?= $value->get_M_Groupuser()->GroupName?></td>
                                     <?php 
                                     if($value->IsActive == 1 ) {
                                     ?>

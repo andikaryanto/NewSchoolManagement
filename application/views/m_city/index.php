@@ -38,6 +38,7 @@
                                   <th><?=  lang('ui_name')?></th>
                                   <th><?=  lang('ui_description')?></th>
                                   <th><?=  lang('ui_province')?></th>
+                                  <th><?=  lang('ui_createat')?></th>
                                   <th class="disabled-sorting text-right">Actions</th>
                                 </tr>
                               </thead>
@@ -47,6 +48,7 @@
                                   <th><?=  lang('ui_name')?></th>
                                   <th><?=  lang('ui_description')?></th>
                                   <th><?=  lang('ui_province')?></th>
+                                  <th><?=  lang('ui_createat')?></th>
                                   <th class="disabled-sorting text-right">Actions</th>
                                 </tr>
                               </tfoot>
@@ -56,9 +58,10 @@
                                 {
                               ?>
                                   <tr role = "row" id = <?= $value->Id?>>
-                                    <td><?= $value->Name?></td>
+                                    <td><?= $value->Test?></td>
                                     <td><?= $value->Description?></td>
-                                    <td><?= $value->M_provinces()->Name?></td>
+                                    <td><?= $value->get_M_Province()->Name?></td>
+                                    <td><?= $value->Created?></td>
                                     <td class = "td-actions text-right">
                                       <a href="#" rel="tooltip" title="<?=  lang('ui_edit')?>" class="btn btn-link btn-success btn-just-icon edit"><i class="material-icons">edit</i></a>
                                       <a href="#" rel="tooltip" title="<?=  lang('ui_delete')?>" class="btn btn-link btn-danger btn-just-icon delete"><i class="material-icons">delete</i></a>
@@ -96,6 +99,7 @@
     $('#tableProvince').DataTable({
       "pagingType": "full_numbers",
       "lengthMenu": [[5, 10, 15, 20, -1], [5, 10, 15, 20, "All"]],
+      "order" : [[3, "desc"]],
       responsive: true,
       language: {
       search: "_INPUT_",

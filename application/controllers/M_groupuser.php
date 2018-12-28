@@ -15,10 +15,12 @@ class M_groupuser extends CI_Controller
     public function index()
     {
         $form = $this->paging->get_form_name_id();
-        if($this->M_groupusers->is_permitted($_SESSION['userdata']['GroupId'],$form['m_groupuser'],'Read'))
+        if($this->M_groupusers->is_permitted($_SESSION['userdata']['M_Groupuser_Id'],$form['m_groupuser'],'Read'))
         {
-
-            $datapages = $this->M_groupusers->get_list(null, "Created", null);
+            $params = array(
+                'order' => array('Created' => 'ASC')
+            );
+            $datapages = $this->M_groupusers->get_list(null, null, $params);
             $data['model'] = $datapages;
             load_view('m_groupuser/index', $data);
         }
@@ -31,7 +33,7 @@ class M_groupuser extends CI_Controller
     public function add()
     {
         $form = $this->paging->get_form_name_id();
-        if($this->M_groupusers->is_permitted($_SESSION['userdata']['GroupId'],$form['m_groupuser'],'Write'))
+        if($this->M_groupusers->is_permitted($_SESSION['userdata']['M_Groupuser_Id'],$form['m_groupuser'],'Write'))
         {
             $model = $this->M_groupusers->new_object();
             $data =  $this->paging->set_data_page_add($model);
@@ -76,7 +78,7 @@ class M_groupuser extends CI_Controller
     public function edit($id)
     {
         $form = $this->paging->get_form_name_id();
-        if($this->M_groupusers->is_permitted($_SESSION['userdata']['GroupId'],$form['m_groupuser'],'Write'))
+        if($this->M_groupusers->is_permitted($_SESSION['userdata']['M_Groupuser_Id'],$form['m_groupuser'],'Write'))
         {
             $model = $this->M_groupusers->get($id);
             $data =  $this->paging->set_data_page_edit($model);
@@ -96,11 +98,12 @@ class M_groupuser extends CI_Controller
         $description = $this->input->post('description');
 
         $model = $this->M_groupusers->get($id);
-        $oldmodel = $model->clone();
-        
+        $oldmodel = clone $model;
+        echo json_encode($oldmodel);
         $model->GroupName = $name;
         $model->Description = $description;
         $model->ModifiedBy = $_SESSION['userdata']['Username'];
+        //echo json_encode($model);
 
         $validate = $this->M_groupusers->validate($model, $oldmodel);
         if($validate)
@@ -121,7 +124,7 @@ class M_groupuser extends CI_Controller
     public function editrole($groupid)
     {
         $form = $this->paging->get_form_name_id();
-        if($this->M_groupusers->is_permitted($_SESSION['userdata']['GroupId'],$form['m_groupuser'],'Write'))
+        if($this->M_groupusers->is_permitted($_SESSION['userdata']['M_Groupuser_Id'],$form['m_groupuser'],'Write'))
         {
             $modelheader = $this->M_groupusers->get($groupid);
             $modeldetail = $modelheader->View_m_accessrole();
@@ -148,7 +151,7 @@ class M_groupuser extends CI_Controller
         $params = array(
             'where' => array(
                 'FormId' => $formid,
-                'GroupId' => $groupid
+                'M_Groupuser_Id' => $groupid
             )
         );
 
@@ -164,7 +167,7 @@ class M_groupuser extends CI_Controller
         } else {
             $new_roles = $this->M_accessroles->new_object();
             $new_roles->FormId = $formid;
-            $new_roles->GroupId = $groupid;
+            $new_roles->M_Groupuser_Id = $groupid;
             $new_roles->Read = $read;
             $new_roles->Write = $write;
             $new_roles->Delete = $delete;
@@ -177,7 +180,7 @@ class M_groupuser extends CI_Controller
     public function delete(){
         $id = $this->input->post("id");
         $form = $this->paging->get_form_name_id();
-        if($this->M_groupusers->is_permitted($_SESSION['userdata']['GroupId'],$form['m_groupuser'],'Delete'))
+        if($this->M_groupusers->is_permitted($_SESSION['userdata']['M_Groupuser_Id'],$form['m_groupuser'],'Delete'))
         {   
             $deleteData = $this->M_groupusers->get($id);
             $delete = $deleteData->delete();
@@ -198,7 +201,7 @@ class M_groupuser extends CI_Controller
     public function deletes($id)
     {
         $form = $this->paging->get_form_name_id();
-        if($this->M_groupusers->is_permitted($_SESSION['userdata']['GroupId'],$form['m_groupuser'],'Delete'))
+        if($this->M_groupusers->is_permitted($_SESSION['userdata']['M_Groupuser_Id'],$form['m_groupuser'],'Delete'))
         {
             $deleteData = $this->M_groupusers->get($id);
             $delete = $deleteData->delete();

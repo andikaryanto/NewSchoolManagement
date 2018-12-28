@@ -11,16 +11,16 @@ class Migration_create_m_usersetting_table20181217062632 extends CI_Migration {
                     'constraint' => 11,
                     'auto_increment' => TRUE
                 ),
-                'UserId' => array(
+                'M_User_Id' => array(
                     'type' => 'INT',
                     'constraint' => 11
                 ),
-                'LanguageId' => array(
+                'G_Language_Id' => array(
                     'type' => 'INT',
                     'constraint' => 11,
                     'default' => 1
                 ),
-                'ColorId' => array(
+                'G_Color_Id' => array(
                     'type' => 'INT',
                     'constraint' => 11,
                     'default' => 1
@@ -33,11 +33,13 @@ class Migration_create_m_usersetting_table20181217062632 extends CI_Migration {
             ));
             $this->dbforge->add_key('Id', TRUE);
             $this->dbforge->create_table('m_usersettings');
-            $this->db->query(add_foreign_key('m_usersettings', 'UserId', 'm_users(Id)', 'CASCADE', 'CASCADE'));
+            $this->db->query(add_foreign_key('m_usersettings', 'M_User_Id', 'm_users(Id)', 'CASCADE', 'CASCADE'));
+            $this->db->query(add_foreign_key('m_usersettings', 'G_Language_Id', 'g_languages(Id)', 'RESTRICT', 'CASCADE'));
+            $this->db->query(add_foreign_key('m_usersettings', 'G_Color_Id', 'g_colors(Id)', 'RESTRICT', 'CASCADE'));
         
             
             $dataSetting = [
-                'UserId' => '1'
+                'M_User_Id' => '1'
             ];
             
             $this->db->insert('m_usersettings', $dataSetting);

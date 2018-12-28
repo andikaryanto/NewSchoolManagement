@@ -15,10 +15,14 @@ class M_province extends CI_Controller
     public function index()
     {
         $form = $this->paging->get_form_name_id();
-        if($this->M_groupusers->is_permitted($_SESSION['userdata']['GroupId'],$form['m_province'],'Read'))
+        if($this->M_groupusers->is_permitted($_SESSION['userdata']['M_Groupuser_Id'],$form['m_province'],'Read'))
         {
 
-            $datapages = $this->M_provinces->get_list(null, "Created", null);
+            $params = array(
+                'order' => array('Created' => 'ASC')
+            );
+
+            $datapages = $this->M_provinces->get_list(null, null, $params);
             $data['model'] = $datapages;
             load_view('m_province/index', $data);
         }
@@ -31,7 +35,7 @@ class M_province extends CI_Controller
     function add()
     {
         $form = $this->paging->get_form_name_id();
-        if($this->M_groupusers->is_permitted($_SESSION['userdata']['GroupId'],$form['m_province'],'Write'))
+        if($this->M_groupusers->is_permitted($_SESSION['userdata']['M_Groupuser_Id'],$form['m_province'],'Write'))
         {
             $model = $this->M_provinces->new_object();
             $data =  $this->paging->set_data_page_add($model);
@@ -76,7 +80,7 @@ class M_province extends CI_Controller
     public function edit($id)
     {
         $form = $this->paging->get_form_name_id();
-        if($this->M_groupusers->is_permitted($_SESSION['userdata']['GroupId'],$form['m_province'],'Write'))
+        if($this->M_groupusers->is_permitted($_SESSION['userdata']['M_Groupuser_Id'],$form['m_province'],'Write'))
         {
             $model = $this->M_provinces->get($id);
             $data =  $this->paging->set_data_page_edit($model);
@@ -96,7 +100,7 @@ class M_province extends CI_Controller
         $description = $this->input->post('description');
 
         $model = $this->M_provinces->get($id);
-        $oldmodel = $model->clone();
+        $oldmodel = clone $model;
         //print_r($oldmodel);
         
         $model->Name = $name;
@@ -124,7 +128,7 @@ class M_province extends CI_Controller
     public function delete(){
         $id = $this->input->post("id");
         $form = $this->paging->get_form_name_id();
-        if($this->M_groupusers->is_permitted($_SESSION['userdata']['GroupId'],$form['m_province'],'Delete'))
+        if($this->M_groupusers->is_permitted($_SESSION['userdata']['M_Groupuser_Id'],$form['m_province'],'Delete'))
         {   
             $deleteData = $this->M_provinces->get($id);
             $delete = $deleteData->delete();

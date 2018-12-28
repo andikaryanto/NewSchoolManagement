@@ -37,6 +37,7 @@
                                   <!-- <th># </th> -->
                                   <th><?=  lang('ui_name')?></th>
                                   <th><?=  lang('ui_description')?></th>
+                                  <th><?=  lang('ui_createat')?></th>
                                   <th class="disabled-sorting text-right">Actions</th>
                                 </tr>
                               </thead>
@@ -45,6 +46,7 @@
                                   <!-- <th># </th> -->
                                   <th><?=  lang('ui_name')?></th>
                                   <th><?=  lang('ui_description')?></th>
+                                  <th><?=  lang('ui_createat')?></th>
                                   <th class="disabled-sorting text-right">Actions</th>
                                 </tr>
                               </tfoot>
@@ -56,9 +58,9 @@
                                   <tr role = "row" id = <?= $value->Id?>>
                                     <td><?= $value->Name?></td>
                                     <td><?= $value->Description?></td>
+                                    <td><?= $value->Created?></td>
                                     <td class = "td-actions text-right">
                                       <a href="#" rel="tooltip" title="<?=  lang('ui_edit')?>" class="btn btn-link btn-success btn-just-icon edit"><i class="material-icons">edit</i></a>
-                                      <a href="#" rel="tooltip" title="<?=  lang('ui_role')?>" class="btn btn-link btn-success btn-just-icon role"><i class="material-icons">face</i></a>
                                       <a href="#" rel="tooltip" title="<?=  lang('ui_delete')?>" class="btn btn-link btn-danger btn-just-icon delete"><i class="material-icons">delete</i></a>
                                     </td>
                                   </tr>
@@ -94,10 +96,11 @@
     $('#tableProvince').DataTable({
       "pagingType": "full_numbers",
       "lengthMenu": [[5, 10, 15, 20, -1], [5, 10, 15, 20, "All"]],
+      "order" : [[2, "desc"]],
       responsive: true,
       language: {
       search: "_INPUT_",
-      searchPlaceholder: "Search records",
+      searchPlaceholder: "Search records"
       }
     }); 
 
@@ -147,13 +150,6 @@
           }
         });
      });
-
-    //Like record
-    table.on( 'click', '.role', function () {
-        $tr = $(this).closest('tr');
-        var id = $tr.attr('id');
-        window.location = "<?= base_url('mprovince/editrole/');?>" + id;
-    });
   }
 
   function init(){

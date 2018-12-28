@@ -11,7 +11,7 @@ class Migration_create_m_city_table20181224081245 extends CI_Migration {
                     'constraint' => 11,
                     'auto_increment' => TRUE
                 ),
-                'ProvinceId' => array(
+                'M_Province_Id' => array(
                     'type' => 'INT',
                     'constraint' => 11
                 ),
@@ -45,7 +45,7 @@ class Migration_create_m_city_table20181224081245 extends CI_Migration {
             ));
             $this->dbforge->add_key('Id', TRUE);
             $this->dbforge->create_table('m_cities');
-            $this->db->query(add_foreign_key('m_provinces', 'ProvinceId', 'm_provinces(Id)', 'RESTRICT', 'CASCADE'));
+            $this->db->query(add_foreign_key('m_cities', 'M_Province_Id', 'm_provinces(Id)', 'RESTRICT', 'CASCADE'));
         
             $data = array('data' =>
                 array(

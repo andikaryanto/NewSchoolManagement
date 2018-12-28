@@ -49,7 +49,7 @@
                             <div class="form-check form-check-inline">
                               <label class="form-check-label">
                                 <input class="form-check-input" type="radio" name="radiocolor" id="exampleRadios1" value="<?= $option?>" 
-                                  <?php if($_SESSION['usersettings']['ColorId'] == $value->Id){
+                                  <?php if($_SESSION['usersettings']['G_Color_Id'] == $value->Id){
                                   ?>
                                     checked
                                   <?php
@@ -99,6 +99,7 @@
     $("#language").val("<?= $_SESSION['languages']['Name']?>");
     $("#languageid").val("<?= $_SESSION['languages']['Id']?>");
     $("#rowperpage").val("<?= $_SESSION['usersettings']['RowPerpage']?>");
+    console.log("<?= $_SESSION['usersettings']['G_Color_Id']?>")
   });
 
   function init(){

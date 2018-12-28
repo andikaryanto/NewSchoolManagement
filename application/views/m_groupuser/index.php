@@ -37,6 +37,7 @@
                                   <!-- <th># </th> -->
                                   <th><?=  lang('ui_name')?></th>
                                   <th><?=  lang('ui_description')?></th>
+                                  <th><?=  lang('ui_createat')?></th>
                                   <th class="disabled-sorting text-right">Actions</th>
                                 </tr>
                               </thead>
@@ -45,6 +46,7 @@
                                   <!-- <th># </th> -->
                                   <th><?=  lang('ui_name')?></th>
                                   <th><?=  lang('ui_description')?></th>
+                                  <th><?=  lang('ui_createat')?></th>
                                   <th class="disabled-sorting text-right">Actions</th>
                                 </tr>
                               </tfoot>
@@ -56,6 +58,7 @@
                                   <tr role = "row" id = <?= $value->Id?>>
                                     <td><?= $value->GroupName?></td>
                                     <td><?= $value->Description?></td>
+                                    <td><?= $value->Created?></td>
                                     <td class = "td-actions text-right">
                                       <a href="#" rel="tooltip" title="<?=  lang('ui_edit')?>" class="btn btn-link btn-success btn-just-icon edit"><i class="material-icons">edit</i></a>
                                       <a href="#" rel="tooltip" title="<?=  lang('ui_role')?>" class="btn btn-link btn-success btn-just-icon role"><i class="material-icons">face</i></a>
@@ -94,6 +97,7 @@
     $('#tableGroupUser').DataTable({
       "pagingType": "full_numbers",
       "lengthMenu": [[5, 10, 15, 20, -1], [5, 10, 15, 20, "All"]],
+      "order" : [[2, "desc"]],
       responsive: true,
       language: {
       search: "_INPUT_",

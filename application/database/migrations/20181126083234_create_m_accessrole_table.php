@@ -12,11 +12,11 @@ class Migration_create_m_accessrole_table extends CI_Migration {
                     'constraint' => 11,
                     'auto_increment' => TRUE
                 ),
-                'FormId' => array(
+                'M_Form_Id' => array(
                     'type' => 'INT',
                     'constraint' => 11
                 ),
-                'GroupId' => array(
+                'M_Groupuser_Id' => array(
                     'type' => 'INT',
                     'constraint' => 11
                 ),
@@ -39,8 +39,8 @@ class Migration_create_m_accessrole_table extends CI_Migration {
             ));
             $this->dbforge->add_key('Id', TRUE);
             $this->dbforge->create_table('m_accessroles');
-            $this->db->query(add_foreign_key('m_accessroles', 'GroupId', 'm_groupusers(Id)', 'CASCADE', 'CASCADE'));
-            $this->db->query(add_foreign_key('m_accessroles', 'FormId', 'm_forms(Id)', 'RESTRICT', 'CASCADE'));
+            $this->db->query(add_foreign_key('m_accessroles', 'M_Groupuser_Id', 'm_groupusers(Id)', 'CASCADE', 'CASCADE'));
+            $this->db->query(add_foreign_key('m_accessroles', 'M_Form_Id', 'm_forms(Id)', 'RESTRICT', 'CASCADE'));
         }   
     }
 

@@ -17,15 +17,15 @@ class M_user extends CI_Controller
     {
         //echo json_encode($_SESSION);
         $form = $this->paging->get_form_name_id();
-        if($this->M_groupusers->is_permitted($_SESSION['userdata']['GroupId'],$form['m_user'],'Read'))
+        if($this->M_groupusers->is_permitted($_SESSION['userdata']['M_Groupuser_Id'],$form['m_user'],'Read'))
         {
             $params = array(
-                'where' => array('Username !=' => 'superadmin')
+                'where' => array('Username !=' => 'superadmin'),
+                'order' => array('Created' => 'ASC')
             );
-
             //echo json_encode($params['where_not_in']);
 
-            $datapages = $this->M_users->get_list(null, 'Created', $params);
+            $datapages = $this->M_users->get_list(null, null, $params);
             $data['model'] = $datapages;
             load_view('m_user/index', $data);
         }
@@ -39,7 +39,7 @@ class M_user extends CI_Controller
     public function add()
     {
         $form = $this->paging->get_form_name_id();
-        if($this->M_groupusers->is_permitted($_SESSION['userdata']['GroupId'],$form['m_user'],'Write'))
+        if($this->M_groupusers->is_permitted($_SESSION['userdata']['M_Groupuser_Id'],$form['m_user'],'Write'))
         {
             
             $model = $this->M_users->new_object();
@@ -68,7 +68,7 @@ class M_user extends CI_Controller
         $password   = $this->input->post('password');
 
         $model = $this->M_users->new_object();
-        $model->GroupId = $groupid;
+        $model->M_Groupuser_Id = $groupid;
         $model->Username = $username;
         $model->Password = $password;
         $model->IsLoggedIn = 0;
@@ -80,8 +80,12 @@ class M_user extends CI_Controller
  
         if($validate)
         {
-            $this->session->set_flashdata('add_warning_msg',$validate);
-            $data =  $this->paging->set_data_page_add($model);
+            $this->session->set_flashdata('add_warning_msg',$validate); 
+            $modal_group = $this->M_groupusers->get_list();
+            $data_modal = array(
+                'modal_group' => $modal_group
+            );
+            $data =  $this->paging->set_data_page_add($model, null, $data_modal);
             load_view('m_user/add', $data);   
         }
         else{
@@ -95,11 +99,11 @@ class M_user extends CI_Controller
     public function edit($id)
     {
         $form = $this->paging->get_form_name_id();
-        if($this->M_groupusers->is_permitted($_SESSION['userdata']['GroupId'],$form['m_user'],'Write'))
+        if($this->M_groupusers->is_permitted($_SESSION['userdata']['M_Groupuser_Id'],$form['m_user'],'Write'))
         {
             
             $edit = $this->M_users->get_data_by_id($id);
-            $model = $this->M_users->create_object($edit->Id, $edit->GroupId, $edit->GroupName, $edit->Username, $edit->Password, null, null, null, null);
+            $model = $this->M_users->create_object($edit->Id, $edit->M_Groupuser_Id, $edit->GroupName, $edit->Username, $edit->Password, null, null, null, null);
             $data =  $this->paging->set_data_page_edit($model);
             //echo json_encode($edit);
             load_view('m_user/edit', $data);   
@@ -122,7 +126,7 @@ class M_user extends CI_Controller
 
         $edit       = $this->M_users->get_data_by_id($userid);
         $model      = $this->M_users->create_object($edit->Id, $groupid, $groupname, $username,  $password, $edit->IOn, $edit->IBy, null , null);
-        $oldmodel   = $this->M_users->create_object($edit->Id, $edit->GroupId, null, $edit->Username,  $edit->Password, $edit->IOn, $edit->IBy, $edit->UOn , $edit->UBy);
+        $oldmodel   = $this->M_users->create_object($edit->Id, $edit->M_Groupuser_Id, null, $edit->Username,  $edit->Password, $edit->IOn, $edit->IBy, $edit->UOn , $edit->UBy);
         $modeltabel = $this->M_users->create_object_tabel($edit->Id, $groupid, $username, $password, $edit->IOn, $edit->IBy, null , null);
 
         $validate   = $this->M_users->validate($model, $oldmodel);
@@ -149,7 +153,7 @@ class M_user extends CI_Controller
     public function delete($id)
     {
         $form = $this->paging->get_form_name_id();
-        if($this->M_groupusers->is_permitted($_SESSION['userdata']['GroupId'],$form['m_user'],'Delete'))
+        if($this->M_groupusers->is_permitted($_SESSION['userdata']['M_Groupuser_Id'],$form['m_user'],'Delete'))
         {
             $delete = $this->M_users->delete_data($id);
             if(isset($delete)){
@@ -177,7 +181,7 @@ class M_user extends CI_Controller
     public function activate($id)
     {
         $form = $this->paging->get_form_name_id();
-        if($this->M_groupusers->is_permitted($_SESSION['userdata']['GroupId'],$form['m_user'],'Write'))
+        if($this->M_groupusers->is_permitted($_SESSION['userdata']['M_Groupuser_Id'],$form['m_user'],'Write'))
         {
             $muser = $this->M_users->get($id);
             if($muser){
@@ -234,8 +238,8 @@ class M_user extends CI_Controller
         $rowperpage = $this->input->post('rowperpage');
         //$usersetting = $this->M_users->create_usersetting_object($_SESSION['usersettings']['Id'], $_SESSION['userdata']['id'],$language, explode("~",$radiocolor)[1],  $rowperpage);
         $usersetting = $this->M_usersettings->get($_SESSION['usersettings']['Id']);
-        $usersetting->LanguageId = $language;
-        $usersetting->ColorId = explode("~",$radiocolor)[1];
+        $usersetting->G_Language_Id = $language;
+        $usersetting->G_Color_Id = explode("~",$radiocolor)[1];
         $usersetting->RowPerpage = $rowperpage;
         $usersetting->save();
 

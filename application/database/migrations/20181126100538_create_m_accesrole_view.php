@@ -18,8 +18,8 @@ class Migration_create_m_accesrole_view extends CI_Migration {
                     b.ClassName AS ClassName,
                     0 AS Header
                 FROM ((m_groupusers a JOIN m_forms b) 
-                LEFT JOIN m_accessroles c ON(((c.FormId = b.Id) 
-                    AND (c.GroupId = a.Id)))) 
+                LEFT JOIN m_accessroles c ON(((c.M_Form_Id = b.Id) 
+                    AND (c.M_Groupuser_Id = a.Id)))) 
                 UNION ALL 
                 SELECT DISTINCT NULL,
                     NULL,

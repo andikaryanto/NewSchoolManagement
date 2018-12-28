@@ -170,7 +170,8 @@ class MY_Model extends CI_Model {
 		$distinct = (isset($params['distinct']) ? $params['distinct'] : FALSE);	// make select DISTINCT
 		$select = (isset($params['select']) ? $params['select'] : FALSE);		// other fields to append in select clause
 		$where_not_in = (isset($params['where_not_in']) ? $params['where_not_in'] : FALSE);			// add custom WHERE string
-		$where = (isset($params['where']) ? $params['where'] : FALSE);			// add custom WHERE string
+		$where = (isset($params['where']) ? $params['where'] : FALSE);	
+		$order = (isset($params['order']) ? $params['order'] : FALSE);			// add custom WHERE string
 		
 		if ($this->_is_caching)
 			$this->db->stop_cache();
@@ -208,13 +209,18 @@ class MY_Model extends CI_Model {
 			}
 		}
 
-		if ($where_not_in)
-		foreach($where_not_in as $key => $value){
-			$this->db->where_not_in($key, $value);
+		if ($where_not_in){
+			foreach($where_not_in as $key => $value){
+				$this->db->where_not_in($key, $value);
+			}
 		}
 
-		if ($order_by)
-			$this->db->order_by($order_by);
+		if ($order){
+			//$this->db->order_by($order_by);
+			foreach($order as $key => $value){
+				$this->db->order_by($key, $value);
+			}
+		}
 		
 		if ($page > 0 && $pagesize > 0)
 			$this->db->limit($pagesize, $pagesize*($page-1));
@@ -661,33 +667,43 @@ class Model_object {
 		if (substr($name, 0, 4) == 'get_')
 		{
 			$entity = substr($name, 4);
-			$field = $entity.'_id';
+			$field = $entity.'_Id';
 			$model = model($entity);
+
+			$CI->load->model($model);
+
+			if(isset($this->$field)){
+				$result = $CI->$model->get($this->$field);
+				if(isset($result))
+					return $result;
+			} else {
+				return $CI->$model->new_object();
+			}
 			
-			return $CI->$model->get($this->$field);
-		}
-		else
-		{
+		} else if (substr($name, 0, 9) == 'get_list_'){
+
+			$entity = substr($name, 9);
+			$field = $entity.'_Id';
+			$model = model($entity);
+
+			$CI->load->model($model);
+
+			if(isset($this->$field)){
+				$params = array(
+					'where' => array(
+						$field => $this->Id
+					)
+				);
+
+				$result = $CI->$model->get_list(null, null, $params);
+				if(isset($result))
+					return $result;
+			} else {
+				return array();
+			}
+		} else {
 			trigger_error('Call to undefined method '.__CLASS__.'::'.$name.'()', E_USER_ERROR);
 		}
-	}
-
-	/**
-	 * Return a clone to get this record as new object model
-	 */
-	public function clone()
-	{
-		$CI = &get_instance();
-		$model = $this->model();
-		$row = new $CI->$model->row_type();
-		$fields = $CI->db->field_data($CI->$model->table);
-		foreach ($fields as $field)
-		{
-			$name = $field->name;
-			$row->$name = $this->$name;
-		}
-		
-		return $row;
 	}
 	
 	/**
@@ -831,6 +847,7 @@ if (!function_exists('model'))
 	{
 		get_instance()->load->helper('inflector');
 		return ucfirst(plural($entity));
+		//return plural($entity);
 	}
 }
 if (!function_exists('table'))

@@ -157,5 +157,6 @@ $lang['ui_usersetting'] = "User Setting";
 $lang['ui_rowperpage'] = "Row Data";
 $lang['ui_forbidden'] = "Forbidden";
 $lang['ui_notfound'] = "Not Found";
+$lang['ui_createat'] = "Created";
 
 

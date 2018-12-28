@@ -12,7 +12,7 @@ class Migration_create_m_user_table extends CI_Migration {
                     'constraint' => 11,
                     'auto_increment' => TRUE
                 ),
-                'GroupId' => array(
+                'M_Groupuser_Id' => array(
                     'type' => 'INT',
                     'constraint' => 11,
                     'null' => true
@@ -61,7 +61,7 @@ class Migration_create_m_user_table extends CI_Migration {
             ));
             $this->dbforge->add_key('Id', TRUE);
             $this->dbforge->create_table('m_users');
-            $this->db->query(add_foreign_key('m_users', 'GroupId', 'm_groupusers(Id)', 'RESTRICT', 'CASCADE'));
+            $this->db->query(add_foreign_key('m_users', 'M_Groupuser_Id', 'm_groupusers(Id)', 'RESTRICT', 'CASCADE'));
         }
     }
 

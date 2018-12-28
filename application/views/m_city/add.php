@@ -29,8 +29,8 @@
                       <label><?= lang('ui_province')?></label>
                       <div class="input-group has-success">
                         
-                        <input hidden id = "provinceid" type="text" class="form-control" name = "provinceid" value="<?= $model->ProvinceId?>">
-                        <input id = "provincename" type="text" class="form-control custom-readonly"  value="<?= $model->M_provinces()->Name?>" readonly>
+                        <input hidden id = "provinceid" type="text" class="form-control" name = "provinceid" value="<?= $model->M_Province_Id?>">
+                        <input id = "provincename" type="text" class="form-control custom-readonly"  value="<?= $model->get_M_Province()->Name?>" readonly>
                         <!-- <span class="form-control-feedback text-primary">
                             <i class="material-icons">search</i>
                         </span> -->

@@ -21,7 +21,7 @@
                 </div>
                 <div class="card-body">                 
                   <form method = "post" action = "<?= base_url('muser/addsave');?>">
-                    <input hidden id = "groupid" type="text" class="form-control" name = "groupid" value="<?= $model->GroupId?>">
+                    <input hidden id = "groupid" type="text" class="form-control" name = "groupid" value="<?= $model->M_Groupuser_Id?>">
                     <div class="form-group bmd-form-group">
                       <label class = ""><?= lang('ui_name')?></label>
                       <input id="named" type="text"  class="form-control " name = "named" value="<?= $model->Username?>" required>
@@ -30,7 +30,7 @@
                       <label><?= lang('ui_group_user')?></label>
                       <div class="input-group has-success">
                         
-                        <input id = "groupname" type="text" class="form-control custom-readonly"  value="<?= $model->M_groupusers()->GroupName?>" readonly>
+                        <input id = "groupname" type="text" class="form-control custom-readonly"  value="<?= $model->get_M_Groupuser()->GroupName?>" readonly>
                         <!-- <span class="form-control-feedback text-primary">
                             <i class="material-icons">search</i>
                         </span> -->

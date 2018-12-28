@@ -39,7 +39,7 @@ class M_cities_model extends MY_Model {
         if($nameexist)
             $warning = array_merge($warning, array(0=>'err_msg_name_exist'));
 
-        if(empty($model->ProvinceId))
+        if(empty($model->M_Province_Id))
             $warning = array_merge($warning, array(0=>'err_msg_province_can_not_null'));
         
         return $warning;
@@ -49,16 +49,15 @@ class M_cities_model extends MY_Model {
 
 class M_city_object extends Model_object {
 
-    public function M_provinces()
-	{
-		$CI = get_instance();
-		
-        $CI->load->model('M_provinces');	// just another CI Power Model objec 
-        if(isset($this->ProvinceId)){
-            $province = $CI->M_provinces->get($this->ProvinceId);
-            if (isset($province))
-                return $province;
+    public function __get($name){
+        switch($name) {
+            case 'Test': 
+              return $this->get_test();
         }
-		return $CI->M_provinces->new_object();
+    }
+
+    private function get_test(){
+        $Test = $this->Name;
+        return $Test;
     }
 }

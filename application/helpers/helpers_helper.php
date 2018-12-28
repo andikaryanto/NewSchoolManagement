@@ -22,7 +22,7 @@ function getEnumName($enumName, $enumDetailId){
 
     $CI->db->select('b.*');
     $CI->db->from('m_enums a');
-    $CI->db->join('m_enumdetails b','a.Id = b.EnumId','inner');
+    $CI->db->join('m_enumdetails b','a.Id = b.M_Enum_Id','inner');
     $CI->db->where('a.Name', $enumName);
     $CI->db->where('b.Value', $enumValue);
     $data = $CI->db->get()->row();

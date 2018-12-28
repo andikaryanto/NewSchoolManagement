@@ -175,3 +175,4 @@ $lang['ui_usersetting'] = "Pengaturan Pengguna";
 $lang['ui_rowperpage'] = "Baris Data";
 $lang['ui_forbidden'] = "Terlarang";
 $lang['ui_notfound'] = "Tidak ditemukan";
+$lang['ui_createat'] = "Dibuat";

@@ -29,9 +29,9 @@ class Login extends CI_Controller
 
                 $this->session->set_userdata('userdata',get_object_vars($query));
                 $this->session->set_userdata('usersettings',get_object_vars($query->M_usersettings()));
-                $this->session->set_userdata('languages',get_object_vars($query->M_usersettings()->G_languages()));
-                $this->session->set_userdata('colors',get_object_vars($query->M_usersettings()->G_colors()));
-                //echo json_encode($this->session->userdata('userdata'));
+                $this->session->set_userdata('languages',get_object_vars($query->M_usersettings()->get_G_Language()));
+                $this->session->set_userdata('colors',get_object_vars($query->M_usersettings()->get_G_Color()));
+                //echo json_encode($this->session->userdata('colors'));
                 redirect('home');
             } else {
                 $this->index();

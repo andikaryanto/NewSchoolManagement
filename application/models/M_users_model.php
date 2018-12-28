@@ -12,14 +12,14 @@ class M_users_model extends MY_Model {
     public function get_sigle_data_user($username, $password)
     {
         $md5pass = encryptMd5("school".$username.$password);
-        $where = array(
-            'Username'=> $username,
-            'Password'=> $md5pass,
-            'IsActive'=> 1
-        );
+
 
         $params = array(
-            'where' => $where
+            'where' => array(
+                'Username'=> $username,
+                'Password'=> $md5pass,
+                'IsActive'=> 1
+            )
         );
 
        return $this->get(null, null, $params);
@@ -74,7 +74,7 @@ class M_users_model extends MY_Model {
         if($nameexist)
             $warning = array_merge($warning, array(0=>'err_msg_name_exist'));
 
-        if(empty($model->GroupId))
+        if(empty($model->M_Groupuser_Id))
             $warning = array_merge($warning, array(0=>'err_msg_groupuser_can_not_null'));
 
         if(empty($model->Password))
@@ -101,20 +101,7 @@ class M_users_model extends MY_Model {
 }
 
 class M_user_object extends Model_object {
-   
-	public function M_groupusers()
-	{
-		$CI = get_instance();
-		
-        $CI->load->model('M_groupusers');	// just another CI Power Model objec 
-        if(isset($this->GroupId)){
-            $groupuser = $CI->M_groupusers->get($this->GroupId);
-            if (isset($groupuser))
-                return $groupuser;
-        }
-		return $CI->M_groupusers->new_object();
-    }
-    
+       
     public function M_usersettings()
 	{
 		$CI = get_instance();
