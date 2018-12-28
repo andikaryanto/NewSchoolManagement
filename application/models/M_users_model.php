@@ -101,19 +101,6 @@ class M_users_model extends MY_Model {
 }
 
 class M_user_object extends Model_object {
-       
-    public function M_usersettings()
-	{
-		$CI = get_instance();
-		
-		$CI->load->model('M_usersettings');	// just another CI Power Model object
-        if(isset($this->Id)){
-            $usersettings = $CI->M_usersettings->get_data_by_userid($this->Id);
-            if (isset($usersettings))
-                return $usersettings;
-        }
-		return $CI->M_usersettings->new_object();
-    }
     
     public function save_with_detail(){
         $id = $this->save();

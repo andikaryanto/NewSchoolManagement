@@ -148,7 +148,7 @@
               
                 <li class="nav-item ">
                   <a class="nav-link" href="<?= base_url($master->IndexRoute);?>">
-                    <!-- <span class="sidebar-mini"> E </span> -->
+                    <span class="sidebar-mini"><?= get_first_letter(lang($master->Resource))?> </span>
                     <span class="sidebar-normal"> <?= lang($master->Resource)?> </span>
                   </a>
                 </li>

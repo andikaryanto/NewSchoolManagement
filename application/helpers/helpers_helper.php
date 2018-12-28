@@ -60,6 +60,15 @@ function delete_status($msg = NULL, $status = TRUE, $isforbidden = FALSE){
     return $delete;
 }
 
+function get_first_letter($word){
+    $new_str = "";
+    $str_arr = explode(" ", $word);
+    foreach($str_arr as $str){
+        $new_str = $new_str.ucfirst(substr($str, 0,1));
+    }
+    return $new_str;
+}
+
 // function getLang($res){
 
 //     $CI =& get_instance();

@@ -26,12 +26,12 @@ class Login extends CI_Controller
         if ($query)
         {
             if($query->IsLoggedIn == 0){
-
+                //print_r($query->get_list_M_User()); 
                 $this->session->set_userdata('userdata',get_object_vars($query));
-                $this->session->set_userdata('usersettings',get_object_vars($query->M_usersettings()));
-                $this->session->set_userdata('languages',get_object_vars($query->M_usersettings()->get_G_Language()));
-                $this->session->set_userdata('colors',get_object_vars($query->M_usersettings()->get_G_Color()));
-                //echo json_encode($this->session->userdata('colors'));
+                $this->session->set_userdata('usersettings',get_object_vars($query->get_list_M_Usersetting()[0]));
+                $this->session->set_userdata('languages',get_object_vars($query->get_list_M_Usersetting()[0]->get_G_Language()));
+                $this->session->set_userdata('colors',get_object_vars($query->get_list_M_Usersetting()[0]->get_G_Color()));
+                // echo json_encode($this->session->userdata('colors'));
                 redirect('home');
             } else {
                 $this->index();

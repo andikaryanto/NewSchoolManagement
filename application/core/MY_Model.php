@@ -664,7 +664,7 @@ class Model_object {
 		//$CI->load->helper('application');
 		
 		// implements undefined get_<entity>()
-		if (substr($name, 0, 4) == 'get_')
+		if (substr($name, 0, 4) == 'get_' && substr($name, 4, 5) != 'list_')
 		{
 			$entity = substr($name, 4);
 			$field = $entity.'_Id';
@@ -680,15 +680,15 @@ class Model_object {
 				return $CI->$model->new_object();
 			}
 			
-		} else if (substr($name, 0, 9) == 'get_list_'){
+		} else if (substr($name, 0, 4) == 'get_' && substr($name, 4, 5) == 'list_'){
 
 			$entity = substr($name, 9);
-			$field = $entity.'_Id';
+			//$field = $entity.'_Id';
 			$model = model($entity);
-
+			$field = column(entity($this->model())).'_Id';
 			$CI->load->model($model);
-
-			if(isset($this->$field)){
+			//echo $model;
+			if(isset($this->Id)){
 				$params = array(
 					'where' => array(
 						$field => $this->Id
@@ -838,7 +838,7 @@ if (!function_exists('mysqldatetime'))
 {
 	function mysqldatetime($timestamp)
 	{
-		return date('Y-m-d H:i:s', $timestamp);
+		return date('Y-m-d H:i:s', strtotime('+6 hours',$timestamp));
 	}
 }
 if (!function_exists('model'))
@@ -864,5 +864,18 @@ if (!function_exists('entity'))
 	{
 		get_instance()->load->helper('inflector');
 		return singular($table);
+	}
+}
+
+if (!function_exists('column'))
+{
+	function column($entity)
+	{
+		$new_str = "";
+		$str_arr = explode("_",$entity);
+		foreach($str_arr as $str){
+			$new_str = $new_str.ucfirst($str)."_";
+		}
+		return substr($new_str, 0, strlen($new_str) - 1);
 	}
 }
