@@ -23,6 +23,7 @@ class Paging {
         $data["m_student"] = "m_students";
         $data["m_province"] = "m_provinces";
         $data["m_city"] = "m_cities";
+        $data["m_subcity"] = "m_subcities";
         return $data;
     }
     

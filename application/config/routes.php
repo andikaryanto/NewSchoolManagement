@@ -117,6 +117,13 @@ $route['mcity/edit/(:num)'] = 'm_city/edit/$1';
 $route['mcity/editsave'] = 'm_city/editsave';
 $route['mcity/delete'] = 'm_city/delete';
 
+$route['msubcity'] = 'm_subcity';
+$route['msubcity/add'] = 'm_subcity/add';
+$route['msubcity/addsave'] = 'm_subcity/addsave';
+$route['msubcity/edit/(:num)'] = 'm_subcity/edit/$1';
+$route['msubcity/editsave'] = 'm_subcity/editsave';
+$route['msubcity/delete'] = 'm_subcity/delete';
+
 //API
 $route['api/mdisaster']['GET'] = 'api_mdisaster/get_disaster';
 $route['api/mdisaster/(:any)/(:any)'] = 'api_mdisaster/get_disaster/$1/$2';
