@@ -104,7 +104,7 @@
     $('#tableCity').DataTable({
       "pagingType": "full_numbers",
       "lengthMenu": [[5, 10, 15, 20, -1], [5, 10, 15, 20, "All"]],
-      "order" : [[3, "desc"]],
+      "order" : [[4, "desc"]],
       responsive: true,
       language: {
       search: "_INPUT_",
