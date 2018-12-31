@@ -70,7 +70,7 @@ class M_user extends CI_Controller
         $model = $this->M_users->new_object();
         $model->M_Groupuser_Id = $groupid;
         $model->Username = $username;
-        $model->Password = $password;
+        $model->setPassword($password);
         $model->IsLoggedIn = 0;
         $model->IsActive = 1;
         $model->Language = 'indonesia';
@@ -141,7 +141,7 @@ class M_user extends CI_Controller
         {
             $date = date("Y-m-d H:i:s");
             $modeltabel['uon'] = $date;
-            $modeltabel['uby'] = $_SESSION['userdata']['username'];
+            $modeltabel['uby'] = $_SESSION['userdata']['Username'];
 
             $this->M_users->edit_data($modeltabel);
             $successmsg = $this->paging->get_success_message();
@@ -218,14 +218,14 @@ class M_user extends CI_Controller
         );
         
         
-        $validate = $this->M_users->validate_changepassword($_SESSION['userdata']['username'], $oldpassword, $newpassword, $confirmpassword);
+        $validate = $this->M_users->validate_changepassword($_SESSION['userdata']['Username'], $oldpassword, $newpassword, $confirmpassword);
         if($validate){
             $this->session->set_flashdata('warning_msg',$validate);
             $data =  $this->paging->set_data_page_add($model);
             load_view('m_user/changePassword', $data);    
         }
         else{
-            $this->M_users->saveNewPassword($_SESSION['userdata']['username'], $oldpassword, $newpassword);
+            $this->M_users->saveNewPassword($_SESSION['userdata']['Username'], $oldpassword, $newpassword);
             $successmsg = $this->paging->get_success_message();
             $this->session->set_flashdata('success_msg', $successmsg);
             redirect('changePassword');
@@ -249,13 +249,6 @@ class M_user extends CI_Controller
         replaceSession('languages', get_object_vars($languages));
         replaceSession('colors', get_object_vars($colors));
         redirect('settings');
-    }
-
-    private function loadview($viewName, $data)
-	{
-		$this->paging->load_header();
-		$this->load->view($viewName, $data);
-		$this->paging->load_footer();
     }
     
 }

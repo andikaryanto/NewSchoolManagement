@@ -101,15 +101,24 @@ class M_users_model extends MY_Model {
 }
 
 class M_user_object extends Model_object {
-    
+
     public function save_with_detail(){
+        $CI =& get_instance();
+        $CI->load->model('M_usersettings');
+
         $id = $this->save();
-        $user_settings = $this->M_usersettings();
-        $user_settings->UserId = $id;
-        $user_settings->LanguageId = 1;
-        $user_settings->ColorId = 1;
+        $user_settings = $CI->M_usersettings->new_object();
+        $user_settings->M_User_Id = $id;
+        $user_settings->G_Language_Id = 1;
+        $user_settings->G_Color_Id = 1;
         $user_settings->RowPerpage = 5;
+        //print_r($user_settings);
         $user_settings->save();
         return $id;
     }
+
+    public function setPassword($password){
+        $this->Password = encryptMd5("school".$this->Username.$password);
+    }
+
 }

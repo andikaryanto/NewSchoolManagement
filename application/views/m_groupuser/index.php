@@ -60,8 +60,8 @@
                                     <td><?= $value->Description?></td>
                                     <td><?= $value->Created?></td>
                                     <td class = "td-actions text-right">
-                                      <a href="#" rel="tooltip" title="<?=  lang('ui_edit')?>" class="btn btn-link btn-success btn-just-icon edit"><i class="material-icons">edit</i></a>
-                                      <a href="#" rel="tooltip" title="<?=  lang('ui_role')?>" class="btn btn-link btn-success btn-just-icon role"><i class="material-icons">face</i></a>
+                                      <a href="#" rel="tooltip" title="<?=  lang('ui_edit')?>" class="btn btn-link btn-primary btn-just-icon edit"><i class="material-icons">edit</i></a>
+                                      <a href="#" rel="tooltip" title="<?=  lang('ui_role')?>" class="btn btn-link btn-primary btn-just-icon role"><i class="material-icons">face</i></a>
                                       <a href="#" rel="tooltip" title="<?=  lang('ui_delete')?>" class="btn btn-link btn-danger btn-just-icon delete"><i class="material-icons">delete</i></a>
                                     </td>
                                   </tr>

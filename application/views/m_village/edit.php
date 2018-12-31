@@ -8,11 +8,11 @@
             <div class="row">
               <div class="col">
                 <h4 class="card-title "><?= lang('ui_edit_data')?></h4>
-                <p class="card-category"> <?= lang('ui_master_subcity')?></p>
+                <p class="card-category"> <?= lang('ui_master_village')?></p>
               </div>
               <div class="col">
                 <div class="text-right">
-                  <button type="button" rel="tooltip" class="btn btn-primary btn-round btn-fab" title="index" onclick="window.location.href='<?= base_url('msubcity');?>'">
+                  <button type="button" rel="tooltip" class="btn btn-primary btn-round btn-fab" title="index" onclick="window.location.href='<?= base_url('mvillage');?>'">
                     <i class="material-icons">list</i>
                   </button>
                 </div>
@@ -20,8 +20,8 @@
             </div>
           </div>
           <div class="card-body">                 
-            <form method = "post" action = "<?= base_url('msubcity/editsave');?>">
-              <input hidden name ="idsubcity" id="idsubcity" value="<?= $model->Id?>">
+            <form method = "post" action = "<?= base_url('mvillage/editsave');?>">
+              <input hidden name ="idvillage" id="idvillage" value="<?= $model->Id?>">
               <div class="form-group">
                 <label><?= lang('ui_name')?></label>
                 <input id="named" type="text"  class="form-control" name = "named" value="<?= $model->Name?>" required>
@@ -36,7 +36,7 @@
                       <i class="material-icons">search</i>
                   </span> -->
                   <div class="input-group-append">
-                    <button id="btnCityModal" data-toggle="modal" type="button" class="btn btn-primary" data-target="#modalCities"><i class="fa fa-search"></i></button>
+                    <button id="btnCityModal" data-toggle="modal" type="button" class="btn btn-primary" data-target="#modalSubcities"><i class="fa fa-search"></i></button>
                   </div>
                 </div>
                     </div>
@@ -55,7 +55,7 @@
   </div>
 
                <!-- modal -->
-<div id="modalCities" tabindex="-1" role="dialog" aria-labelledby="cityModalLabel" aria-hidden="true" class="modal fade text-left">
+               <div id="modalSubcities" tabindex="-1" role="dialog" aria-labelledby="cityModalLabel" aria-hidden="true" class="modal fade text-left">
   <div role="document" class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
@@ -73,13 +73,15 @@
             <div class="row">
               <div class="col-sm-12">
                 <div class="table-responsive">
-                  <table data-page-length="<?= $_SESSION['usersettings']['RowPerpage']?>" id = "tablemodalCities" class="table table-striped table-no-bordered table-hover dataTable dtr-inline collapsed" cellspacing="0" width="100%" style="width: 100%;" role="grid" aria-describedby="datatables_info">
+                  <table data-page-length="<?= $_SESSION['usersettings']['RowPerpage']?>" id = "tablemodalSubcities" class="table table-striped table-no-bordered table-hover dataTable dtr-inline collapsed" cellspacing="0" width="100%" style="width: 100%;" role="grid" aria-describedby="datatables_info">
                     <thead class=" text-primary">
+                        <th><?=  lang('ui_subcity')?></th>
                         <th><?=  lang('ui_city')?></th>
                         <th><?=  lang('ui_province')?></th>
                     </thead>
                     <tfoot class=" text-primary">
                       <tr role = "row">
+                        <th><?=  lang('ui_subcity')?></th>
                         <th><?=  lang('ui_city')?></th>
                         <th><?=  lang('ui_province')?></th>
                       </tr>
@@ -87,12 +89,14 @@
                     <tbody>
                     <?php
                       //print_r($modeldetail);
-                        foreach ($datamodal['modal_city'] as $value)
+                        foreach ($datamodal['modal_subcity'] as $value)
                         {
                       ?>
                           <tr class = "rowdetail" role = "row" id = <?= $value->Id?>>
                             <td><?= $value->Name?></td>
-                            <td><?= $value->get_M_City()->Name?></td>
+                            <td><?= $value->get_M_Subcity()->Name?></td>
+                            <td><?= $value->get_M_Subcity()->get_M_City()->Name?></td>
+                            <td><?= $value->get_M_Subcity()->get_M_City()->get_M_Province()->Name?></td>
                             <!-- <td><?= $value->Description?></td> -->
                           </tr>
                       <?php
@@ -113,7 +117,7 @@
 <script>
   $(document).ready(function() {    
     init();
-    loadModal("#tablemodalCities");
+    loadModal("#tablemodalSubcities");
   });
 
   function init(){
@@ -153,7 +157,7 @@
 
         $("#cityid").val(id);
         $("#cityname").val(data[0]);
-        $('#modalCities').modal('hide');
+        $('#modalSubcities').modal('hide');
      } );
   }
 </script>

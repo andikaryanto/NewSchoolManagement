@@ -8,12 +8,12 @@
                   <div class="row">
                     <div class="col">
                       <h4 class="card-title "><?= lang('ui_data')?></h4>
-                      <p class="card-category"> <?= lang('ui_master_subcity')?></p>
+                      <p class="card-category"> <?= lang('ui_master_village')?></p>
                     </div>
                     
                     <div class="col">
                       <div class="text-right">
-                        <button type="button" rel="tooltip" class="btn btn-primary btn-round btn-fab" title="<?= lang('ui_add')?>" onclick="window.location.href='<?= base_url('msubcity/add');?>'">
+                        <button type="button" rel="tooltip" class="btn btn-primary btn-round btn-fab" title="<?= lang('ui_add')?>" onclick="window.location.href='<?= base_url('mvillage/add');?>'">
                           <i class="material-icons">add</i>
                         </button>
                       </div>
@@ -35,6 +35,7 @@
                               <thead class=" text-primary">
                                 <tr role = "row">
                                   <!-- <th># </th> -->
+                                  <th><?=  lang('ui_village')?></th>
                                   <th><?=  lang('ui_subcity')?></th>
                                   <!-- <th><?=  lang('ui_description')?></th> -->
                                   <th><?=  lang('ui_city')?></th>
@@ -46,6 +47,7 @@
                               <tfoot class=" text-primary">
                                 <tr role = "row">
                                   <!-- <th># </th> -->
+                                  <th><?=  lang('ui_village')?></th>
                                   <th><?=  lang('ui_subcity')?></th>
                                   <!-- <th><?=  lang('ui_description')?></th> -->
                                   <th><?=  lang('ui_city')?></th>
@@ -61,8 +63,9 @@
                               ?>
                                   <tr role = "row" id = <?= $value->Id?>>
                                     <td><?= $value->Name?></td>
-                                    <td><?= $value->get_M_City()->Name?></td>
-                                    <td><?= $value->get_M_City()->get_M_Province()->Name?></td>
+                                    <td><?= $value->get_M_Subcity()->Name?></td>
+                                    <td><?= $value->get_M_Subcity()->get_M_City()->Name?></td>
+                                    <td><?= $value->get_M_Subcity()->get_M_City()->get_M_Province()->Name?></td>
                                     <td><?= $value->Created?></td>
                                     <td class = "td-actions text-right">
                                       <a href="#" rel="tooltip" title="<?=  lang('ui_edit')?>" class="btn btn-link btn-primary btn-just-icon edit"><i class="material-icons">edit</i></a>
@@ -115,7 +118,7 @@
         $tr = $(this).closest('tr');
 
         var id = $tr.attr('id');
-        window.location = "<?= base_url('msubcity/edit/');?>" + id;
+        window.location = "<?= base_url('mvillage/edit/');?>" + id;
      } );
 
      // Delete a record
@@ -129,7 +132,7 @@
             
             $.ajax({
               type : "POST",
-              url : "<?= base_url('msubcity/delete/');?>",
+              url : "<?= base_url('mvillage/delete/');?>",
               data : {id : id},
               success : function(data){
                 var status = $.parseJSON(data);

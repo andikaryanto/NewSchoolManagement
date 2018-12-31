@@ -150,7 +150,7 @@ class M_groupuser extends CI_Controller
 
         $params = array(
             'where' => array(
-                'FormId' => $formid,
+                'M_Form_Id' => $formid,
                 'M_Groupuser_Id' => $groupid
             )
         );
@@ -166,7 +166,7 @@ class M_groupuser extends CI_Controller
             echo json_encode($update_roles);
         } else {
             $new_roles = $this->M_accessroles->new_object();
-            $new_roles->FormId = $formid;
+            $new_roles->M_Form_Id = $formid;
             $new_roles->M_Groupuser_Id = $groupid;
             $new_roles->Read = $read;
             $new_roles->Write = $write;

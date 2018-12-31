@@ -102,6 +102,7 @@ class Tools extends CI_Controller {
 
     protected function make_migration_file($name) {
         $date = new DateTime();
+        $date->setTimezone(new DateTimeZone('Asia/Jakarta'));
         $timestamp = $date->format('YmdHis');
 
         $newname = $name.$timestamp;

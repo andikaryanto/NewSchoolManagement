@@ -1,6 +1,6 @@
 <?php
 
-class Migration_create_m_subcities_table20181230083750 extends CI_Migration {
+class Migration_create_m_villages_table20181231042405 extends CI_Migration {
 
     public function up() {
         $this->load->helper('db_helper');
@@ -10,7 +10,7 @@ class Migration_create_m_subcities_table20181230083750 extends CI_Migration {
                 'constraint' => 11,
                 'auto_increment' => TRUE
             ),
-            'M_City_Id' => array(
+            'M_Subcity_Id' => array(
                 'type' => 'INT',
                 'constraint' => 11
             ),
@@ -44,17 +44,17 @@ class Migration_create_m_subcities_table20181230083750 extends CI_Migration {
 
         ));
         $this->dbforge->add_key('Id', TRUE);
-        $this->dbforge->create_table('m_subcities', TRUE);
-        $this->db->query(add_foreign_key('m_subcities', 'M_City_Id', 'm_cities(Id)', 'RESTRICT', 'CASCADE'));
+        $this->dbforge->create_table('m_villages', TRUE);
+        $this->db->query(add_foreign_key('m_villages', 'M_Subcity_Id', 'm_subcities(Id)', 'RESTRICT', 'CASCADE'));
     
         $data = array('data' =>
             array(
-                'FormName' => 'm_subcities',
-                'AliasName' => 'master sub city',
-                'LocalName' => 'master kecamatan',
+                'FormName' => 'm_villages',
+                'AliasName' => 'master village',
+                'LocalName' => 'master kelurahan',
                 'ClassName' => 'Master',
-                'Resource' => 'ui_subcity',
-                'IndexRoute' => 'msubcity'
+                'Resource' => 'ui_village',
+                'IndexRoute' => 'mvillage'
             )
         );
         foreach ($data as $value){
@@ -63,7 +63,7 @@ class Migration_create_m_subcities_table20181230083750 extends CI_Migration {
     }
 
     public function down() {
-        //$this->dbforge->drop_table('create_m_subcities_table20181230083750');
+        //$this->dbforge->drop_table('create_m_villages_table20181231042405');
     }
 
 }

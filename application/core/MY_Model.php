@@ -698,6 +698,7 @@ class Model_object {
 				$result = $CI->$model->get_list(null, null, $params);
 				if(isset($result))
 					return $result;
+				
 			} else {
 				return array();
 			}
@@ -838,7 +839,10 @@ if (!function_exists('mysqldatetime'))
 {
 	function mysqldatetime($timestamp)
 	{
-		return date('Y-m-d H:i:s', strtotime('+6 hours',$timestamp));
+		$date = new DateTime();
+		$date->setTimezone(new DateTimeZone('Asia/Jakarta'));
+		return $date->format('Y-m-d H:i:s');
+		//return date('Y-m-d H:i:s', $timestamp);
 	}
 }
 if (!function_exists('model'))

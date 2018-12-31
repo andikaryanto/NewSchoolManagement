@@ -17,7 +17,8 @@ class Migration_create_m_province20181223055507 extends CI_Migration {
                 ),
                 'Description' => array(
                     'type' => 'varchar',
-                    'constraint' => 300
+                    'constraint' => 300,
+                    'null' => true
                 ),
                 'CreatedBy' => array(
                     'type' => 'varchar',

@@ -24,6 +24,7 @@ class Paging {
         $data["m_province"] = "m_provinces";
         $data["m_city"] = "m_cities";
         $data["m_subcity"] = "m_subcities";
+        $data["m_village"] = "m_villages";
         return $data;
     }
     

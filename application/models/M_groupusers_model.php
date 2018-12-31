@@ -61,8 +61,8 @@ class M_groupusers_model extends MY_Model {
         $permitted = false;
         $this->db->select('*');
         $this->db->from('m_accessroles');
-        $this->db->where('GroupId', $groupid);
-        $this->db->where('FormId', $formid);
+        $this->db->where('M_Groupuser_Id', $groupid);
+        $this->db->where('M_Form_Id', $formid);
         $this->db->where($role, 1);
         $query = $this->db->get();
         $result = $query->row();

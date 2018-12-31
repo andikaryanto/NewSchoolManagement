@@ -56,7 +56,7 @@
 
                 <!-- modal -->
 <div id="modalProvinces" tabindex="-1" role="dialog" aria-labelledby="provinceModalLabel" aria-hidden="true" class="modal fade text-left">
-  <div role="document" class="modal-dialog">
+  <div role="document" class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
         <h5 id="provinceModalLabel" class="modal-title">Group User</h5>

@@ -54,8 +54,8 @@
         </div>
 
                <!-- modal -->
-<div id="modalProvinces" tabindex="-1" role="dialog" aria-labelledby="provinceModalLabel" aria-hidden="true" class="modal fade text-left">
-  <div role="document" class="modal-dialog">
+<div id="modalProvinces" class="modal fade text-left" tabindex="-1" role="dialog" aria-labelledby="provinceModalLabel" aria-hidden="true">
+  <div role="document" class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
         <h5 id="provinceModalLabel" class="modal-title"><?= lang('ui_province')?></h5>
@@ -101,7 +101,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div>  
     </div>
   </div>
 </div>

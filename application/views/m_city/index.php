@@ -8,7 +8,7 @@
                   <div class="row">
                     <div class="col">
                       <h4 class="card-title "><?= lang('ui_data')?></h4>
-                      <p class="card-category"> <?= lang('ui_pmaster_city')?></p>
+                      <p class="card-category"> <?= lang('ui_master_city')?></p>
                     </div>
                     
                     <div class="col">
@@ -35,8 +35,8 @@
                               <thead class=" text-primary">
                                 <tr role = "row">
                                   <!-- <th># </th> -->
-                                  <th><?=  lang('ui_name')?></th>
-                                  <th><?=  lang('ui_description')?></th>
+                                  <th><?=  lang('ui_city')?></th>
+                                  <!-- <th><?=  lang('ui_description')?></th> -->
                                   <th><?=  lang('ui_province')?></th>
                                   <th><?=  lang('ui_createat')?></th>
                                   <th class="disabled-sorting text-right">Actions</th>
@@ -45,8 +45,8 @@
                               <tfoot class=" text-primary">
                                 <tr role = "row">
                                   <!-- <th># </th> -->
-                                  <th><?=  lang('ui_name')?></th>
-                                  <th><?=  lang('ui_description')?></th>
+                                  <th><?=  lang('ui_city')?></th>
+                                  <!-- <th><?=  lang('ui_description')?></th> -->
                                   <th><?=  lang('ui_province')?></th>
                                   <th><?=  lang('ui_createat')?></th>
                                   <th class="disabled-sorting text-right">Actions</th>
@@ -59,11 +59,11 @@
                               ?>
                                   <tr role = "row" id = <?= $value->Id?>>
                                     <td><?= $value->Test?></td>
-                                    <td><?= $value->Description?></td>
+                                    <!-- <td><?= $value->Description?></td> -->
                                     <td><?= $value->get_M_Province()->Name?></td>
                                     <td><?= $value->Created?></td>
                                     <td class = "td-actions text-right">
-                                      <a href="#" rel="tooltip" title="<?=  lang('ui_edit')?>" class="btn btn-link btn-success btn-just-icon edit"><i class="material-icons">edit</i></a>
+                                      <a href="#" rel="tooltip" title="<?=  lang('ui_edit')?>" class="btn btn-link btn-primary btn-just-icon edit"><i class="material-icons">edit</i></a>
                                       <a href="#" rel="tooltip" title="<?=  lang('ui_delete')?>" class="btn btn-link btn-danger btn-just-icon delete"><i class="material-icons">delete</i></a>
                                     </td>
                                   </tr>
