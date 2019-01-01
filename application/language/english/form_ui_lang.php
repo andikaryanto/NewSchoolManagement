@@ -158,5 +158,7 @@ $lang['ui_rowperpage'] = "Row Data";
 $lang['ui_forbidden'] = "Forbidden";
 $lang['ui_notfound'] = "Not Found";
 $lang['ui_createat'] = "Created";
+$lang['ui_fax'] = "Fax";
+$lang['ui_email'] = "Email";
 
 

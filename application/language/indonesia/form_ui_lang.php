@@ -176,3 +176,5 @@ $lang['ui_rowperpage'] = "Baris Data";
 $lang['ui_forbidden'] = "Terlarang";
 $lang['ui_notfound'] = "Tidak ditemukan";
 $lang['ui_createat'] = "Dibuat";
+$lang['ui_fax'] = "Fax";
+$lang['ui_email'] = "Email";
