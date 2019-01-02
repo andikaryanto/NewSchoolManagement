@@ -106,7 +106,7 @@ class M_schoolyear extends CI_Controller
         //print_r($oldmodel);
         
         $model->Name = $name;
-        $model->Description = $description;
+        $model->DateStart = get_formated_date($datestart);
         $model->ModifiedBy = $_SESSION['userdata']['Username'];
         
 

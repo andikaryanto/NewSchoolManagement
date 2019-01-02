@@ -81,7 +81,7 @@
   <!-- <script src="<?= base_url('assets/material-dashboard/assets/js/plugins/bootstrap-notify.js');?>"></script> -->
   <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
   <!-- script src="<?= base_url('assets/material-dashboard/assets/js/material-dashboard.min.js');?>"></script> -->
-  <script src="<?= base_url('assets/material-dashboard/assets/js/material-dashboard.min.js');?>"></script>
+  <script src="<?= base_url('assets/material-dashboard/assets/js/material-dashboard.js');?>"></script>
   
   <!-- Material Dashboard DEMO methods, don't include it in your project! -->
   <script src="<?= base_url('assets/material-dashboard/assets/demo/demo.js');?>"></script>
