@@ -80,8 +80,8 @@
   <!--  Notifications Plugin    -->
   <!-- <script src="<?= base_url('assets/material-dashboard/assets/js/plugins/bootstrap-notify.js');?>"></script> -->
   <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
-  <!-- script src="<?= base_url('assets/material-dashboard/assets/js/material-dashboard.min.js');?>"></script> -->
-  <script src="<?= base_url('assets/material-dashboard/assets/js/material-dashboard.js');?>"></script>
+  <script src="<?= base_url('assets/material-dashboard/assets/js/material-dashboard.min.js');?>"></script>
+  <!-- <script src="<?= base_url('assets/material-dashboard/assets/js/material-dashboard.js');?>"></script> -->
   
   <!-- Material Dashboard DEMO methods, don't include it in your project! -->
   <script src="<?= base_url('assets/material-dashboard/assets/demo/demo.js');?>"></script>
@@ -335,14 +335,14 @@
       function deleteData(name, callback){
       bootbox.confirm({
       //title: "Destroy planet?",
-      message: "<div class='text-center'><?= lang('ui_want_delete')?> " + name + " ?</div>",
+      message: "<div class='text-center'><?= lang('ui_want_delete')?> <b><text class = 'text-primary'>" + name + "</text></b> ?</div>",
         buttons: {
             cancel: {
                 className: 'btn btn-link',
                 label: "<?= lang('ui_cancel')?>"
             },
             confirm: {
-                className: 'btn btn-success btn-link',
+                className: 'btn btn-primary btn-link',
                 label: "<?= lang('ui_confirm')?>"
             }
         },

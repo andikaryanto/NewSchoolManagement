@@ -25,7 +25,7 @@ class Login extends CI_Controller
         $query = $this->M_users->get_sigle_data_user($username, $password);
         if ($query)
         {
-            if($query->IsLoggedIn == 0){
+            if($query->IsActive == 1){
                 //print_r($query->get_list_M_User()); 
                 $this->session->set_userdata('userdata',get_object_vars($query));
                 $this->session->set_userdata('usersettings',get_object_vars($query->get_list_M_Usersetting()[0]));
@@ -34,11 +34,11 @@ class Login extends CI_Controller
                 // echo json_encode($this->session->userdata('colors'));
                 redirect('home');
             } else {
-                $this->index();
+                redirect('login');
             }
         }
         else{
-            $this->index();
+            redirect('login');
         }
     }
 
