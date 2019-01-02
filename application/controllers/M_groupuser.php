@@ -7,8 +7,6 @@ class M_groupuser extends CI_Controller
         parent::__construct();
         //$this->load->database('naturedisaster', TRUE);
         $this->load->model(array('M_groupusers','M_accessroles')); 
-        $this->load->library(array('paging', 'session','helpers'));
-        $this->load->helper('form');
         $this->paging->is_session_set();
     }
 

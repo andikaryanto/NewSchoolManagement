@@ -27,7 +27,7 @@ $lang['ui_date_of_birth'] = "Date of Birth";
 $lang['ui_gender'] = "Gender";
 $lang['ui_religion'] = "Religion";
 $lang['ui_address'] = "Alamat";
-$lang['ui_telephone'] = "Telephone";
+$lang['ui_telephone'] = "Telepon";
 $lang['ui_work_status'] = "Worker Status";
 $lang['ui_work_status1'] = "Worker Status";
 $lang['ui_description'] = "Deskripsi";
@@ -128,11 +128,15 @@ $lang['ui_maintenance'] = "Perbaikan";
 $lang['ui_class'] = "Kelas";
 $lang['ui_worker'] = "Worker";
 $lang['ui_school'] = "Sekolah";
+$lang['ui_master_school'] = "Master Sekolah";
 $lang['ui_master_schoolyear'] = "Master Tahun Ajaran";
 $lang['ui_schoolyear'] = "Tahun Ajaran";
 $lang['ui_fromyear'] = "Dari Tahun";
 $lang['ui_toyear'] = "Sampai Tahun";
 $lang['ui_monthstart'] = "Bulan Mulai";
+$lang['ui_datestart'] = "Tanggal Mulai";
+$lang['ui_month'] = "Bulan";
+$lang['ui_year'] = "Tahun";
 
 $lang['msg_orderuomconvertion'] = "Urutkan Perubahan ukuran dari paling BESAR ke KECIL. contoh : Box ke Pack (nomor urut = 1), Pack ke Pcs (nomor urut = 2) dan seterusnya";
 

@@ -8,12 +8,12 @@
                   <div class="row">
                     <div class="col">
                       <h4 class="card-title "><?= lang('ui_data')?></h4>
-                      <p class="card-category"> <?= lang('ui_master_school')?></p>
+                      <p class="card-category"> <?= lang('ui_master_schoolyear')?></p>
                     </div>
                     
                     <div class="col">
                       <div class="text-right">
-                        <button type="button" rel="tooltip" class="btn btn-primary btn-round btn-fab" title="<?= lang('ui_add')?>" onclick="window.location.href='<?= base_url('mschool/add');?>'">
+                        <button type="button" rel="tooltip" class="btn btn-primary btn-round btn-fab" title="<?= lang('ui_add')?>" onclick="window.location.href='<?= base_url('mschoolyear/add');?>'">
                           <i class="material-icons">add</i>
                         </button>
                       </div>
@@ -31,14 +31,15 @@
                       <div class="row">
                         <div class="col-sm-12">
                           <div class="table-responsive">
-                            <table data-page-length="<?= $_SESSION['usersettings']['RowPerpage']?>" id = "tableSchool" class="table table-striped table-no-bordered table-hover dataTable dtr-inline collapsed" cellspacing="0" width="100%" style="width: 100%;" role="grid" aria-describedby="datatables_info">
+                            <table data-page-length="<?= $_SESSION['usersettings']['RowPerpage']?>" id = "tableClass" class="table table-striped table-no-bordered table-hover dataTable dtr-inline collapsed" cellspacing="0" width="100%" style="width: 100%;" role="grid" aria-describedby="datatables_info">
                               <thead class=" text-primary">
                                 <tr role = "row">
                                   <!-- <th># </th> -->
                                   <th><?=  lang('ui_name')?></th>
-                                  <th><?=  lang('ui_address')?></th>
-                                  <th><?=  lang('ui_telephone')?></th>
-                                  <th><?=  lang('ui_email')?></th>
+                                  <th><?=  lang('ui_datestart')?></th>
+                                  <th><?=  lang('ui_month')?></th>
+                                  <th><?=  lang('ui_year')?></th>
+                                  <th class="disabled-sorting"><?=  lang('ui_isactive')?></th>
                                   <th class="disabled-sorting text-right">Actions</th>
                                 </tr>
                               </thead>
@@ -46,9 +47,10 @@
                                 <tr role = "row">
                                   <!-- <th># </th> -->
                                   <th><?=  lang('ui_name')?></th>
-                                  <th><?=  lang('ui_address')?></th>
-                                  <th><?=  lang('ui_telephone')?></th>
-                                  <th><?=  lang('ui_email')?></th>
+                                  <th><?=  lang('ui_datestart')?></th>
+                                  <th><?=  lang('ui_month')?></th>
+                                  <th><?=  lang('ui_year')?></th>
+                                  <th class="disabled-sorting"><?=  lang('ui_isactive')?></th>
                                   <th class="disabled-sorting text-right">Actions</th>
                                 </tr>
                               </tfoot>
@@ -59,12 +61,24 @@
                               ?>
                                   <tr role = "row" id = <?= $value->Id?>>
                                     <td><?= $value->Name?></td>
-                                    <td><?= $value->Address?></td>
-                                    <td><?= $value->Telp?></td>
-                                    <td><?= $value->Email?></td>
+                                    <td><?= get_formated_date($value->DateStart, "d-M-Y")?></td>
+                                    <td><?= $value->Month?></td>
+                                    <td><?= $value->Year?></td>
+                                    <?php 
+                                    if($value->IsActive == 1 ) {
+                                    ?>
+                                    <td><a><i class='fa fa-check'></i></a></td>
+                                    <?php
+                                    } else {
+                                    ?>
+                                      <td><a><i class='fa fa-close'></i></a></td>
+                                    <?php
+                                    }  
+                                    ?>
                                     <td class = "td-actions text-right">
                                       <a href="#" rel="tooltip" title="<?=  lang('ui_edit')?>" class="btn btn-link btn-primary btn-just-icon edit"><i class="material-icons">edit</i></a>
-                                      <a href="#" rel="tooltip" title="<?=  lang('ui_delete')?>" class="btn btn-link btn-danger btn-just-icon delete"><i class="material-icons">delete</i></a>
+                                      <?php $button_class = !$value->IsActive ? "btn btn-link btn-success btn-just-icon activate" : "btn btn-link btn-danger btn-just-icon" ?>
+                                      <a href="#" rel="tooltip" title="<?= !$value->IsActive ? lang('ui_activate') : lang('ui_deactivate')?>" class="<?= $button_class?> activate"><i class="material-icons">power</i></a>
                                     </td>
                                   </tr>
                               <?php
@@ -96,10 +110,9 @@
   });
 
   function dataTable(){
-    $('#tableSchool').DataTable({
+    $('#tableClass').DataTable({
       "pagingType": "full_numbers",
       "lengthMenu": [[5, 10, 15, 20, -1], [5, 10, 15, 20, "All"]],
-      "order" : [[0, "desc"]],
       responsive: true,
       language: {
       search: "_INPUT_",
@@ -107,13 +120,13 @@
       }
     }); 
 
-    var table = $('#tableSchool').DataTable();
+    var table = $('#tableClass').DataTable();
      // Edit record
      table.on( 'click', '.edit', function () {
         $tr = $(this).closest('tr');
 
         var id = $tr.attr('id');
-        window.location = "<?= base_url('mschool/edit/');?>" + id;
+        window.location = "<?= base_url('mschoolyear/edit/');?>" + id;
      } );
 
      // Delete a record
@@ -127,7 +140,7 @@
             
             $.ajax({
               type : "POST",
-              url : "<?= base_url('mschool/delete/');?>",
+              url : "<?= base_url('mschoolyear/delete/');?>",
               data : {id : id},
               success : function(data){
                 var status = $.parseJSON(data);
@@ -152,6 +165,13 @@
             });
           }
         });
+     });
+
+      table.on( 'click', '.activate', function (e) {
+        $tr = $(this).closest('tr');
+        var data = table.row($tr).data();
+        var id = $tr.attr('id');
+        window.location = "<?= base_url('mschoolyear/activate/');?>" + id;
      });
   }
 

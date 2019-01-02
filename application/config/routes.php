@@ -131,6 +131,14 @@ $route['mvillage/edit/(:num)'] = 'm_village/edit/$1';
 $route['mvillage/editsave'] = 'm_village/editsave';
 $route['mvillage/delete'] = 'm_village/delete';
 
+$route['mclass'] = 'm_class';
+$route['mclass/add'] = 'm_class/add';
+$route['mclass/addsave'] = 'm_class/addsave';
+$route['mclass/edit/(:num)'] = 'm_class/edit/$1';
+$route['mclass/editsave'] = 'm_class/editsave';
+$route['mclass/delete'] = 'm_class/delete';
+
+
 //API
 $route['api/mdisaster']['GET'] = 'api_mdisaster/get_disaster';
 $route['api/mdisaster/(:any)/(:any)'] = 'api_mdisaster/get_disaster/$1/$2';

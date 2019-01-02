@@ -8,8 +8,6 @@ class M_user extends CI_Controller
         parent::__construct();
         //$this->load->database('natureuser', TRUE);
         $this->load->model(array('M_users','M_groupusers', 'G_languages', 'G_colors', 'M_usersettings'));
-        $this->load->library(array('paging', 'session','helpers'));
-        $this->load->helper('form');
         $this->paging->is_session_set();
     }
 

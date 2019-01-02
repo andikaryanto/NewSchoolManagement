@@ -115,6 +115,9 @@ $lang['ui_schoolyear'] = "School Year";
 $lang['ui_fromyear'] = "From Year";
 $lang['ui_toyear'] = "To Year";
 $lang['ui_monthstart'] = "Month Start";
+$lang['ui_datestart'] = "Date Start";
+$lang['ui_month'] = "Month";
+$lang['ui_year'] = "Year";
 
 
 $lang['msg_orderuomconvertion'] = "Please order Unit Convertion from biggest to smallest unit. for example : Box to Pack (order number = 1), Pack to Pcs (order number = 2) and go on";
@@ -160,5 +163,7 @@ $lang['ui_notfound'] = "Not Found";
 $lang['ui_createat'] = "Created";
 $lang['ui_fax'] = "Fax";
 $lang['ui_email'] = "Email";
+$lang['ui_telephone'] = "Telephone";
+$lang['ui_master_school'] = "Master School";
 
 

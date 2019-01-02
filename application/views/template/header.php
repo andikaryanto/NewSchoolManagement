@@ -12,6 +12,7 @@
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
   <!--     Fonts and icons     -->
   <link rel="stylesheet" href="<?= base_url('assets/material-dashboard/assets/css/font-awesome.min.css')?>"/>
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css"/> -->
   <link rel="stylesheet" href="<?= base_url('assets/material-dashboard/assets/css/googlefonts.css')?>"/>
   <!-- CSS Files -->
   <link href="<?= base_url($_SESSION['colors']['CssPath']);?>" rel="stylesheet" />
@@ -27,6 +28,19 @@
   
   <script src="<?= base_url('assets/material-dashboard/assets/js/bootstrap-notify.js');?>"></script>
   <script src="<?= base_url('assets/material-dashboard/assets/js/bootbox.min.js');?>"></script>
+  <!-- <script src="<?= base_url('assets/material-dashboard/assets/js/core/popper.min.js');?>"></script>
+  <script src="<?= base_url('assets/material-dashboard/assets/js/core/bootstrap-material-design.min.js');?>"></script>
+  <script src="<?= base_url('assets/material-dashboard/assets/js/plugins/perfect-scrollbar.jquery.min.js');?>"></script> -->
+  <!-- Plugin for the momentJs  -->
+  <script src="<?= base_url('assets/material-dashboard/assets/js/plugins/moment.min.js');?>"></script>
+  <!--  Plugin for Sweet Alert -->
+  <!-- <script src="<?= base_url('assets/material-dashboard/assets/js/plugins/sweetalert2.js');?>"></script> -->
+  <!-- Forms Validations Plugin -->
+  <!-- <script src="<?= base_url('assets/material-dashboard/assets/js/plugins/jquery.validate.min.js');?>"></script> -->
+  <!-- Plugin for the Wizard, full documentation here: https://github.com/VinceG/twitter-bootstrap-wizard -->
+  <!-- <script src="<?= base_url('assets/material-dashboard/assets/js/plugins/jquery.bootstrap-wizard.js');?>"></script> -->
+  <!--  Plugin for the DateTimePicker, full documentation here: https://eonasdan.github.io/bootstrap-datetimepicker/ -->
+  <script src="<?= base_url('assets/material-dashboard/assets/js/plugins/bootstrap-datetimepicker.min.js');?>"></script>
 </head>
 
 <body>

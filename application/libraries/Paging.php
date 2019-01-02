@@ -26,6 +26,7 @@ class Paging {
         $data["m_subcity"] = "m_subcities";
         $data["m_village"] = "m_villages";
         $data["m_school"] = "m_schools";
+        $data["m_class"] = "m_classes";
         return $data;
     }
     

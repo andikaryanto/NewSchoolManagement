@@ -1,28 +1,28 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-class M_province extends CI_Controller
+class M_schoolyear extends CI_Controller
 {
     public function __construct()
     {
         parent::__construct();
         //$this->load->database('naturedisaster', TRUE);
-        $this->load->model(array('M_provinces','M_groupusers')); 
+        $this->load->model(array('M_schoolyears','M_groupusers')); 
         $this->paging->is_session_set();
     }
 
     public function index()
     {
         $form = $this->paging->get_form_name_id();
-        if($this->M_groupusers->is_permitted($_SESSION['userdata']['M_Groupuser_Id'],$form['m_province'],'Read'))
+        if($this->M_groupusers->is_permitted($_SESSION['userdata']['M_Groupuser_Id'],$form['m_schoolyear'],'Read'))
         {
 
             $params = array(
                 'order' => array('Created' => 'ASC')
             );
 
-            $datapages = $this->M_provinces->get_list(null, null, $params);
+            $datapages = $this->M_schoolyears->get_list(null, null, $params);
             $data['model'] = $datapages;
-            load_view('m_province/index', $data);
+            load_view('m_schoolyear/index', $data);
         }
         else
         {   
@@ -33,11 +33,13 @@ class M_province extends CI_Controller
     function add()
     {
         $form = $this->paging->get_form_name_id();
-        if($this->M_groupusers->is_permitted($_SESSION['userdata']['M_Groupuser_Id'],$form['m_province'],'Write'))
+        if($this->M_groupusers->is_permitted($_SESSION['userdata']['M_Groupuser_Id'],$form['m_schoolyear'],'Write'))
         {
-            $model = $this->M_provinces->new_object();
+            $model = $this->M_schoolyears->new_object();
+            $model->DateStart = get_current_date();
+            // print_r($model);
             $data =  $this->paging->set_data_page_add($model);
-            load_view('m_province/add', $data);  
+            load_view('m_schoolyear/add', $data);  
         }
         else
         {
@@ -51,38 +53,40 @@ class M_province extends CI_Controller
         $warning = array();
         $err_exist = false;
         $name = $this->input->post('named');
-        $description = $this->input->post('description');
+        $datestart = $this->input->post('datestart');
+        // $isactive = $this->input->post('isactive');
         
-        $model = $this->M_provinces->new_object();
+        $model = $this->M_schoolyears->new_object();
         $model->Name = $name;
-        $model->Description = $description;
+        $model->DateStart = get_formated_date($datestart);
+        $model->IsActive = 0;
         $model->CreatedBy = $_SESSION['userdata']['Username'];
-
-        $validate = $this->M_provinces->validate($model);
+        $validate = $this->M_schoolyears->validate($model);
  
         if($validate)
         {
             $this->session->set_flashdata('add_warning_msg',$validate);
             $data =  $this->paging->set_data_page_add($model);
-            load_view('m_province/add', $data);   
+            load_view('m_schoolyear/add', $data);   
         }
         else{
     
             $model->save();
             $successmsg = $this->paging->get_success_message();
             $this->session->set_flashdata('success_msg', $successmsg);
-            redirect('mprovince/add');
+            redirect('mschoolyear');
         }
     }
 
     public function edit($id)
     {
         $form = $this->paging->get_form_name_id();
-        if($this->M_groupusers->is_permitted($_SESSION['userdata']['M_Groupuser_Id'],$form['m_province'],'Write'))
+        if($this->M_groupusers->is_permitted($_SESSION['userdata']['M_Groupuser_Id'],$form['m_schoolyear'],'Write'))
         {
-            $model = $this->M_provinces->get($id);
+            $model = $this->M_schoolyears->get($id);
+            $model->DateStart = get_formated_date($model->DateStart, 'd/m/Y');
             $data =  $this->paging->set_data_page_edit($model);
-            load_view('m_province/edit', $data);  
+            load_view('m_schoolyear/edit', $data);  
         }
         else
         {
@@ -93,11 +97,11 @@ class M_province extends CI_Controller
     public function editsave()
     {
         
-        $id = $this->input->post('idprovince');
+        $id = $this->input->post('idschoolyear');
         $name = $this->input->post('named');
-        $description = $this->input->post('description');
+        $datestart = $this->input->post('datestart');
 
-        $model = $this->M_provinces->get($id);
+        $model = $this->M_schoolyears->get($id);
         $oldmodel = clone $model;
         //print_r($oldmodel);
         
@@ -107,28 +111,59 @@ class M_province extends CI_Controller
         
 
 
-        $validate = $this->M_provinces->validate($model, $oldmodel);
+        $validate = $this->M_schoolyears->validate($model, $oldmodel);
         if($validate)
         {
             $this->session->set_flashdata('edit_warning_msg',$validate);
             $data =  $this->paging->set_data_page_edit($model);
-            load_view('m_province/edit', $data);   
+            load_view('m_schoolyear/edit', $data);   
         }
         else
         {
             $model->save();
             $successmsg = $this->paging->get_success_message();
             $this->session->set_flashdata('success_msg', $successmsg);
-            redirect('mprovince');
+            redirect('mschoolyear');
         }
+    }
+
+    public function activate($id){
+        $form = $this->paging->get_form_name_id();
+        if($this->M_groupusers->is_permitted($_SESSION['userdata']['M_Groupuser_Id'],$form['m_schoolyear'],'Write'))
+        {
+            $muser = $this->M_schoolyears->get($id);
+            if($muser){
+                $muser->IsActive = $muser->IsActive ? 0 : 1;
+
+                if($muser->IsActive == 1){
+                    $params = array(
+                        'where' => array(
+                            'Id !=' => $id
+                        )
+                    );
+                    $list_user = $this->M_schoolyears->get_list(null, null, $params);
+                    if(isset($list_user))
+                        foreach($list_user as $user){
+                            $user->IsActive = 0;
+                            $user->save();
+                        }
+                } else {
+                    $muser->IsActive = 1;
+                }
+                $muser->save();
+            }
+            redirect('mschoolyear');
+        } else {   
+            $this->load->view('forbidden/forbidden');
+        }   
     }
 
     public function delete(){
         $id = $this->input->post("id");
         $form = $this->paging->get_form_name_id();
-        if($this->M_groupusers->is_permitted($_SESSION['userdata']['M_Groupuser_Id'],$form['m_province'],'Delete'))
+        if($this->M_groupusers->is_permitted($_SESSION['userdata']['M_Groupuser_Id'],$form['m_schoolyear'],'Delete'))
         {   
-            $deleteData = $this->M_provinces->get($id);
+            $deleteData = $this->M_schoolyears->get($id);
             $delete = $deleteData->delete();
             if(isset($delete)){
                 $deletemsg = $this->helpers->get_query_error_message($delete['code']);

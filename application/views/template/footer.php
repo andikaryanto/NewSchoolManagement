@@ -352,6 +352,15 @@
       });
       }
   </script>
+   <script>
+    $(document).ready(function() {
+      // initialise Datetimepicker and Sliders
+      md.initFormExtendedDatetimepickers("DD-MM-YYYY");
+      if ($('.slider').length != 0) {
+        md.initSliders();
+      }
+    });
+  </script>
 </body>
 
 </html>
