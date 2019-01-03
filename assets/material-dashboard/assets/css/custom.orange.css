@@ -12,3 +12,9 @@
 .custom-readonly{
     background-color: transparent !important;
 }
+
+.btn-lookup{
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 60px;
+}

@@ -71,15 +71,15 @@ class Migration_create_g_languages20181219070746 extends CI_Migration {
                     'Value' => '#9c27b0',
                     'CssClass' => 'text-primary',
                     'CssPath' => 'assets/material-dashboard/assets/css/material-dashboard.min.css',
-                    'CssCustomPath' => 'assets/material-dashboard/assets/css/Custom.css',
+                    'CssCustomPath' => 'assets/material-dashboard/assets/css/custom.css',
 
                 ),
                 array(
                     'Name' => 'green',
                     'Value' => '#4caf50',
                     'CssClass' => 'text-success',
-                    'CssPath' => 'assets/material-dashboard/assets/css/material-dashboard.green.min.css',
-                    'CssCustomPath' => 'assets/material-dashboard/assets/css/Custom.green.css'
+                    'CssPath' => 'assets/material-dashboard/assets/css/material-dashboard.greeen.min.css',
+                    'CssCustomPath' => 'assets/material-dashboard/assets/css/custom.green.css'
                 ),
             );
             

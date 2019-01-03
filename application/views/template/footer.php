@@ -38,19 +38,7 @@
       <div class="ps-scrollbar-y-rail" style="top: 0px; right: 0px; height: 626px;"><div class="ps-scrollbar-y" tabindex="0" style="top: 0px; height: 317px;"></div></div> -->
     </div>
   </div>
-  <script src="<?= base_url('assets/material-dashboard/assets/js/core/popper.min.js');?>"></script>
-  <script src="<?= base_url('assets/material-dashboard/assets/js/core/bootstrap-material-design.min.js');?>"></script>
-  <script src="<?= base_url('assets/material-dashboard/assets/js/plugins/perfect-scrollbar.jquery.min.js');?>"></script>
-  <!-- Plugin for the momentJs  -->
-  <script src="<?= base_url('assets/material-dashboard/assets/js/plugins/moment.min.js');?>"></script>
-  <!--  Plugin for Sweet Alert -->
-  <script src="<?= base_url('assets/material-dashboard/assets/js/plugins/sweetalert2.js');?>"></script>
-  <!-- Forms Validations Plugin -->
-  <script src="<?= base_url('assets/material-dashboard/assets/js/plugins/jquery.validate.min.js');?>"></script>
-  <!-- Plugin for the Wizard, full documentation here: https://github.com/VinceG/twitter-bootstrap-wizard -->
-  <script src="<?= base_url('assets/material-dashboard/assets/js/plugins/jquery.bootstrap-wizard.js');?>"></script>
-  <!--	Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
-  <script src="<?= base_url('assets/material-dashboard/assets/js/plugins/bootstrap-selectpicker.js');?>"></script>
+  
   <!--  Plugin for the DateTimePicker, full documentation here: https://eonasdan.github.io/bootstrap-datetimepicker/ -->
   <script src="<?= base_url('assets/material-dashboard/assets/js/plugins/bootstrap-datetimepicker.min.js');?>"></script>
   <!--  DataTables.net Plugin, full documentation here: https://datatables.net/  -->
@@ -90,7 +78,6 @@
     $(document).ready(function() {
       $().ready(function() {
         $sidebar = $('.sidebar');
-
         $sidebar_img_container = $sidebar.find('.sidebar-background');
 
         $full_page = $('.full-page');
@@ -361,6 +348,15 @@
       }
     });
   </script>
+  <!-- <script>
+    $(document).ready(function() {
+      // Initialise the wizard
+      demo.initMaterialWizard();
+      setTimeout(function() {
+        $('.card.card-wizard').addClass('active');
+      }, 600);
+    });
+  </script> -->
 </body>
 
 </html>

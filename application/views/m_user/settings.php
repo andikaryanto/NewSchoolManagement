@@ -20,8 +20,7 @@
                     <div class="form-group">
                       <div class = "row">
                           <label class="col-sm-2 col-form-label"><?= lang('ui_language')?></label>
-                          <div class="col">
-                          <div class="dropdown bootstrap-select show-tick">
+                          <div class="col-sm-10">
                             <select id = "language" name ="language" class="selectpicker" data-style="select-with-transition" title ="<?= $_SESSION['languages']['Name']?>" >
                               <?php 	
                               foreach ($enums['languageenums'] as $value)
@@ -32,7 +31,6 @@
                               }
                               ?>
                             </select>
-                          </div>
                         </div>
                       </div>
                     </div>
@@ -71,15 +69,13 @@
                     <div class="form-group">
                       <div class = "row">
                           <label class="col-sm-2 col-form-label"><?= lang('ui_rowperpage')?></label>
-                          <div class="col">
-                          <div class="dropdown bootstrap-select show-tick">
+                          <div class="col-sm-10">
                             <select id = "rowpage" name ="rowpage" class="selectpicker" data-style="select-with-transition" title ="<?= $_SESSION['usersettings']['RowPerpage']?>" >
                               <option value ="5">5</option>
                               <option value ="10">10</option>
                               <option value ="15">15</option>
                               <option value ="20">20</option>
                             </select>
-                          </div>
                         </div>
                       </div>
                     </div>

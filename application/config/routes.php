@@ -138,6 +138,13 @@ $route['mclass/edit/(:num)'] = 'm_class/edit/$1';
 $route['mclass/editsave'] = 'm_class/editsave';
 $route['mclass/delete'] = 'm_class/delete';
 
+$route['mpeople'] = 'm_people';
+$route['mpeople/add'] = 'm_people/add';
+$route['mpeople/addsave'] = 'm_people/addsave';
+$route['mpeople/edit/(:num)'] = 'm_people/edit/$1';
+$route['mpeople/editsave'] = 'm_people/editsave';
+$route['mpeople/delete'] = 'm_people/delete';
+
 
 //API
 $route['api/mdisaster']['GET'] = 'api_mdisaster/get_disaster';

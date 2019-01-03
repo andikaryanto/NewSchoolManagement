@@ -21,26 +21,22 @@
   <link href="<?= base_url($_SESSION['colors']['CssCustomPath']);?>" rel="stylesheet" />
   <!-- CSS Just for demo purpose, don't include it in your project -->
   <link href="<?= base_url('assets/material-dashboard/assets/demo/demo.css');?>" rel="stylesheet" />
-
-  
-  
   <script src="<?= base_url('assets/material-dashboard/assets/js/core/jquery.min.js');?>"></script>
-  
   <script src="<?= base_url('assets/material-dashboard/assets/js/bootstrap-notify.js');?>"></script>
   <script src="<?= base_url('assets/material-dashboard/assets/js/bootbox.min.js');?>"></script>
-  <!-- <script src="<?= base_url('assets/material-dashboard/assets/js/core/popper.min.js');?>"></script>
+  <script src="<?= base_url('assets/material-dashboard/assets/js/core/popper.min.js');?>"></script>
   <script src="<?= base_url('assets/material-dashboard/assets/js/core/bootstrap-material-design.min.js');?>"></script>
-  <script src="<?= base_url('assets/material-dashboard/assets/js/plugins/perfect-scrollbar.jquery.min.js');?>"></script> -->
+  <script src="<?= base_url('assets/material-dashboard/assets/js/plugins/perfect-scrollbar.jquery.min.js');?>"></script>
   <!-- Plugin for the momentJs  -->
   <script src="<?= base_url('assets/material-dashboard/assets/js/plugins/moment.min.js');?>"></script>
   <!--  Plugin for Sweet Alert -->
-  <!-- <script src="<?= base_url('assets/material-dashboard/assets/js/plugins/sweetalert2.js');?>"></script> -->
+  <script src="<?= base_url('assets/material-dashboard/assets/js/plugins/sweetalert2.js');?>"></script>
   <!-- Forms Validations Plugin -->
-  <!-- <script src="<?= base_url('assets/material-dashboard/assets/js/plugins/jquery.validate.min.js');?>"></script> -->
+  <script src="<?= base_url('assets/material-dashboard/assets/js/plugins/jquery.validate.min.js');?>"></script>
   <!-- Plugin for the Wizard, full documentation here: https://github.com/VinceG/twitter-bootstrap-wizard -->
-  <!-- <script src="<?= base_url('assets/material-dashboard/assets/js/plugins/jquery.bootstrap-wizard.js');?>"></script> -->
-  <!--  Plugin for the DateTimePicker, full documentation here: https://eonasdan.github.io/bootstrap-datetimepicker/ -->
-  <script src="<?= base_url('assets/material-dashboard/assets/js/plugins/bootstrap-datetimepicker.min.js');?>"></script>
+  <script src="<?= base_url('assets/material-dashboard/assets/js/plugins/jquery.bootstrap-wizard.js');?>"></script>
+  <!--	Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
+  <script src="<?= base_url('assets/material-dashboard/assets/js/plugins/bootstrap-selectpicker.js');?>"></script>
 </head>
 
 <body>
@@ -91,55 +87,6 @@
             </div>
           </div>
         </div>
-        <!-- <form class="navbar-form">
-          <span class="bmd-form-group"><div class="input-group no-border">
-            <input type="text" value="" class="form-control" placeholder="Search...">
-            <button type="submit" class="btn btn-white btn-round btn-just-icon">
-              <i class="material-icons">search</i>
-              <div class="ripple-container"></div>
-            </button>
-          </div></span>
-        </form>
-        <ul class="nav navbar-nav nav-mobile-menu">
-          <li class="nav-item">
-            <a class="nav-link" href="#pablo">
-              <i class="material-icons">dashboard</i>
-              <p class="d-lg-none d-md-block">
-                Stats
-              </p>
-            </a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <i class="material-icons">notifications</i>
-              <span class="notification">5</span>
-              <p class="d-lg-none d-md-block">
-                Some Actions
-              </p>
-            <div class="ripple-container"></div></a>
-            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="#">Mike John responded to your email</a>
-              <a class="dropdown-item" href="#">You have 5 new tasks</a>
-              <a class="dropdown-item" href="#">You're now friend with Andrew</a>
-              <a class="dropdown-item" href="#">Another Notification</a>
-              <a class="dropdown-item" href="#">Another One</a>
-            </div>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link" href="#pablo" id="navbarDropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <i class="material-icons">person</i>
-              <p class="d-lg-none d-md-block">
-                Account
-              </p>
-            <div class="ripple-container"></div></a>
-            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProfile">
-              <a class="dropdown-item" href="#">Profile</a>
-              <a class="dropdown-item" href="#">Settings</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Log out</a>
-            </div>
-          </li>
-        </ul> -->
         <ul class="nav">
           <li class="nav-item active ">
             <a class="nav-link" href="../examples/dashboard.html">

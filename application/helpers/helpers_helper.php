@@ -24,7 +24,7 @@ function getEnumName($enumName, $enumDetailId){
     $CI->db->from('m_enums a');
     $CI->db->join('m_enumdetails b','a.Id = b.M_Enum_Id','inner');
     $CI->db->where('a.Name', $enumName);
-    $CI->db->where('b.Value', $enumValue);
+    $CI->db->where('b.Id', $enumDetailId);
     $data = $CI->db->get()->row();
 
     //return $data->Resource;

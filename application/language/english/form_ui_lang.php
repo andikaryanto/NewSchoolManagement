@@ -10,7 +10,7 @@ $lang['ui_master_city'] = "Master City";
 $lang['ui_master_user'] = "Master User";
 $lang['ui_user'] = "User";
 $lang['ui_master_groupuser'] = "Master Group User";
-$lang['ui_master_kelas'] = "Master Class";
+$lang['ui_master_class'] = "Master Class";
 $lang['ui_master_worker'] = "Master Worker";
 $lang['ui_group_user'] = "Grup User";
 $lang['ui_data'] = "Data";
@@ -165,5 +165,10 @@ $lang['ui_fax'] = "Fax";
 $lang['ui_email'] = "Email";
 $lang['ui_telephone'] = "Telephone";
 $lang['ui_master_school'] = "Master School";
+$lang['ui_teacher'] = "Guru";
+$lang['ui_others'] = "Lain - Lain";
+$lang['ui_master_people'] = "Master People";
+$lang['ui_people'] = "People";
+$lang['ui_bloodtype'] = "Blood Type";
 
 

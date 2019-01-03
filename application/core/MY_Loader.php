@@ -13,6 +13,7 @@ class MY_Loader extends CI_Loader {
 	{
 		if (is_string($model) && $name == '')
 		{
+						
 			$name = $model;
 			$model = $model.'_model';
 			//$model = $model;

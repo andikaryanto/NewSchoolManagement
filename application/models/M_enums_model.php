@@ -6,7 +6,7 @@ class M_enums_model extends MY_Model {
     {
         $this->db->select('*');
         $this->db->from('m_enumdetails', $id);
-        $this->db->where('EnumId', $id);
+        $this->db->where('M_Enum_Id', $id);
         $this->db->order_by('Ordering');
         $query = $this->db->get();
         return $query->result();
